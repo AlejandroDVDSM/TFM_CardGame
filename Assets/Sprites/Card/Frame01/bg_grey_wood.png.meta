@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bg_grey_wood_0: 5854286607179100022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

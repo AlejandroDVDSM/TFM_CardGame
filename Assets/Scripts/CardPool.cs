@@ -33,11 +33,36 @@ namespace CardGame
             
         }
 
-        public void DestroyCard()
+        /// <summary>
+        /// Bring a card back to the pool
+        /// </summary>
+        /// <param name="card">Card that will go back to the pool</param>
+        public void DestroyCard(Card card)
         {
-            
+            card.transform.SetParent(transform);
+            card.transform.localPosition = Vector3.zero;
+            card.DisableCard();
         }
 
+        /// <summary>
+        /// Sends cards back to the pool
+        /// </summary>
+        /// <param name="card">A range of cards to send back to the pool</param>
+        public void DestroyCards(List<Card> cards)
+        {
+            foreach (Card card in cards)
+            {
+                card.transform.SetParent(transform);
+                card.transform.localPosition = Vector3.zero;
+                card.DisableCard();
+            }
+        }
+        
+
+        /// <summary>
+        /// Picks a random card from the pool
+        /// </summary>
+        /// <returns>A card</returns>
         public Card ExtractCardFromPool()
         {
             List <Card> inactiveCards = _cardsPool.FindAll(card => card.IsInPool);
@@ -46,6 +71,10 @@ namespace CardGame
             return card;
         }
 
+        /// <summary>
+        /// Picks the first three cards from the pool
+        /// </summary>
+        /// <returns>A list containing three cards</returns>
         public List<Card> ExtractRangeFromPool()
         {
             List <Card> cards = _cardsPool.FindAll(card => card.IsInPool).GetRange(0, 3);
