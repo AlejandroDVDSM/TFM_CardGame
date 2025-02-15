@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3559ffae2074510b7176a30089464df, type: 3}
+  m_Name: StatusesCollection
+  m_EditorClassIdentifier: 
+  Cards:
+  - {fileID: 11400000, guid: e0a0e8bd842a6c248a8f4de5b382c04e, type: 2}
+  - {fileID: 11400000, guid: 216ccd842290a7345be2e32d80d01e23, type: 2}
+  - {fileID: 11400000, guid: 928b435daf71f8647bd9a49ec522d0ba, type: 2}

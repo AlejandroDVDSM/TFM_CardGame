@@ -1,17 +1,40 @@
 using CardGame.Enums;
+using ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("UI")]
+    [SerializeField] private TMP_Text nameTxt;    
+    [SerializeField] private TMP_Text valueTxt;
+    [SerializeField] private Image image;
+    
     public bool IsInPool { get; set; }
     public ECardLane CardLane => _cardLane;
     public ERow CurrentRow => _currentRow;
+    public BaseCardData CardData => _cardData;
     
     private ECardLane _cardLane = ECardLane.OUT;
     private ERow _currentRow;
+    private BaseCardData _cardData;
 
     protected abstract void ApplyEffect();
+
+    public void SetCard(BaseCardData cardData)
+    {
+        _cardData = cardData;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        nameTxt.text = _cardData.Name;
+        valueTxt.text = Random.Range(_cardData.MinValue, _cardData.MaxValue).ToString();
+        image.sprite = _cardData.Sprite;
+    }
 
     public void SetLaneAndRow(int laneIndex, ERow row)
     {

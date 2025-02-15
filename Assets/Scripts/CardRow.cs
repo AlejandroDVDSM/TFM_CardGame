@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CardGame.Enums;
 using UnityEngine;
@@ -12,8 +11,6 @@ namespace CardGame
         
         [Min(0)]
         [SerializeField] private float offsetX = 160;
-        [Min(0)]
-        [SerializeField] private float offsetY = 150;
 
         public void PopulateRow(List<Card> cards)
         {

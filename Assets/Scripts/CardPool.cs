@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace CardGame
 {
     public class CardPool : MonoBehaviour
     {
+        [Header("Card Data")]
         [SerializeField] private Card cardPrefab;
+        [SerializeField] private CardCollection enemiesCollection;
+        [SerializeField] private CardCollection itemsCollection;
+        [SerializeField] private CardCollection statusesCollection;
         
+        [Header("Pool Config")]
         [Min(0)]
         [SerializeField] private int poolSize = 12; // 3 card x 4 rows
 
@@ -25,12 +31,6 @@ namespace CardGame
                 _cardsPool.Add(card);
                 card.IsInPool = true;
             }
-        }
-
-        
-        public void CreateCard()
-        {
-            
         }
 
         /// <summary>
@@ -57,7 +57,6 @@ namespace CardGame
                 card.DisableCard();
             }
         }
-        
 
         /// <summary>
         /// Picks a random card from the pool
@@ -78,9 +77,29 @@ namespace CardGame
         public List<Card> ExtractRangeFromPool()
         {
             List <Card> cards = _cardsPool.FindAll(card => card.IsInPool).GetRange(0, 3);
-            
+
             foreach (Card card in cards)
+            {
                 card.IsInPool = false;
+
+                switch (Random.Range(0, 3))
+                {
+                    // Enemy
+                    case 0:
+                        card.SetCard(enemiesCollection.GetRandomCard());
+                        break;
+                    
+                    // Items
+                    case 1:
+                        card.SetCard(itemsCollection.GetRandomCard());
+                        break;
+                    
+                    // Status
+                    case 2:
+                        card.SetCard(statusesCollection.GetRandomCard());
+                        break;
+                }
+            }
             
             return cards;
         }
