@@ -1,18 +1,41 @@
 ﻿using CardGame.Enums;
+using TMPro;
 using UnityEngine;
 
 public class PlayerCard : MonoBehaviour
 {
+    [Min(1)]
+    [SerializeField] private int maxHealth;
+    [SerializeField] private TMP_Text healthText;
+    
     [SerializeField] private float lateralMovement;
     [SerializeField] private float posY;
     
     private ECardLane _currentLane = ECardLane.MIDDLE;
+
+    private int _currentHealth;
     
     private void Start()
     {
         GameManager.Instance.OnCardSelected.AddListener(OnCardSelected);
+        _currentHealth = maxHealth;
+        healthText.text = _currentHealth.ToString();
     }
 
+    public void Hit(int damage)
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _currentHealth);
+        
+        if (_currentHealth == 0)
+        {
+            // TODO: end game
+            // TODO: add tween
+            Debug.Log("DEAD");
+        }
+        
+        healthText.text = _currentHealth.ToString();
+    }
+    
     private void OnCardSelected(Card selectedCard)
     {
         PlacePlayerInPosition(selectedCard.CardLane);

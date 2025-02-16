@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
+    public PlayerCard Player => _player;
+    
     [Header("Game settings")]
     [SerializeField] private CardPool cardPool;
     
@@ -20,7 +22,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent<Card> OnCardSelected;
-    
+
+    [SerializeField] private PlayerCard _player;
+
     private void Awake()
     {
         // Singleton
