@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();
         
+        // Send the cards that were in the bottom row back to the pool
+        cardPool.DestroyCards(bottomRowCards);
+        
         // Generates new cards if there are still rounds to be played
         if (turns > 0)
         {
@@ -86,8 +89,6 @@ public class GameManager : MonoBehaviour
         // The cards that were in the top row will go to the middle row now
         middleRow.PopulateRow(topRowCards);
         
-        // Send the cards that were in the bottom row back to the pool
-        cardPool.DestroyCards(bottomRowCards);
         
         // The cards that were in the middle row will go to the bottom row now
         bottomRow.PopulateRow(middleRowCards);

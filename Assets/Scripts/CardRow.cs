@@ -22,6 +22,7 @@ namespace CardGame
                 pos.x = offsetX * i;
                 cards[i].transform.localPosition = pos;
                 cards[i].SetLaneAndRow(i, row);
+                //cards[i].IsInPool = false;
             }
         }
 

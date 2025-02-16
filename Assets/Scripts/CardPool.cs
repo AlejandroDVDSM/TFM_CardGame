@@ -119,6 +119,7 @@ namespace CardGame
             card.transform.localPosition = Vector3.zero;
             card.DisableCard();
             card.IsInPool = true;
+            // Debug.Log($"Destroy card: {card} - {card.GetInstanceID()}");
         }
         
         /// <summary>
@@ -138,26 +139,26 @@ namespace CardGame
                     // Enemy
                     case 0:
                         card = ExtractCardFromPool(ECardType.ENEMY);
-                        card.SetCard(enemiesCollection.GetRandomCard());
                         break;
                     
                     // Items
                     case 1:
                         card = ExtractCardFromPool(ECardType.ITEM);
-                        card.SetCard(itemsCollection.GetRandomCard());
                         break;
                     
                     // Status
                     case 2:
                         card = ExtractCardFromPool(ECardType.STATUS);
-                        card.SetCard(statusesCollection.GetRandomCard());
                         break;
                 }
-                
-            if (card != null)
-                cards.Add(card);
-            else
-                Debug.LogError("Card is null");
+
+                if (card != null)
+                {
+                    cards.Add(card);
+                    card.IsInPool = false;
+                }
+                else
+                    Debug.LogError("Card is null");
             
             }
             
@@ -175,9 +176,8 @@ namespace CardGame
             for (int i = 0; i < 3; i++)
             {
                 Card card = ExtractCardFromPool(ECardType.CUP);
-                card.SetCard(cupCardData);
-
                 cards.Add(card);
+                card.IsInPool = false;
             }
             
             return cards;
@@ -194,30 +194,27 @@ namespace CardGame
             {
                 case ECardType.ENEMY:
                     card = _enemiesPool.First(c => c.IsInPool);
+                    card.SetCard(enemiesCollection.GetRandomCard());
                     break;
                 
                 case ECardType.ITEM:
                     card = _itemsPool.First(c => c.IsInPool);
+                    card.SetCard(itemsCollection.GetRandomCard());
                     break;
                 
                 case ECardType.STATUS:
                     card = _statusesPool.First(c => c.IsInPool);
+                    card.SetCard(statusesCollection.GetRandomCard());
                     break;
                 
                 case ECardType.CUP:
                     card = _cupsPool.First(c => c.IsInPool);
+                    card.SetCard(cupCardData);
+
                     break;
             }
             
-            // Card card = _cardsPool.First(c => c.IsInPool);
-            if (card != null)
-            {
-                card.IsInPool = false;
-                return card;
-            }
-
-            Debug.LogError("Card is null");
-            return null;
+            return card;
         }
     }
 }
