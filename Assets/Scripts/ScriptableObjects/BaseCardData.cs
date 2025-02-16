@@ -2,7 +2,7 @@
 
 namespace ScriptableObjects
 {
-    // [CreateAssetMenu(fileName = "BaseCard", menuName = "Card / BaseCard")]
+    [CreateAssetMenu(fileName = "NewBaseCard", menuName = "Card / Base Card")]
     public class BaseCardData : ScriptableObject
     {
         public string Name;

@@ -5,6 +5,7 @@
         HEALTH,
         MANA,
         COINS,
-        ARMOR
+        ARMOR,
+        CUP
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CardGame
 {
-    public class Enemy : Card
+    public class EnemyCard : Card
     {
         protected override void ApplyEffect()
         {

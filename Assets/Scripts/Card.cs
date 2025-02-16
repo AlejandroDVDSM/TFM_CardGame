@@ -25,6 +25,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void SetCard(BaseCardData cardData)
     {
+        // Debug.Log($"Card: {cardData}");
         _cardData = cardData;
         UpdateUI();
     }
@@ -49,7 +50,6 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void DisableCard()
     {
-        IsInPool = true;
         _cardLane = ECardLane.OUT;
         _currentRow = ERow.OUT;
     }
@@ -61,7 +61,10 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         if (_currentRow != ERow.BOTTOM)
             return;
         
-        GameManager.Instance.SelectCard(this);
+        if (CardData.name.Equals("Cup"))
+            GameManager.Instance.EndGame();
+        else
+            GameManager.Instance.SelectCard(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
