@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using CardGame.Enums;
 using ScriptableObjects;
 using UnityEngine;
@@ -10,7 +13,6 @@ namespace CardGame
     public class CardPool : MonoBehaviour
     {
         [Header("Cards Prefab")]
-        // [SerializeField] private Card cardPrefab;
         [SerializeField] private EnemyCard enemyCardPrefab;
         [SerializeField] private ItemCard itemCardPrefab;
         [SerializeField] private StatusCard statusCardPrefab;
@@ -23,13 +25,20 @@ namespace CardGame
         [SerializeField] private BaseCardData cupCardData;
         
         [Header("Pool Config")]
-        [Min(3)]
-        [SerializeField] private int poolSize; 
+        [SerializeField] private int enemiesPoolSize;
+        [SerializeField] private int itemsPoolSize;
+        [SerializeField] private int statusesPoolSize;
+        // [Min(3)]
+        // [SerializeField] private int poolSize; 
 
-        private List<EnemyCard> _enemiesPool;
+        /*private List<EnemyCard> _enemiesPool;
         private List<ItemCard> _itemsPool;
         private List<StatusCard> _statusesPool;
-        private List<CupCard> _cupsPool;
+        private List<CupCard> _cupsPool;*/
+        
+        private List<Card> _cardsPool;
+        private const int k_CupsPoolSize = 3;
+        
 
         private void Awake()
         {
@@ -43,13 +52,41 @@ namespace CardGame
         /// </summary>
         private void InitPools()
         {
-            InitEnemyPool();
+            _cardsPool = new List<Card>();
+            /*InitEnemyPool();
             InitItemPool();
             InitStatusPool();
-            InitCupPool();
+            InitCupPool();*/
+
+            for (int i = 0; i < enemiesPoolSize; i++)
+            {
+                EnemyCard enemyCard = Instantiate(enemyCardPrefab, transform);
+                enemyCard.IsInPool = true;
+                _cardsPool.Add(enemyCard);
+            }
+            for (int i = 0; i < itemsPoolSize; i++)
+            {
+                ItemCard itemCard = Instantiate(itemCardPrefab, transform);
+                itemCard.IsInPool = true;
+                _cardsPool.Add(itemCard);
+            }
+            for (int i = 0; i < statusesPoolSize; i++)
+            {
+                StatusCard statusCard = Instantiate(statusCardPrefab, transform);
+                statusCard.IsInPool = true;
+                _cardsPool.Add(statusCard);
+            }
+            for (int i = 0; i < k_CupsPoolSize; i++)
+            {
+                CupCard cupCard = Instantiate(cupCardPrefab, transform);
+                cupCard.IsInPool = true;
+                _cardsPool.Add(cupCard);
+            }
+            
+            
         }
 
-        private void InitEnemyPool()
+        /*private void InitEnemyPool()
         {
             _enemiesPool = new List<EnemyCard>();
 
@@ -95,7 +132,7 @@ namespace CardGame
                 cupCard.IsInPool = true;
                 _cupsPool.Add(cupCard);
             }
-        }
+        }*/
         
         #endregion
 
@@ -193,26 +230,55 @@ namespace CardGame
             switch (cardType)
             {
                 case ECardType.ENEMY:
-                    card = _enemiesPool.First(c => c.IsInPool);
-                    card.SetCard(enemiesCollection.GetRandomCard());
+                    card = _cardsPool.OfType<EnemyCard>().FirstOrDefault(c => c.IsInPool);
+                    
+                    // If we didn't find an EnemyCard, try with another type of card
+                    if (!card)
+                        card = ExtractCardFromPool(ECardType.ITEM);
+                        
                     break;
                 
                 case ECardType.ITEM:
-                    card = _itemsPool.First(c => c.IsInPool);
-                    card.SetCard(itemsCollection.GetRandomCard());
+                    card = _cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);
+                                  
+                    // If we didn't find an ItemCard, try with another type of card
+                    if (!card)
+                        card = ExtractCardFromPool(ECardType.STATUS);
+                    
                     break;
                 
                 case ECardType.STATUS:
-                    card = _statusesPool.First(c => c.IsInPool);
-                    card.SetCard(statusesCollection.GetRandomCard());
+                    card = _cardsPool.OfType<StatusCard>().FirstOrDefault(c => c.IsInPool);
+                                        
+                    // If we didn't find an EnemyCard, try with another type of card
+                    if (!card)
+                        card = ExtractCardFromPool(ECardType.ENEMY);
+                    
                     break;
                 
                 case ECardType.CUP:
-                    card = _cupsPool.First(c => c.IsInPool);
-                    card.SetCard(cupCardData);
+                    card = _cardsPool.OfType<CupCard>().FirstOrDefault(c => c.IsInPool);
+                    
+                    // This scenario shouldn't happen as we only spawn three cups during a game
+                    if (!card)
+                    {
+                        Debug.LogError($"[POOL] Could not find a <{typeof(CupCard)}> in the pool");
+                        return null;
+                    }
 
                     break;
+
             }
+
+            // TODO: is this the best way to do it? Doubt it
+            if (card?.GetType() == typeof(EnemyCard))
+                card.SetCard(enemiesCollection.GetRandomCard());
+            else if (card?.GetType() == typeof(ItemCard))
+                card.SetCard(itemsCollection.GetRandomCard());
+            else if (card?.GetType() == typeof(StatusCard))
+                card.SetCard(statusesCollection.GetRandomCard());
+            else if (card?.GetType() == typeof(CupCard))
+                card.SetCard(cupCardData);
             
             return card;
         }

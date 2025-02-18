@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPool: {fileID: 1410710009}
-  turns: 3
+  turns: 10
   topRow: {fileID: 127667215}
   middleRow: {fileID: 1350023431}
   bottomRow: {fileID: 339020195}
@@ -704,7 +704,10 @@ MonoBehaviour:
   itemsCollection: {fileID: 11400000, guid: fd49c578229d2084083edda1eba8ad14, type: 2}
   statusesCollection: {fileID: 11400000, guid: 5421cbfe675df574982fc5d2f7983b80, type: 2}
   cupCardData: {fileID: 11400000, guid: 359cdf6bd465b7c4d8a558b12bed2d18, type: 2}
-  poolSize: 6
+  enemiesPoolSize: 5
+  itemsPoolSize: 5
+  statusesPoolSize: 2
+  cupsPoolSize: 3
 --- !u!1 &1833218736
 GameObject:
   m_ObjectHideFlags: 0
