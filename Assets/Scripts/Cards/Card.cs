@@ -17,7 +17,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     private ECardLane m_cardLane = ECardLane.Out;
     private ERow m_currentRow;
-    private BaseCardData m_cardData;
+    protected BaseCardData m_cardData;
     protected int m_cardValue;
 
     public abstract void PerformAction();

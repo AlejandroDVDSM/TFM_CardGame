@@ -7,13 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public PlayerCard Player => m_player;
+    public Player Player => m_player;
     
     [Header("Game settings")]
     [Min(1)]
     [SerializeField] private int m_turns;
     
-    [SerializeField] private PlayerCard m_player;
+    [SerializeField] private Player m_player;
     [SerializeField] private CardPool m_cardPool;
     
     [Header("Rows")]
