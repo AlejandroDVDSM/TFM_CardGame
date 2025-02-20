@@ -2,7 +2,7 @@
 {
     public class CupCard : Card
     {
-        protected override void PerformAction()
+        public override void PerformAction()
         {
             // TODO
         }

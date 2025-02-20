@@ -589,15 +589,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a57299f9e2cb5498b880ea161bc3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPool: {fileID: 1410710009}
-  turns: 10
+  m_turns: 10
+  m_player: {fileID: 8696173517092335567}
+  m_cardPool: {fileID: 1410710009}
   topRow: {fileID: 127667215}
   middleRow: {fileID: 1350023431}
   bottomRow: {fileID: 339020195}
-  OnCardSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  _player: {fileID: 8696173517092335567}
 --- !u!1 &1350023429
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +704,6 @@ MonoBehaviour:
   enemiesPoolSize: 5
   itemsPoolSize: 5
   statusesPoolSize: 2
-  cupsPoolSize: 3
 --- !u!1 &1833218736
 GameObject:
   m_ObjectHideFlags: 0

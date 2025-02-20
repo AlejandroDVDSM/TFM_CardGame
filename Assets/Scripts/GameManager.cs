@@ -7,24 +7,20 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public PlayerCard Player => _player;
+    public PlayerCard Player => m_player;
     
     [Header("Game settings")]
-    [SerializeField] private CardPool cardPool;
-    
     [Min(1)]
-    [SerializeField] private int turns;
+    [SerializeField] private int m_turns;
+    
+    [SerializeField] private PlayerCard m_player;
+    [SerializeField] private CardPool m_cardPool;
     
     [Header("Rows")]
     [SerializeField] private CardRow topRow;
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
-
-    [Header("Events")]
-    public UnityEvent<Card> OnCardSelected;
-
-    [SerializeField] private PlayerCard _player;
-
+    
     private void Awake()
     {
         // Singleton
@@ -43,48 +39,58 @@ public class GameManager : MonoBehaviour
     private void InitGame()
     {
         // Populate top row
-        topRow.PopulateRow(cardPool.ExtractRangeFromPool());
+        topRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
         
         // Populate middle row
-        middleRow.PopulateRow(cardPool.ExtractRangeFromPool());
+        middleRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
         
         // Populate bottom row
-        bottomRow.PopulateRow(cardPool.ExtractRangeFromPool());
+        bottomRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
     }
 
     /// <summary>
-    /// Invoke all registered callbacks when a card has been selected
+    /// Make all entities perform their actions in the correct sequence
     /// </summary>
     /// <param name="card">The card that has been selected</param>
-    public void SelectCard(Card card)
+    public void PlayTurn(Card card)
     {
-        OnCardSelected?.Invoke(card);
+        // Check if the player can move to the selected card
+        if (!Player.CanMoveTo(card.CardLane))
+            return;
+        
+        // Moves the player to the lane of the selected card
+        Player.PlaceInPosition(card.CardLane);
+        
+        // Apply card effect
+        card.PerformAction();
+        
+        CommitTurn();
+
     }
 
     /// <summary>
     /// Moves cards and make new ones appear in the top row
     /// </summary>
-    public void CommitTurn()
+    private void CommitTurn()
     {
         List<Card> topRowCards = topRow.GetCards();
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();
         
         // Send the cards that were in the bottom row back to the pool
-        cardPool.DestroyCards(bottomRowCards);
+        m_cardPool.DestroyCards(bottomRowCards);
         
         // Generates new cards if there are still rounds to be played
-        if (turns > 0)
+        if (m_turns > 0)
         {
             // New cards from the pool will go the top row
-            topRow.PopulateRow(cardPool.ExtractRangeFromPool());
-            turns--;
-        } else if (turns == 0)
+            topRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
+            m_turns--;
+        } else if (m_turns == 0)
         { // Generates cups cards
-            topRow.PopulateRow(cardPool.ExtractCupsFromPool());
-            turns--;
+            topRow.PopulateRow(m_cardPool.ExtractCupsFromPool());
+            m_turns--;
         }
-            
         
         // The cards that were in the top row will go to the middle row now
         middleRow.PopulateRow(topRowCards);

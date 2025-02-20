@@ -2,9 +2,9 @@
 {
     public enum ERow
     {
-        TOP,
-        MIDDLE,
-        BOTTOM,
-        OUT
+        Top,
+        Middle,
+        Bottom,
+        Out
     }
 }

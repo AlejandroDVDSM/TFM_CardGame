@@ -4,7 +4,7 @@ namespace CardGame
 {
     public class StatusCard : Card
     {
-        protected override void PerformAction()
+        public override void PerformAction()
         {
             // TODO
 

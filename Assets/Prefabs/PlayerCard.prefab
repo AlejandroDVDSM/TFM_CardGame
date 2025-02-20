@@ -516,5 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531de205c4742d98350d65b961dd448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthText: {fileID: 5720810780793639620}
   lateralMovement: 216
   posY: -400

@@ -13,62 +13,60 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField] private Image image;
     
     public bool IsInPool { get; set; }
-    public ECardLane CardLane => _cardLane;
-    public ERow CurrentRow => _currentRow;
-    public BaseCardData CardData => _cardData;
+    public ECardLane CardLane => m_cardLane;
     
-    private ECardLane _cardLane = ECardLane.OUT;
-    private ERow _currentRow;
-    private BaseCardData _cardData;
-    protected int cardValue;
+    private ECardLane m_cardLane = ECardLane.Out;
+    private ERow m_currentRow;
+    private BaseCardData m_cardData;
+    protected int m_cardValue;
 
-    protected abstract void PerformAction();
+    public abstract void PerformAction();
 
-    public void SetCard(BaseCardData cardData)
+    public void Set(BaseCardData cardData)
     {
         // Debug.Log($"Card: {cardData}");
-        _cardData = cardData;
-        cardValue = Random.Range(cardData.MinValue, cardData.MaxValue + 1);
+        m_cardData = cardData;
+        m_cardValue = Random.Range(cardData.MinValue, cardData.MaxValue + 1);
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        nameTxt.text = _cardData.Name;
-        valueTxt.text = cardValue.ToString();
-        image.sprite = _cardData.Sprite;
+        nameTxt.text = m_cardData.Name;
+        valueTxt.text = m_cardValue.ToString();
+        image.sprite = m_cardData.Sprite;
     }
 
     public void SetLaneAndRow(int laneIndex, ERow row)
     {
-        _cardLane = (ECardLane)laneIndex;
-        _currentRow = row;
+        m_cardLane = (ECardLane)laneIndex;
+        m_currentRow = row;
     }
 
     public void SetRow(ERow row)
     {
-        _currentRow = row;
+        m_currentRow = row;
     }
 
-    public void DisableCard()
+    public void Disable()
     {
-        _cardLane = ECardLane.OUT;
-        _currentRow = ERow.OUT;
+        m_cardLane = ECardLane.Out;
+        m_currentRow = ERow.Out;
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
         // Do nothing if the selected card is not at the bottom
         // TODO: add tween when the selected card is not at the bottom
-        if (_currentRow != ERow.BOTTOM)
+        if (m_currentRow != ERow.Bottom)
             return;
         
-        if (CardData.name.Equals("Cup"))
+        if (m_cardData.name.Equals("Cup"))
             GameManager.Instance.EndGame();
         else
         {
-            PerformAction();
-            GameManager.Instance.SelectCard(this);
+            GameManager.Instance.PlayTurn(this);
+            //PerformAction();
         }
     }
 

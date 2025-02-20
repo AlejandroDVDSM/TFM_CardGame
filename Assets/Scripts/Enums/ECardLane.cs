@@ -2,9 +2,9 @@
 {
     public enum ECardLane
     {
-        LEFT = 0,
-        MIDDLE = 1,
-        RIGHT = 2,
-        OUT = -1,
+        Left = 0,
+        Middle = 1,
+        Right = 2,
+        Out = -1,
     }
 }

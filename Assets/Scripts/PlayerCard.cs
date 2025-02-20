@@ -11,13 +11,12 @@ public class PlayerCard : MonoBehaviour
     [SerializeField] private float lateralMovement;
     [SerializeField] private float posY;
     
-    private ECardLane _currentLane = ECardLane.MIDDLE;
+    private ECardLane _currentLane = ECardLane.Middle;
 
     private int _currentHealth;
     
     private void Start()
     {
-        GameManager.Instance.OnCardSelected.AddListener(OnCardSelected);
         _currentHealth = maxHealth;
         healthText.text = _currentHealth.ToString();
     }
@@ -36,35 +35,28 @@ public class PlayerCard : MonoBehaviour
         healthText.text = _currentHealth.ToString();
     }
     
-    private void OnCardSelected(Card selectedCard)
-    {
-        PlacePlayerInPosition(selectedCard.CardLane);
-    }
-    
-    private void PlacePlayerInPosition(ECardLane cardLane)
+    public void PlaceInPosition(ECardLane cardLane)
     {
         // Checks if the player is currently in one side and is trying to select a card from the other side
         // If it is, he can't move there
-        if (Mathf.Abs(_currentLane - cardLane) > 1)
-        {
-            // TODO: add tween to give player the feedback that it can't move to the other side
-            Debug.LogWarning($"[Player] Player can not move from {_currentLane} to {cardLane}");
+
+        // TODO: add tween to give player the feedback that it can't move to the other side
+        if (!CanMoveTo(cardLane))
             return;
-        }
         
         Vector3 newPos = Vector3.zero;
         
         switch (cardLane)
         {
-            case ECardLane.LEFT:
+            case ECardLane.Left:
                 newPos = new Vector3(-lateralMovement, posY, 0);
                 break;
             
-            case ECardLane.MIDDLE:
+            case ECardLane.Middle:
                 newPos = new Vector3(0, posY, 0);
                 break;
             
-            case ECardLane.RIGHT:
+            case ECardLane.Right:
                 newPos = new Vector3(lateralMovement, posY, 0);
                 break;
         }
@@ -74,6 +66,17 @@ public class PlayerCard : MonoBehaviour
         _currentLane = cardLane;
         
         // 
-        GameManager.Instance.CommitTurn();
+        // GameManager.Instance.CommitTurn();
+    }
+
+    public bool CanMoveTo(ECardLane cardLane)
+    {
+        if (Mathf.Abs(_currentLane - cardLane) > 1)
+        {
+            Debug.LogWarning($"[Player] Player can not move from {_currentLane} to {cardLane}");
+            return false;
+        }
+
+        return true;
     }
 }

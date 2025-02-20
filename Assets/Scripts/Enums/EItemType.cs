@@ -2,10 +2,9 @@
 {
     public enum EItemType
     {
-        HEALTH,
-        MANA,
-        COINS,
-        ARMOR,
-        CUP
+        Health,
+        Mana,
+        Coin,
+        Armor
     }
 }

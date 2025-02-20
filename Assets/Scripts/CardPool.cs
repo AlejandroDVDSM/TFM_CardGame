@@ -154,7 +154,7 @@ namespace CardGame
         {
             card.transform.SetParent(transform);
             card.transform.localPosition = Vector3.zero;
-            card.DisableCard();
+            card.Disable();
             card.IsInPool = true;
             // Debug.Log($"Destroy card: {card} - {card.GetInstanceID()}");
         }
@@ -175,17 +175,17 @@ namespace CardGame
                 {
                     // Enemy
                     case 0:
-                        card = ExtractCardFromPool(ECardType.ENEMY);
+                        card = ExtractCardFromPool(ECardType.Enemy);
                         break;
                     
                     // Items
                     case 1:
-                        card = ExtractCardFromPool(ECardType.ITEM);
+                        card = ExtractCardFromPool(ECardType.Item);
                         break;
                     
                     // Status
                     case 2:
-                        card = ExtractCardFromPool(ECardType.STATUS);
+                        card = ExtractCardFromPool(ECardType.Status);
                         break;
                 }
 
@@ -212,7 +212,7 @@ namespace CardGame
             
             for (int i = 0; i < 3; i++)
             {
-                Card card = ExtractCardFromPool(ECardType.CUP);
+                Card card = ExtractCardFromPool(ECardType.Cup);
                 cards.Add(card);
                 card.IsInPool = false;
             }
@@ -229,34 +229,34 @@ namespace CardGame
             Card card = null;
             switch (cardType)
             {
-                case ECardType.ENEMY:
+                case ECardType.Enemy:
                     card = _cardsPool.OfType<EnemyCard>().FirstOrDefault(c => c.IsInPool);
                     
                     // If we didn't find an EnemyCard, try with another type of card
                     if (!card)
-                        card = ExtractCardFromPool(ECardType.ITEM);
+                        card = ExtractCardFromPool(ECardType.Item);
                         
                     break;
                 
-                case ECardType.ITEM:
+                case ECardType.Item:
                     card = _cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);
                                   
                     // If we didn't find an ItemCard, try with another type of card
                     if (!card)
-                        card = ExtractCardFromPool(ECardType.STATUS);
+                        card = ExtractCardFromPool(ECardType.Status);
                     
                     break;
                 
-                case ECardType.STATUS:
+                case ECardType.Status:
                     card = _cardsPool.OfType<StatusCard>().FirstOrDefault(c => c.IsInPool);
                                         
                     // If we didn't find an EnemyCard, try with another type of card
                     if (!card)
-                        card = ExtractCardFromPool(ECardType.ENEMY);
+                        card = ExtractCardFromPool(ECardType.Enemy);
                     
                     break;
                 
-                case ECardType.CUP:
+                case ECardType.Cup:
                     card = _cardsPool.OfType<CupCard>().FirstOrDefault(c => c.IsInPool);
                     
                     // This scenario shouldn't happen as we only spawn three cups during a game
@@ -272,13 +272,13 @@ namespace CardGame
 
             // TODO: is this the best way to do it? Doubt it
             if (card?.GetType() == typeof(EnemyCard))
-                card.SetCard(enemiesCollection.GetRandomCard());
+                card.Set(enemiesCollection.GetRandomCard());
             else if (card?.GetType() == typeof(ItemCard))
-                card.SetCard(itemsCollection.GetRandomCard());
+                card.Set(itemsCollection.GetRandomCard());
             else if (card?.GetType() == typeof(StatusCard))
-                card.SetCard(statusesCollection.GetRandomCard());
+                card.Set(statusesCollection.GetRandomCard());
             else if (card?.GetType() == typeof(CupCard))
-                card.SetCard(cupCardData);
+                card.Set(cupCardData);
             
             return card;
         }

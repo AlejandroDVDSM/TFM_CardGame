@@ -2,9 +2,9 @@
 {
     public enum ECardType
     {
-        ENEMY = 0,
-		ITEM = 1,
-		STATUS = 2,
-        CUP = 3
+        Enemy = 0,
+		Item = 1,
+		Status = 2,
+        Cup = 3
     }
 }

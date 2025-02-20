@@ -2,12 +2,12 @@
 {
     public enum EStatusType
     {
-        POISON,
-        BLIND,
-        SILENCE,
-        INVISIBILITY,
-        REGENERATION,
-        PROTECTION
+        Poison,
+        Blind,
+        Silence,
+        Invisibility,
+        Regeneration,
+        Protection
         
     }
 }
