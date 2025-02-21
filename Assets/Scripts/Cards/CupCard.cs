@@ -5,6 +5,7 @@
         public override void PerformAction()
         {
             // TODO
+            GameManager.Instance.EndGame();
         }
     }
 }

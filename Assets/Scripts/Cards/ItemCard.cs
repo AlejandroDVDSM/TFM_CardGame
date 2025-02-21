@@ -8,27 +8,27 @@ namespace CardGame
     {
         public override void PerformAction()
         {
-            if (!m_cardData is ItemCardData)
+            if (!m_data is ItemCardData)
                 return;
             
-            ItemCardData itemCardData = m_cardData as ItemCardData;
+            ItemCardData itemCardData = m_data as ItemCardData;
             
             switch (itemCardData.Type)
             {
                 case EItemType.Health:
-                    GameManager.Instance.Player.RestoreHealth(m_cardValue);
+                    GameManager.Instance.Player.RestoreHealth(m_value);
                     break;
                 
                 case EItemType.Mana:
-                    GameManager.Instance.Player.RestoreMana(m_cardValue);
+                    GameManager.Instance.Player.RestoreMana(m_value);
                     break;
                 
                 case EItemType.Coin:
-                    GameManager.Instance.Player.AddCoins(m_cardValue);
+                    GameManager.Instance.Player.AddCoins(m_value);
                     break;
                 
                 case EItemType.Armor:
-                    GameManager.Instance.Player.RestoreArmor(m_cardValue);
+                    GameManager.Instance.Player.RestoreArmor(m_value);
                     break;
             }
 

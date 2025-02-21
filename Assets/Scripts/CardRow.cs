@@ -22,13 +22,21 @@ namespace CardGame
                 pos.x = offsetX * i;
                 cards[i].transform.localPosition = pos;
                 cards[i].SetLaneAndRow(i, row);
-                //cards[i].IsInPool = false;
             }
         }
 
         public List<Card> GetCards()
         {
             return GetComponentsInChildren<Card>().ToList();
+        }
+
+        public void PlaceSingleCard(Card card, ECardLane lane)
+        {
+            Vector3 pos = Vector3.zero;
+            card.transform.SetParent(transform);
+            pos.x = offsetX * (int)lane;
+            card.transform.localPosition = pos;
+            card.SetLaneAndRow((int)lane, row);
         }
     }
 }

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using CardGame;
+using CardGame.Enums;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,17 +56,29 @@ public class GameManager : MonoBehaviour
     public void PlayTurn(Card card)
     {
         // Check if the player can move to the selected card
-        if (!Player.CanMoveTo(card.CardLane))
+        if (!Player.CanMoveTo(card.Lane))
             return;
         
         // Moves the player to the lane of the selected card
-        Player.PlaceInPosition(card.CardLane);
+        Player.PlaceInPosition(card.Lane);
         
         // Apply card effect
         card.PerformAction();
-        
-        CommitTurn();
 
+        // If the card is an enemy, turn it into coins
+        if (card is EnemyCard)
+        {
+            Debug.Log("Enemy is now a Coin");
+            ItemCard coinCard = m_cardPool.ExtractItemCardOfType(EItemType.Coin);
+            coinCard.UpdateValue(card.Value);
+            
+            bottomRow.PlaceSingleCard(coinCard, card.Lane);
+            m_cardPool.DestroyCard(card);
+        }
+        else
+        {
+            CommitTurn();
+        }
     }
 
     /// <summary>

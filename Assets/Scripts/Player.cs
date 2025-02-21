@@ -81,24 +81,40 @@ public class Player : MonoBehaviour
         m_armorText.text = m_stats.m_currentArmor.ToString();
     }
 
+    /// <summary>
+    /// Heal player
+    /// </summary>
+    /// <param name="health">Heal value</param>
     public void RestoreHealth(int health)
     {
         m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth + health, m_stats.m_currentHealth, m_stats.MaxHealth);
         m_healthText.text = m_stats.m_currentHealth.ToString();
     }
 
+    /// <summary>
+    /// Add armor to the player
+    /// </summary>
+    /// <param name="armor">Armor value</param>
     public void RestoreArmor(int armor)
     {
         m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor + armor, m_stats.m_currentArmor, m_stats.MaxArmor);
         m_armorText.text = m_stats.m_currentArmor.ToString();
     }
 
+    /// <summary>
+    /// Increase current mana
+    /// </summary>
+    /// <param name="mana">Mana value</param>
     public void RestoreMana(int mana)
     {
         m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, m_stats.m_currentMana, m_stats.MaxMana);
         m_manaText.text = m_stats.m_currentMana.ToString();
     }
 
+    /// <summary>
+    /// Add coins
+    /// </summary>
+    /// <param name="coins">The amount to add</param>
     public void AddCoins(int coins)
     {
         m_stats.m_coins += coins;

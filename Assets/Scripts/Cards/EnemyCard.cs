@@ -5,7 +5,7 @@
         public override void PerformAction()
         {
             // TODO: tween (?)
-            GameManager.Instance.Player.Hit(m_cardValue);
+            GameManager.Instance.Player.Hit(m_value);
         }
     }
 }

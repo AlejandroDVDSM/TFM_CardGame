@@ -13,33 +13,40 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField] private Image image;
     
     public bool IsInPool { get; set; }
-    public ECardLane CardLane => m_cardLane;
+    public ECardLane Lane => m_lane;
+    public int Value => m_value;
     
-    private ECardLane m_cardLane = ECardLane.Out;
+    private ECardLane m_lane = ECardLane.Out;
     private ERow m_currentRow;
-    protected BaseCardData m_cardData;
-    protected int m_cardValue;
+    protected BaseCardData m_data;
+    protected int m_value;
 
     public abstract void PerformAction();
 
     public void Set(BaseCardData cardData)
     {
         // Debug.Log($"Card: {cardData}");
-        m_cardData = cardData;
-        m_cardValue = Random.Range(cardData.MinValue, cardData.MaxValue + 1);
+        m_data = cardData;
+        m_value = Random.Range(cardData.MinValue, cardData.MaxValue + 1);
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        nameTxt.text = m_cardData.Name;
-        valueTxt.text = m_cardValue.ToString();
-        image.sprite = m_cardData.Sprite;
+        nameTxt.text = m_data.Name;
+        valueTxt.text = m_value.ToString();
+        image.sprite = m_data.Sprite;
+    }
+    
+    public void UpdateValue(int cardValue)
+    {
+        m_value = cardValue;
+        valueTxt.text = cardValue.ToString();
     }
 
     public void SetLaneAndRow(int laneIndex, ERow row)
     {
-        m_cardLane = (ECardLane)laneIndex;
+        m_lane = (ECardLane)laneIndex;
         m_currentRow = row;
     }
 
@@ -50,7 +57,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void Disable()
     {
-        m_cardLane = ECardLane.Out;
+        m_lane = ECardLane.Out;
         m_currentRow = ERow.Out;
     }
     
@@ -61,13 +68,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         if (m_currentRow != ERow.Bottom)
             return;
         
-        if (m_cardData.name.Equals("Cup"))
-            GameManager.Instance.EndGame();
-        else
-        {
-            GameManager.Instance.PlayTurn(this);
-            //PerformAction();
-        }
+        GameManager.Instance.PlayTurn(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

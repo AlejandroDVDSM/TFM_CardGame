@@ -28,17 +28,9 @@ namespace CardGame
         [SerializeField] private int enemiesPoolSize;
         [SerializeField] private int itemsPoolSize;
         [SerializeField] private int statusesPoolSize;
-        // [Min(3)]
-        // [SerializeField] private int poolSize; 
-
-        /*private List<EnemyCard> _enemiesPool;
-        private List<ItemCard> _itemsPool;
-        private List<StatusCard> _statusesPool;
-        private List<CupCard> _cupsPool;*/
         
-        private List<Card> _cardsPool;
+        private List<Card> m_cardsPool;
         private const int k_CupsPoolSize = 3;
-        
 
         private void Awake()
         {
@@ -52,87 +44,33 @@ namespace CardGame
         /// </summary>
         private void InitPools()
         {
-            _cardsPool = new List<Card>();
-            /*InitEnemyPool();
-            InitItemPool();
-            InitStatusPool();
-            InitCupPool();*/
+            m_cardsPool = new List<Card>();
 
             for (int i = 0; i < enemiesPoolSize; i++)
             {
                 EnemyCard enemyCard = Instantiate(enemyCardPrefab, transform);
                 enemyCard.IsInPool = true;
-                _cardsPool.Add(enemyCard);
+                m_cardsPool.Add(enemyCard);
             }
             for (int i = 0; i < itemsPoolSize; i++)
             {
                 ItemCard itemCard = Instantiate(itemCardPrefab, transform);
                 itemCard.IsInPool = true;
-                _cardsPool.Add(itemCard);
+                m_cardsPool.Add(itemCard);
             }
             for (int i = 0; i < statusesPoolSize; i++)
             {
                 StatusCard statusCard = Instantiate(statusCardPrefab, transform);
                 statusCard.IsInPool = true;
-                _cardsPool.Add(statusCard);
+                m_cardsPool.Add(statusCard);
             }
             for (int i = 0; i < k_CupsPoolSize; i++)
             {
                 CupCard cupCard = Instantiate(cupCardPrefab, transform);
                 cupCard.IsInPool = true;
-                _cardsPool.Add(cupCard);
-            }
-            
-            
-        }
-
-        /*private void InitEnemyPool()
-        {
-            _enemiesPool = new List<EnemyCard>();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                EnemyCard enemyCard = Instantiate(enemyCardPrefab, transform);
-                enemyCard.IsInPool = true;
-                _enemiesPool.Add(enemyCard);
+                m_cardsPool.Add(cupCard);
             }
         }
-        
-        private void InitItemPool()
-        {
-            _itemsPool = new List<ItemCard>();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                ItemCard itemCard = Instantiate(itemCardPrefab, transform);
-                itemCard.IsInPool = true;
-                _itemsPool.Add(itemCard);
-            }
-        }
-        
-        private void InitStatusPool()
-        {
-            _statusesPool = new List<StatusCard>();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                StatusCard statusCard = Instantiate(statusCardPrefab, transform);
-                statusCard.IsInPool = true;
-                _statusesPool.Add(statusCard);
-            }
-        }
-        
-        private void InitCupPool()
-        {
-            _cupsPool = new List<CupCard>();
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                CupCard cupCard = Instantiate(cupCardPrefab, transform);
-                cupCard.IsInPool = true;
-                _cupsPool.Add(cupCard);
-            }
-        }*/
         
         #endregion
 
@@ -150,13 +88,12 @@ namespace CardGame
         /// Bring a card back to the pool
         /// </summary>
         /// <param name="card">Card that will go back to the pool</param>
-        private void DestroyCard(Card card)
+        public void DestroyCard(Card card)
         {
             card.transform.SetParent(transform);
             card.transform.localPosition = Vector3.zero;
             card.Disable();
             card.IsInPool = true;
-            // Debug.Log($"Destroy card: {card} - {card.GetInstanceID()}");
         }
         
         /// <summary>
@@ -190,10 +127,7 @@ namespace CardGame
                 }
 
                 if (card != null)
-                {
                     cards.Add(card);
-                    card.IsInPool = false;
-                }
                 else
                     Debug.LogError("Card is null");
             
@@ -230,7 +164,7 @@ namespace CardGame
             switch (cardType)
             {
                 case ECardType.Enemy:
-                    card = _cardsPool.OfType<EnemyCard>().FirstOrDefault(c => c.IsInPool);
+                    card = m_cardsPool.OfType<EnemyCard>().FirstOrDefault(c => c.IsInPool);
                     
                     // If we didn't find an EnemyCard, try with another type of card
                     if (!card)
@@ -239,7 +173,7 @@ namespace CardGame
                     break;
                 
                 case ECardType.Item:
-                    card = _cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);
+                    card = m_cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);
                                   
                     // If we didn't find an ItemCard, try with another type of card
                     if (!card)
@@ -248,7 +182,7 @@ namespace CardGame
                     break;
                 
                 case ECardType.Status:
-                    card = _cardsPool.OfType<StatusCard>().FirstOrDefault(c => c.IsInPool);
+                    card = m_cardsPool.OfType<StatusCard>().FirstOrDefault(c => c.IsInPool);
                                         
                     // If we didn't find an EnemyCard, try with another type of card
                     if (!card)
@@ -257,7 +191,7 @@ namespace CardGame
                     break;
                 
                 case ECardType.Cup:
-                    card = _cardsPool.OfType<CupCard>().FirstOrDefault(c => c.IsInPool);
+                    card = m_cardsPool.OfType<CupCard>().FirstOrDefault(c => c.IsInPool);
                     
                     // This scenario shouldn't happen as we only spawn three cups during a game
                     if (!card)
@@ -272,15 +206,34 @@ namespace CardGame
 
             // TODO: is this the best way to do it? Doubt it
             if (card?.GetType() == typeof(EnemyCard))
-                card.Set(enemiesCollection.GetRandomCard());
+                card.Set(enemiesCollection.GetRandomData());
             else if (card?.GetType() == typeof(ItemCard))
-                card.Set(itemsCollection.GetRandomCard());
+                card.Set(itemsCollection.GetRandomData());
             else if (card?.GetType() == typeof(StatusCard))
-                card.Set(statusesCollection.GetRandomCard());
+                card.Set(statusesCollection.GetRandomData());
             else if (card?.GetType() == typeof(CupCard))
                 card.Set(cupCardData);
             
+            if (card)
+                card.IsInPool = false;
+            
             return card;
+        }
+
+        public ItemCard ExtractItemCardOfType(EItemType itemType)
+        {
+            ItemCard itemCard = m_cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);
+
+            if (!itemCard)
+            { 
+                // If there is no ItemCard in the pool create one and add it
+                itemCard = Instantiate(itemCardPrefab, transform);
+                itemCard.IsInPool = true;
+                m_cardsPool.Add(itemCard);
+            }
+            
+            itemCard.Set(itemsCollection.GetItemDataByType(itemType));
+            return itemCard;
         }
     }
 }
