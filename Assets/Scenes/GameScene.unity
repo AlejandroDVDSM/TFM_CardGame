@@ -153,7 +153,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -216, y: 350}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 142, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &127667215
 MonoBehaviour:
@@ -203,7 +203,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -216, y: -150}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 142, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &339020195
 MonoBehaviour:
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a57299f9e2cb5498b880ea161bc3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_turns: 2
+  m_turns: 10
   m_player: {fileID: 8696173517092335567}
   m_cardPool: {fileID: 1410710009}
   topRow: {fileID: 127667215}
@@ -629,7 +629,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -216, y: 100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 142, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350023431
 MonoBehaviour:
@@ -903,10 +903,6 @@ PrefabInstance:
     - target: {fileID: 56816292652665325, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
-      propertyPath: m_stats.MaxArmor
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name

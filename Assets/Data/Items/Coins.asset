@@ -16,4 +16,5 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: 966b1c8b5576b9643983e52c9ce9ab3e, type: 3}
   MinValue: 1
   MaxValue: 10
+  IgnoreData: 1
   Type: 2

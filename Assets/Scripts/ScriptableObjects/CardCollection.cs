@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CardGame;
 using CardGame.Enums;
 using UnityEngine;
 
@@ -15,8 +14,10 @@ namespace ScriptableObjects
         /// Get a random card
         /// </summary>
         /// <returns>A random card</returns>
-        public BaseCardData GetRandomData() {
-            return GetDataByIndex(Random.Range(0, Cards.Count));
+        public BaseCardData GetRandomData()
+        {
+            List<BaseCardData> cardsData = Cards.Where(d => !d.IgnoreData).ToList();
+            return cardsData[Random.Range(0, cardsData.Count)];
         }
         
         /// <summary>

@@ -21,6 +21,7 @@ namespace CardGame
                 cards[i].transform.SetParent(transform);
                 pos.x = offsetX * i;
                 cards[i].transform.localPosition = pos;
+                cards[i].transform.localScale = Vector3.one;
                 cards[i].SetLaneAndRow(i, row);
             }
         }
@@ -36,6 +37,7 @@ namespace CardGame
             card.transform.SetParent(transform);
             pos.x = offsetX * (int)lane;
             card.transform.localPosition = pos;
+            card.transform.localScale = Vector3.one;
             card.SetLaneAndRow((int)lane, row);
         }
     }

@@ -12,5 +12,8 @@ namespace ScriptableObjects
         public int MinValue;
         
         public int MaxValue;
+        
+        public bool IgnoreData;
+
     }
 }

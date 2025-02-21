@@ -7,6 +7,5 @@ namespace ScriptableObjects
     public class ItemCardData : BaseCardData
     {
         public EItemType Type;
-        public bool IgnoreDataWhenRandom;
     }
 }
