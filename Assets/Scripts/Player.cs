@@ -50,13 +50,25 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Reduce player's health
+    /// Reduce player's health. If the player has armor, it will reduce the armor first
     /// </summary>
     /// <param name="damage">The amount of damage to apply</param>
     public void Hit(int damage)
     {
-        m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damage, 0, m_stats.m_currentHealth);
+        // If the player has armor...
+        if (m_stats.m_currentArmor > 0)
+        {
+            // ... get the damaged that couldn't be absorbed by the armor and apply it to the health
+            int damageNotAbsorbedByArmor = Mathf.Abs(m_stats.m_currentArmor - damage);
+            m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor - damage, 0, m_stats.m_currentArmor);
+            m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damageNotAbsorbedByArmor, 0, m_stats.m_currentHealth);
+        }
+        else
+        { // ... apply damage
+            m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damage, 0, m_stats.m_currentHealth);   
+        }
         
+        // Check if the damage was enough to kill the player
         if (m_stats.m_currentHealth == 0)
         {
             // TODO: end game
@@ -66,6 +78,7 @@ public class Player : MonoBehaviour
         }
         
         m_healthText.text = m_stats.m_currentHealth.ToString();
+        m_armorText.text = m_stats.m_currentArmor.ToString();
     }
 
     public void RestoreHealth(int health)
