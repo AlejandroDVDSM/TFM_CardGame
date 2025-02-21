@@ -2,6 +2,7 @@
 using CardGame.Enums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -39,9 +40,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float m_posY;
     
     private ECardLane m_currentLane = ECardLane.Middle;
+    private int m_isPoisoned;
+    private int m_isBlind;
     
     private void Start()
     {
+        GameManager.Instance.OnTurnCommited.AddListener(ApplyStatuses);;
+        
         m_stats.m_currentHealth = m_stats.MaxHealth;
         m_healthText.text = m_stats.m_currentHealth.ToString();
         m_armorText.text = m_stats.m_currentArmor.ToString();
@@ -56,7 +61,7 @@ public class Player : MonoBehaviour
     public void Hit(int damage)
     {
         // If the player has armor...
-        if (m_stats.m_currentArmor > 0)
+        if (m_stats.m_currentArmor > 0 && m_isPoisoned == 0)
         {
             // ... get the damaged that couldn't be absorbed by the armor and apply it to the health
             int damageNotAbsorbedByArmor = Mathf.Abs(m_stats.m_currentArmor - damage);
@@ -120,7 +125,37 @@ public class Player : MonoBehaviour
         m_stats.m_coins += coins;
         m_coinsText.text = m_stats.m_coins.ToString();
     }
+
+    // TODO: make own script for player statuses?
+    private void ApplyStatuses()
+    {
+        Debug.Log("[PLAYER] Applying statuses...");
+        
+        if (m_isPoisoned > 0)
+        {
+            ApplyPoison(m_isPoisoned - 1);
+            Hit(1);
+        }
+        
+    }
     
+    public void ApplyPoison(int turns)
+    {
+        Debug.Log($"[PLAYER] Applying poison ({turns} turns left)");
+        
+        m_isPoisoned = turns;
+    }
+
+    public void ApplyBlind(int turns)
+    {
+        Debug.Log($"PLAYER] Applying blind ({turns} turns left)");
+        m_isBlind = turns;
+        
+        // TODO
+    }
+    
+    
+    // TODO: make own script for player movement (?)
     /// <summary>
     /// Place the player in the desired lane
     /// </summary>

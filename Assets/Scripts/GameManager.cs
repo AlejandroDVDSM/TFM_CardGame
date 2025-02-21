@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CardGame;
 using CardGame.Enums;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -21,7 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow topRow;
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
-    
+
+    public UnityEvent OnTurnCommited;
+
     private void Awake()
     {
         // Singleton
@@ -112,6 +115,7 @@ public class GameManager : MonoBehaviour
         // The cards that were in the middle row will go to the bottom row now
         bottomRow.PopulateRow(middleRowCards);
 
+        OnTurnCommited?.Invoke();
     }
 
     public void EndGame()
