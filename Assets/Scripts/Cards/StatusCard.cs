@@ -1,5 +1,5 @@
-﻿using CardGame.Enums;
-using ScriptableObjects;
+﻿using ScriptableObjects;
+using UnityEngine;
 
 namespace CardGame
 {
@@ -7,38 +7,12 @@ namespace CardGame
     {
         public override void PerformAction()
         {
-            if (!m_data is StatusCardData)
-                return;
-            
             StatusCardData itemCardData = m_data as StatusCardData;
             
-            switch (itemCardData.Status)
-            {
-                case EStatusType.Poison:
-                    GameManager.Instance.Player.Status.ApplyPoison(Value);
-                    break;
-                
-                case EStatusType.Blind:
-                    // TODO
-                    break;
-                
-                case EStatusType.Silence:
-                    // TODO
-                    break;
-                
-                case EStatusType.Invisibility:
-                    // TODO
-                    break;
-                
-                case EStatusType.Regeneration:
-                    // TODO
-                    break;
-                
-                case EStatusType.Protection:
-                    // TODO
-                    break;
-            }
-
+            if (itemCardData)
+                GameManager.Instance.Player.Status.ApplyNewStatus(itemCardData.Status, Value);
+            else
+                Debug.LogError($"This card is not of type {typeof(StatusCard)}");
         }
     }
 }

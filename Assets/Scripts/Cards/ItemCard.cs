@@ -8,12 +8,9 @@ namespace CardGame
     {
         public override void PerformAction()
         {
-            if (!m_data is ItemCardData)
-                return;
-            
             ItemCardData itemCardData = m_data as ItemCardData;
             
-            switch (itemCardData.Type)
+            switch (itemCardData?.Type)
             {
                 case EItemType.Health:
                     GameManager.Instance.Player.RestoreHealth(m_value);

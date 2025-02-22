@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using CardGame;
 using CardGame.Enums;
-using CardGame.Player;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {

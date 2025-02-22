@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Silence
   Sprite: {fileID: 21300000, guid: 2e6f2acecdb89d841b3a6f5d909f461e, type: 3}
-  MinValue: 0
-  MaxValue: 0
+  MinValue: 2
+  MaxValue: 5
+  IgnoreData: 0
   Status: 2

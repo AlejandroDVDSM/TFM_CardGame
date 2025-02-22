@@ -37,6 +37,11 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         valueTxt.text = m_value.ToString();
         image.sprite = m_data.Sprite;
     }
+
+    public void HideValue(bool hide)
+    {
+        valueTxt.text = hide ? "?" : Value.ToString();
+    }
     
     public void UpdateValue(int cardValue)
     {
