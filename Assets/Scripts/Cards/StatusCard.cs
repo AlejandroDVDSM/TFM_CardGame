@@ -15,7 +15,7 @@ namespace CardGame
             switch (itemCardData.Status)
             {
                 case EStatusType.Poison:
-                    GameManager.Instance.Player.ApplyPoison(Value);
+                    GameManager.Instance.Player.Status.ApplyPoison(Value);
                     break;
                 
                 case EStatusType.Blind:

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CardGame;
 using CardGame.Enums;
+using CardGame.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -59,11 +60,11 @@ public class GameManager : MonoBehaviour
     public void PlayTurn(Card card)
     {
         // Check if the player can move to the selected card
-        if (!Player.CanMoveTo(card.Lane))
+        if (!Player.Movement.CanMoveTo(card.Lane))
             return;
         
         // Moves the player to the lane of the selected card
-        Player.PlaceInPosition(card.Lane);
+        Player.Movement.PlaceInPosition(card.Lane);
         
         // Apply card effect
         card.PerformAction();
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves cards and make new ones appear in the top row
+    /// Move the cards and make new ones appear in the top row
     /// </summary>
     private void CommitTurn()
     {
