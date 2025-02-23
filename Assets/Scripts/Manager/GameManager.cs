@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using CardGame;
-using CardGame.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public CardPool CardPool => m_cardPool;
     
     public Player Player => m_player;
     
@@ -41,13 +41,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void InitGame()
     {
-        // Populate top row
         topRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
         
-        // Populate middle row
         middleRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
         
-        // Populate bottom row
         bottomRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
     }
 
@@ -67,20 +64,10 @@ public class GameManager : MonoBehaviour
         // Apply card effect
         card.PerformAction();
 
-        // If the card is an enemy, turn it into coins
-        if (card is EnemyCard)
-        {
-            Debug.Log("Enemy is now a Coin");
-            ItemCard coinCard = m_cardPool.ExtractItemCardOfType(EItemType.Coin);
-            coinCard.UpdateValue(card.Value);
-            
-            bottomRow.PlaceSingleCard(coinCard, card.Lane);
-            m_cardPool.DestroyCard(card);
-        }
-        else
-        {
+        // We do not commit the turn when the card is an enemy as it has to turn into a coin first.
+        // Then, the player must choose between selecting that coin or one of the other two cards in the row
+        if (card is not EnemyCard)
             CommitTurn();
-        }
     }
 
     /// <summary>
@@ -109,7 +96,6 @@ public class GameManager : MonoBehaviour
         
         // The cards that were in the top row will go to the middle row now
         middleRow.PopulateRow(topRowCards);
-        
         
         // The cards that were in the middle row will go to the bottom row now
         bottomRow.PopulateRow(middleRowCards);

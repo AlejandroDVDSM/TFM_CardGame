@@ -8,7 +8,8 @@ namespace CardGame.Player
         [Header("Position")]
         [SerializeField] private float m_lateralMovement;
         [SerializeField] private float m_posY;
-    
+
+        public ECardLane CurrentLane => m_currentLane;
         private ECardLane m_currentLane = ECardLane.Middle;
     
         /// <summary>
