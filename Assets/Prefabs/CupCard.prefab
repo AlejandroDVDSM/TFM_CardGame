@@ -92,14 +92,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: CupCard
       objectReference: {fileID: 0}
+    - target: {fileID: 2715818635225806416, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2765672542850701214, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
       propertyPath: m_text
       value: Cup
       objectReference: {fileID: 0}
-    - target: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+    - target: {fileID: 3090900311588605522, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794219392687635211, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a439dfcf432abff409e56125221b1e21, type: 3}
+    - target: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8967089281458769660, guid: 96e9ff82b626fd240835c3327b6eda4b, type: 3}
+    - target: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_Color.g
+      value: 0.90228593
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108,6 +132,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2940050988515781388}
   m_SourcePrefab: {fileID: 100100000, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+--- !u!114 &398488119828249505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4794219392687635211, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+  m_PrefabInstance: {fileID: 5120535560544059562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2549331247944528296 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7236933535682359554, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
@@ -149,7 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTxt: {fileID: 7020671396486764340}
   valueTxt: {fileID: 5857393398392080608}
-  image: {fileID: 2549331247944528296}
+  background: {fileID: 2549331247944528296}
+  shadow: {fileID: 7496449467102111978}
+  image: {fileID: 398488119828249505}
 --- !u!114 &7020671396486764340 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2765672542850701214, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
@@ -159,5 +196,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7496449467102111978 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3388807970047764544, guid: ada27fd5910e1924aaf52bd9653161ec, type: 3}
+  m_PrefabInstance: {fileID: 5120535560544059562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

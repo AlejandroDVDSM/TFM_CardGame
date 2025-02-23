@@ -10,6 +10,8 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [Header("UI")]
     [SerializeField] private TMP_Text nameTxt;    
     [SerializeField] private TMP_Text valueTxt;
+    [SerializeField] private Image background;
+    [SerializeField] private Image shadow;
     [SerializeField] private Image image;
     
     public bool IsInPool { get; set; }
@@ -37,6 +39,8 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         nameTxt.text = m_data.Name;
         valueTxt.text = m_value.ToString();
         image.sprite = m_data.Sprite;
+        background.color = m_data.BackgroundColor;
+        shadow.color = m_data.BackgroundColor;
     }
 
     public void HideValue(bool hide)

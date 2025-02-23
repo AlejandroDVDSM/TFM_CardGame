@@ -37,7 +37,7 @@ namespace CardGame
         //     GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane);
         //     GameManager.Instance.CardPool.DestroyCard(this);
         // }
-        //
+        
         private void CheckPlayerPosition()
         {
             if (GameManager.Instance.Player.Movement.CurrentLane == Lane && m_currentRow == ERow.Bottom)

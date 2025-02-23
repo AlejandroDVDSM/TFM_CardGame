@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: EvolvedBug
   m_EditorClassIdentifier: 
   Name: Enemy
-  Sprite: {fileID: 21300000, guid: 5779ecf0eeb0bf7428387aced12a8553, type: 3}
-  MinValue: 1
-  MaxValue: 10
+  Sprite: {fileID: 6584690746588489567, guid: 0ce3223ea46cf3440841b2e8c89a2205, type: 3}
+  BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  MinValue: 2
+  MaxValue: 5
+  IgnoreData: 0

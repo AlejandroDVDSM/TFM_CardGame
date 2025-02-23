@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   Name: Health
-  Sprite: {fileID: 21300000, guid: 081bfe902e135ab4597c3d62a4c776de, type: 3}
+  Sprite: {fileID: 21300000, guid: bd8201264b81866439b29f77e586d40a, type: 3}
+  BackgroundColor: {r: 1, g: 0.65882355, b: 0.95686275, a: 1}
   MinValue: 1
   MaxValue: 10
+  IgnoreData: 0
   Type: 0

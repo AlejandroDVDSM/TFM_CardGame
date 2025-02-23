@@ -9,6 +9,8 @@ namespace ScriptableObjects
         
         public Sprite Sprite;
         
+        public Color BackgroundColor = Color.white;
+        
         public int MinValue;
         
         public int MaxValue;
