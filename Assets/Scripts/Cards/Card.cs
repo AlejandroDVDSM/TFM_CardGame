@@ -50,8 +50,8 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     public void UpdateValue(int cardValue)
     {
-        m_value = cardValue;
-        valueTxt.text = cardValue.ToString();
+        m_value = Mathf.Clamp(cardValue, 0, m_value);
+        valueTxt.text = m_value.ToString();
     }
 
     public void SetLaneAndRow(int laneIndex, ERow row)

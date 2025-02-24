@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
         internal int m_coins;
     }
     
+    public int CurrentMana => m_stats.m_currentMana;
+    
     [SerializeField] private Stats m_stats;
     
     [Space(10)]
@@ -112,9 +114,9 @@ public class Player : MonoBehaviour
     /// Increase current mana
     /// </summary>
     /// <param name="mana">Mana value</param>
-    public void RestoreMana(int mana)
+    public void UpdateMana(int mana)
     {
-        m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, m_stats.m_currentMana, m_stats.MaxMana);
+        m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, 0, m_stats.MaxMana);
         m_manaText.text = m_stats.m_currentMana.ToString();
     }
 

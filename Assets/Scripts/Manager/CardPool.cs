@@ -70,6 +70,11 @@ public class CardPool : MonoBehaviour
     
     #endregion
 
+    public List<EnemyCard> GetEnemiesOutsidePool()
+    {
+        return m_cardsPool.OfType<EnemyCard>().Where(card => !card.IsInPool).ToList();
+    }
+    
     /// <summary>
     /// Sends cards back to the pool
     /// </summary>

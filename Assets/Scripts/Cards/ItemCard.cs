@@ -17,7 +17,7 @@ namespace CardGame
                     break;
                 
                 case EItemType.Mana:
-                    GameManager.Instance.Player.RestoreMana(m_value);
+                    GameManager.Instance.Player.UpdateMana(m_value);
                     break;
                 
                 case EItemType.Coin:
