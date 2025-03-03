@@ -63,6 +63,12 @@ public class Player : MonoBehaviour
     /// <param name="damage">The amount of damage to apply</param>
     public void Hit(int damage)
     {
+        // Reduce all damage in half if it has Protection enabled
+        if (Status.HasStatusApplied(EStatusType.Protection))
+        {
+            damage /= 2;
+        }
+        
         // If the player has armor and is not poisoned...
         if (m_stats.m_currentArmor > 0 && !m_status.HasStatusApplied(EStatusType.Poison))
         {

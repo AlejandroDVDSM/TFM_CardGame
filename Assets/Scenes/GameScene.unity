@@ -705,7 +705,7 @@ MonoBehaviour:
   statusesCollection: {fileID: 11400000, guid: 5421cbfe675df574982fc5d2f7983b80, type: 2}
   cupCardData: {fileID: 11400000, guid: 359cdf6bd465b7c4d8a558b12bed2d18, type: 2}
   enemiesPoolSize: 5
-  itemsPoolSize: 5
+  itemsPoolSize: 4
   statusesPoolSize: 2
 --- !u!1 &1833218736
 GameObject:

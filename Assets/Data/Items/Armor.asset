@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Armor
   m_EditorClassIdentifier: 
   Name: Armor
-  Sprite: {fileID: -4258536346754752987, guid: 27f98750630e2794898813f7804277cc, type: 3}
+  Sprite: {fileID: -444986159734177276, guid: b3016bf46ec68aa47b844f01f7d19446, type: 3}
   BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   MinValue: 1
   MaxValue: 10

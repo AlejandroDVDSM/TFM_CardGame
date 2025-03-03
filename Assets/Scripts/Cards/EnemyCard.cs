@@ -6,11 +6,18 @@ namespace CardGame
     {
         private void Start()
         {
-            GameManager.Instance.OnTurnCommited.AddListener(CheckPlayerPosition);
+            GameManager.Instance.OnTurnCommited.AddListener(AutoAttack);
         }
 
         public override void PerformAction()
-        {            
+        {
+            // The enemy will avoid the player if it is invisible
+            if (GameManager.Instance.Player.Status.HasStatusApplied(EStatusType.Invisibility))
+            {
+                GameManager.Instance.CommitTurn();
+                return;
+            }
+            
             // Hit player
             GameManager.Instance.Player.Hit(m_value);
             
@@ -25,6 +32,22 @@ namespace CardGame
             // StartCoroutine(Test());
         }
 
+        /// <summary>
+        /// Automatically attacks a player after commiting a turn if the player is in the enemy line of sight
+        /// </summary>
+        private void AutoAttack()
+        {
+            if (GameManager.Instance.Player.Status.HasStatusApplied(EStatusType.Invisibility))
+            {
+                return;
+            }
+            
+            if (GameManager.Instance.Player.Movement.CurrentLane == Lane && m_currentRow == ERow.Bottom)
+            {
+                PerformAction();
+            }
+        }
+        
         // private IEnumerator Test()
         // {
         //     // Replace this enemy card for a coin card
@@ -37,13 +60,5 @@ namespace CardGame
         //     GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane);
         //     GameManager.Instance.CardPool.DestroyCard(this);
         // }
-        
-        private void CheckPlayerPosition()
-        {
-            if (GameManager.Instance.Player.Movement.CurrentLane == Lane && m_currentRow == ERow.Bottom)
-            {
-                PerformAction();
-            }
-        }
     }
 }

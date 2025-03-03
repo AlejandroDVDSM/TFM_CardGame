@@ -16,5 +16,5 @@ MonoBehaviour:
   Sprite: {fileID: -5181010036814234096, guid: 0ce3223ea46cf3440841b2e8c89a2205, type: 3}
   BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   MinValue: 1
-  MaxValue: 3
+  MaxValue: 2
   IgnoreData: 0

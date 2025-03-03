@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CardGame;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -67,14 +66,14 @@ public class GameManager : MonoBehaviour
 
         // We do not commit the turn when the card is an enemy as it has to turn into a coin first.
         // Then, the player must choose between selecting that coin or one of the other two cards in the row
-        if (card is not EnemyCard)
-            CommitTurn();
+        // if (card is not EnemyCard)
+        //     CommitTurn();
     }
 
     /// <summary>
     /// Move the cards and make new ones appear in the top row
     /// </summary>
-    private void CommitTurn()
+    public void CommitTurn()
     {
         List<Card> topRowCards = topRow.GetCards();
         List<Card> middleRowCards = middleRow.GetCards();

@@ -28,7 +28,8 @@ namespace CardGame
                     GameManager.Instance.Player.RestoreArmor(m_value);
                     break;
             }
-
+            
+            GameManager.Instance.CommitTurn();
         }
     }
 }

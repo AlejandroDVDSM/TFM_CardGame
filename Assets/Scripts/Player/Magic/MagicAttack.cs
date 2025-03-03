@@ -13,7 +13,7 @@ public abstract class MagicAttack : MonoBehaviour
     private void Start()
     {
         m_player = GetComponent<Player>();
-        GameManager.Instance.OnTurnCommited.AddListener(RestoreMagic);
+        GameManager.Instance.OnTurnCommited.AddListener(RestoreMagicUse);
     }
 
     private void Update()
@@ -52,7 +52,7 @@ public abstract class MagicAttack : MonoBehaviour
         return true;
     }
     
-    private void RestoreMagic()
+    private void RestoreMagicUse()
     {
         hasUsedMagic = false;
     }

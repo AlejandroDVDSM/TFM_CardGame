@@ -13,6 +13,8 @@ namespace CardGame
                 GameManager.Instance.Player.Status.ApplyNewStatus(itemCardData.Status, Value);
             else
                 Debug.LogError($"This card is not of type {typeof(StatusCard)}");
+            
+            GameManager.Instance.CommitTurn();
         }
     }
 }
