@@ -3,17 +3,26 @@ using UnityEngine;
 
 public abstract class MagicAttack : MonoBehaviour
 {
-    [SerializeField]
-    protected MagicData m_magicData;
+    [Header("Data")]
+    [SerializeField] protected MagicData m_magicData;
+    public MagicData MagicData => m_magicData;
+    
+    [Header("UI")]
+    [SerializeField] private GameObject m_magicUIPrefab;
+    
+    [Header("Debug")]
+    [SerializeField] private bool m_infiniteUses;
     
     protected Player m_player;
-
-    internal bool hasUsedMagic;
+    protected IMagicView m_magicUI;
+    protected bool hasUsedMagic;
     
-    private void Start()
+    protected virtual void Start()
     {
         m_player = GetComponent<Player>();
         GameManager.Instance.OnTurnCommited.AddListener(RestoreMagicUse);
+        
+        m_magicUI = Instantiate(m_magicUIPrefab, FindAnyObjectByType<Canvas>().transform).GetComponent<IMagicView>();
     }
 
     private void Update()
@@ -24,12 +33,12 @@ public abstract class MagicAttack : MonoBehaviour
         }
     }
 
-    protected abstract void Cast();
+    public abstract void Cast();
     
     protected bool CanCast()
     {
         // If the player has already used the magic in this turn...
-        if (hasUsedMagic)
+        if (hasUsedMagic && !m_infiniteUses)
         {
             Debug.Log($"The player can't use <{typeof(MagicAttack)}> as it has already been used in this turn");   
             return false;

@@ -16,6 +16,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     public bool IsInPool { get; set; }
     public ECardLane Lane => m_lane;
+    public ERow CurrentRow => m_currentRow;
     public int Value => m_value;
     
     private ECardLane m_lane = ECardLane.Out;

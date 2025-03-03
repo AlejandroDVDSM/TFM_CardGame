@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text m_manaText;
     [SerializeField] private TMP_Text m_coinsText;
 
+    [Header("Debug")]
+    [SerializeField] private bool m_fullManaAtStart;
+
     public PlayerMovement Movement => m_movement;
     private PlayerMovement m_movement;
     
@@ -51,10 +54,18 @@ public class Player : MonoBehaviour
     private void Start()
     {
         m_stats.m_currentHealth = m_stats.MaxHealth;
+        
+        // Debug: start game with full mana
+        if (m_fullManaAtStart)
+        {
+            m_stats.m_currentMana = m_stats.MaxMana;
+        }
+        
         m_healthText.text = m_stats.m_currentHealth.ToString();
         m_armorText.text = m_stats.m_currentArmor.ToString();
         m_manaText.text = m_stats.m_currentMana.ToString();
         m_coinsText.text = m_stats.m_coins.ToString();
+
     }
 
     /// <summary>

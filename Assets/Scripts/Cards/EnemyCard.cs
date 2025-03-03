@@ -1,4 +1,5 @@
 ﻿using CardGame.Enums;
+using UnityEngine;
 
 namespace CardGame
 {
@@ -30,6 +31,11 @@ namespace CardGame
             GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane);
             GameManager.Instance.CardPool.DestroyCard(this);
             // StartCoroutine(Test());
+        }
+
+        public void Hit(int damage)
+        {
+            UpdateValue(Mathf.Clamp(m_value - damage, 0, m_value));
         }
 
         /// <summary>
