@@ -10,6 +10,21 @@ public class CardRow : MonoBehaviour
     [Min(0)]
     [SerializeField] private float offsetX = 160;
 
+    public void PopulateRow()
+    {
+        Vector3 pos = Vector3.zero;
+        List<Card> cards = GameManager.Instance.CardPool.ExtractRangeFromPool();
+        
+        for(int i = 0; i < cards.Count; i++)
+        {
+            cards[i].transform.SetParent(transform);
+            pos.x = offsetX * i;
+            cards[i].transform.localPosition = pos;
+            cards[i].transform.localScale = Vector3.one;
+            cards[i].SetLaneAndRow(i, row);
+        }   
+    }
+    
     public void PopulateRow(List<Card> cards)
     {
         Vector3 pos = Vector3.zero;

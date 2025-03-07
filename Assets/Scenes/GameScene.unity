@@ -961,10 +961,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8696173517092335568}
-    - targetCorrespondingSourceObject: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8696173517092335573}
+      addedObject: {fileID: 8696173517092335578}
   m_SourcePrefab: {fileID: 100100000, guid: 921acd986f674da41a578ca4114f5348, type: 3}
 --- !u!1 &3366543820717749067 stripped
 GameObject:
@@ -987,23 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531de205c4742d98350d65b961dd448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8696173517092335568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366543820717749067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a6b3797d884a6f8f49778e12fab4c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: a4f64c236e65de64aa6ad46c419a5571, type: 2}
-  m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
-  m_infiniteUses: 0
-  m_damage: 2
---- !u!114 &8696173517092335573
+--- !u!114 &8696173517092335578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1012,13 +993,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3366543820717749067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b78dacab9204056a002a51b114b47ae, type: 3}
+  m_Script: {fileID: 11500000, guid: ca799e174c7c9a74984ff8d1781fe551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: f9eb18bdf003ff34f813a6b1a5f89a81, type: 2}
-  m_magicUIPrefab: {fileID: 1499569109691824336, guid: 61d78840bd7bb0648a341d2ad1207688, type: 3}
-  m_infiniteUses: 1
-  m_damage: 1
+  m_magicData: {fileID: 11400000, guid: 6ceaba55e3272454ebc06ca3e791a2eb, type: 2}
+  m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
+  m_infiniteUses: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

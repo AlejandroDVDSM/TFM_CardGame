@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FireballView : MonoBehaviour, IMagicView
+public class SimpleMagicView : MonoBehaviour, IMagicView
 {
 
     [Header("UI")]
@@ -11,11 +11,11 @@ public class FireballView : MonoBehaviour, IMagicView
     [SerializeField] private TMP_Text m_magicNameTxt;
     [SerializeField] private TMP_Text m_manaCostTxt;
     
-    private Fireball m_magicAttack;
+    private MagicAttack m_magicAttack;
 
     private void Start()
     {
-        m_magicAttack = FindAnyObjectByType<Fireball>();
+        m_magicAttack = FindAnyObjectByType<MagicAttack>();
         m_CastBtn.onClick.AddListener(m_magicAttack.Cast);
         UpdateUI();
     }

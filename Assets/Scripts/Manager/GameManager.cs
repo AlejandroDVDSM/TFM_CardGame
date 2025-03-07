@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CardGame.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     public CardPool CardPool => m_cardPool;
     
     public Player Player => m_player;
+
+    public CardRow TopRow => topRow;
+    public CardRow MiddleRow => middleRow;
+    public CardRow BottomRow => bottomRow;
     
     [Header("Game settings")]
     [Min(1)]
@@ -22,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
 
+    
+    
     public UnityEvent OnTurnCommited;
 
     private void Awake()
@@ -41,11 +48,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void InitGame()
     {
-        topRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
+        topRow.PopulateRow();
         
-        middleRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
+        middleRow.PopulateRow();
         
-        bottomRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
+        bottomRow.PopulateRow();
     }
 
     /// <summary>

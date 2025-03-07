@@ -55,7 +55,7 @@ public class BasicDamage : MagicAttack
     private void CastToNextEnemy()
     {
         EnemyCard enemy = GameManager.Instance.CardPool.GetEnemiesOutsidePool().FirstOrDefault(e =>
-            e.Lane == m_player.Movement.CurrentLane && e.CurrentRow == ERow.Bottom);
+            e.Lane == m_player.Movement.CurrentLane && e.CurrentRow == ERow.Middle);
 
         if (enemy != null)
         {

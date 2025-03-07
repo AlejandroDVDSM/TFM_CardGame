@@ -70,9 +70,19 @@ public class CardPool : MonoBehaviour
     
     #endregion
 
+    public List<Card> GetCardsInRow(ERow row)
+    {
+        return GetCardsOutsidePool().Where(c => c.CurrentRow == row).ToList();
+    }
+    
     public List<EnemyCard> GetEnemiesOutsidePool()
     {
         return m_cardsPool.OfType<EnemyCard>().Where(card => !card.IsInPool).ToList();
+    }
+
+    public List<Card> GetCardsOutsidePool()
+    {
+        return m_cardsPool.Where(c => !c.IsInPool).ToList();
     }
     
     /// <summary>
