@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02d8748343a4a7caa6f5c834d6a66d6, type: 3}
-  m_Name: Armor
+  m_Script: {fileID: 11500000, guid: 59e401d76e567cc41b47c0c24b50005b, type: 3}
+  m_Name: Blessing
   m_EditorClassIdentifier: 
-  Name: Armor
-  Sprite: {fileID: -444986159734177276, guid: b3016bf46ec68aa47b844f01f7d19446, type: 3}
-  BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  MinValue: 1
-  MaxValue: 2
-  IgnoreData: 0
-  Type: 3
+  Name: Blessing
+  ManaCost: 6

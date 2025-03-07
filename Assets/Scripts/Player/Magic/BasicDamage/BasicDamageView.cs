@@ -1,14 +1,10 @@
 ﻿using CardGame.Enums;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BasicDamageView : MonoBehaviour, IMagicView
+public class BasicDamageView : MagicView
 {
-    [Header("Button")]
-    [SerializeField] private Button m_CastBtn;
-    
     [Header("Toggles")] 
     [SerializeField] private Toggle m_nextToggle;
     [SerializeField] private Toggle m_laneToggle;
@@ -19,19 +15,17 @@ public class BasicDamageView : MonoBehaviour, IMagicView
     [SerializeField] private TMP_Text m_laneToggleTxt;
     [SerializeField] private TMP_Text m_allToggleTxt;
 
-    
     private BasicDamage m_basicDamage;
 
-    private void Start()
+    protected override void Start()
     {
-        m_basicDamage = FindAnyObjectByType<BasicDamage>();
+        m_basicDamage = m_magicAttack as BasicDamage;
         
-        m_CastBtn.onClick.AddListener(m_basicDamage.Cast);
+        base.Start();
+        
         m_nextToggle.onValueChanged.AddListener(OnNextModeSelected);
         m_laneToggle.onValueChanged.AddListener(OnLaneModeSelected);
         m_allToggle.onValueChanged.AddListener(OnAllModeSelected);
-        
-        UpdateUI();
     }
 
     private void OnNextModeSelected(bool isOn)
@@ -64,8 +58,9 @@ public class BasicDamageView : MonoBehaviour, IMagicView
         m_basicDamage.SetMode(EBasicDamageMode.All);
     }
     
-    public void UpdateUI()
+    protected override void UpdateUI()
     {
+        m_magicNameTxt.text = m_magicAttack.MagicData.Name;
         m_nextToggleTxt.text = $"Next [{m_basicDamage.GetManaCost(EBasicDamageMode.Next)}]";
         m_laneToggleTxt.text = $"Lane [{m_basicDamage.GetManaCost(EBasicDamageMode.Lane)}]";
         m_allToggleTxt.text = $"All [{m_basicDamage.GetManaCost(EBasicDamageMode.All)}]";

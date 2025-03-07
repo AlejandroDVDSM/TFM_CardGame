@@ -298,6 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CastBtn: {fileID: 5998776166234268185}
+  m_magicNameTxt: {fileID: 4886373854281852731}
+  m_manaCostTxt: {fileID: 0}
   m_nextToggle: {fileID: 8249129936301048404}
   m_laneToggle: {fileID: 7003690618041507179}
   m_allToggle: {fileID: 5528077427588988537}

@@ -993,11 +993,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3366543820717749067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca799e174c7c9a74984ff8d1781fe551, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c9e28d89037f9488f51caba296c046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: 6ceaba55e3272454ebc06ca3e791a2eb, type: 2}
-  m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
+  m_magicData: {fileID: 11400000, guid: 199c6d50fa3fbd047900bf38d7364429, type: 2}
+  m_magicUIPrefab: {fileID: 5894767803897306457, guid: 81979e138ea39cd49994d5de8fe90aff, type: 3}
   m_infiniteUses: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
