@@ -1,9 +1,11 @@
+using System;
 using CardGame.Enums;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -24,6 +26,13 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     protected BaseCardData m_data;
     protected int m_value;
+    
+    private Transmute m_Transmute;
+
+    protected virtual void Start()
+    {
+        GameManager.Instance.Player.TryGetComponent<Transmute>(out m_Transmute);
+    }
 
     public abstract void PerformAction();
 
@@ -74,6 +83,12 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (m_Transmute !=null && m_Transmute.IsTransmuting)
+        {
+            m_Transmute.PickCard(this);
+            return;
+        }
+        
         // Do nothing if the selected card is not at the bottom
         // TODO: add tween when the selected card is not at the bottom
         if (m_currentRow != ERow.Bottom)

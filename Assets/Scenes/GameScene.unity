@@ -997,14 +997,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3366543820717749067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6159e507242c2459e8d7430498632c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d9a4674f7f606b449f281848d978791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: be2dedc3c0739ab44a0ce3a1da7c31f4, type: 2}
-  m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
-  m_infiniteUses: 0
-  m_minNumberOfTurns: 1
-  m_maxNumberOfTurns: 3
+  m_magicData: {fileID: 11400000, guid: cca5406f63fbf5a4d95efe71ba69af1f, type: 2}
+  m_magicUIPrefab: {fileID: 6961201363290884559, guid: 3574c50af289cbe4c8e6fd3cf4ac8645, type: 3}
+  m_infiniteUses: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

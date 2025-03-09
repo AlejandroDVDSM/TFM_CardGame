@@ -1,10 +1,14 @@
 using CardGame.Enums;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BlessingView : MagicView
 {
+    [Header("Blessing")]
     [SerializeField] private GameObject m_blessingsSelectionPanel;
+    [SerializeField] private CardCollection m_blessingsCollection;
+    [SerializeField] private CardSelection m_cardSelectionPrefab;
     
     private Blessing m_blessing;
 
@@ -15,25 +19,24 @@ public class BlessingView : MagicView
         m_blessingsSelectionPanel.SetActive(false);
         UpdateUI();
     }
-
-    public void PickInvisibilityBlessing()
+    
+    protected override void UpdateUI()
     {
-        // TODO: tween
-        m_blessing.ApplyBlessing(EStatusType.Invisibility);
-        m_blessingsSelectionPanel.SetActive(false);
+        base.UpdateUI();
+
+        CardSelection cardSelection = null;
+        foreach (var blessing in m_blessingsCollection.Cards)
+        {
+            cardSelection = Instantiate(m_cardSelectionPrefab, m_blessingsSelectionPanel.transform);
+            cardSelection.SetData(blessing);
+            cardSelection.GetComponentInChildren<Button>().onClick.AddListener(() => PickBlessing(((StatusCardData)blessing).Status /*, cardSelection.Value*/));
+        }
     }
 
-    public void PickProtectionBlessing()
+    private void PickBlessing(EStatusType status)
     {
-        // TODO: tween
-        m_blessing.ApplyBlessing(EStatusType.Protection);
-        m_blessingsSelectionPanel.SetActive(false);
-    }
-
-    public void PickRegenerationBlessing()
-    {
-        // TODO: tween
-        m_blessing.ApplyBlessing(EStatusType.Regeneration);
+        // TODO: tween when picking blessing
+        m_blessing.ApplyBlessing(status);
         m_blessingsSelectionPanel.SetActive(false);
     }
 }

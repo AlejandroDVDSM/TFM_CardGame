@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
         internal int m_coins;
     }
     
+    
+    public int MaxHealth => m_stats.MaxHealth;
+    public int MaxArmor => m_stats.MaxArmor;
+    public int MaxMana => m_stats.MaxMana;
+    
     public int CurrentHealth => m_stats.m_currentHealth;
     public int CurrentArmor => m_stats.m_currentArmor;
     public int CurrentMana => m_stats.m_currentMana;
@@ -46,6 +51,7 @@ public class Player : MonoBehaviour
     private PlayerMovement m_movement;
     
     public PlayerStatus Status => m_status;
+
     private PlayerStatus m_status;
 
     private void Awake()
@@ -58,23 +64,22 @@ public class Player : MonoBehaviour
     {
         m_stats.m_currentHealth = m_stats.MaxHealth;
         
-        // Debug: start game with full mana
-        if (m_fullManaAtStart)
-        {
-            m_stats.m_currentMana = m_stats.MaxMana;
-        }
-
         // Debug: start game with full armor
         if (m_fullArmorAtStart)
         {
             m_stats.m_currentArmor = m_stats.MaxArmor;
         }
         
+        // Debug: start game with full mana
+        if (m_fullManaAtStart)
+        {
+            m_stats.m_currentMana = m_stats.MaxMana;
+        }
+
         m_healthText.text = m_stats.m_currentHealth.ToString();
         m_armorText.text = m_stats.m_currentArmor.ToString();
         m_manaText.text = m_stats.m_currentMana.ToString();
         m_coinsText.text = m_stats.m_coins.ToString();
-
     }
 
     /// <summary>

@@ -44,13 +44,20 @@ public class CardRow : MonoBehaviour
         return GetComponentsInChildren<Card>().ToList();
     }
 
-    public void PlaceSingleCard(Card card, ECardLane lane)
+    public void PlaceSingleCard(Card card, ECardLane lane, int siblingIndex = -1)
     {
         Vector3 pos = Vector3.zero;
         card.transform.SetParent(transform);
+
+        if (siblingIndex > 0)
+        {
+            card.gameObject.transform.SetSiblingIndex(siblingIndex);
+        }
+        
         pos.x = offsetX * (int)lane;
         card.transform.localPosition = pos;
         card.transform.localScale = Vector3.one;
         card.SetLaneAndRow((int)lane, row);
+        card.IsInPool = false;
     }
 }

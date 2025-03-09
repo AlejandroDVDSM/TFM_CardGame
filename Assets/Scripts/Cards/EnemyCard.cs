@@ -5,8 +5,9 @@ namespace CardGame
 {
     public class EnemyCard : Card
     {
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             GameManager.Instance.OnTurnCommited.AddListener(AutoAttack);
         }
 
@@ -28,7 +29,7 @@ namespace CardGame
             
             // TODO: add tween before replacing to card. The effect has to be like an attack
             
-            GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane);
+            GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane, transform.GetSiblingIndex());
             GameManager.Instance.CardPool.DestroyCard(this);
             // StartCoroutine(Test());
         }
