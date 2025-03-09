@@ -57,8 +57,14 @@ public class PlayerStatus : MonoBehaviour
         
         if (m_appliedStatuses.ContainsKey(EStatusType.Regeneration))
             ApplyRegeneration();
+        
+        if (m_appliedStatuses.ContainsKey(EStatusType.ArcaneProtection))
+            ApplyArcaneProtection();
     }
 
+    /// <summary>
+    /// Reduce player's health by 1
+    /// </summary>
     private void ApplyPoison()
     {
         if (m_appliedStatuses[EStatusType.Poison] > 0)
@@ -75,6 +81,9 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide all cards' values
+    /// </summary>
     private void ApplyBlind()
     {
         List<Card> cards = FindObjectsByType<Card>(FindObjectsSortMode.None).Where(c => !c.IsInPool).ToList();
@@ -104,6 +113,9 @@ public class PlayerStatus : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Prevent player from casting any magic
+    /// </summary>
     private void ApplySilence() 
     {
         if (m_appliedStatuses[EStatusType.Silence] > 0)
@@ -118,6 +130,9 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Make enemies ignore the player. Enemies won't drop coins while this status is enabled
+    /// </summary>
     private void ApplyInvisibility()
     {
         if (m_appliedStatuses[EStatusType.Invisibility] > 0)
@@ -132,6 +147,9 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduce damage by half
+    /// </summary>
     private void ApplyProtection()
     {
         if (m_appliedStatuses[EStatusType.Protection] > 0)
@@ -146,6 +164,9 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Heal player each turn while this status is enabled
+    /// </summary>
     private void ApplyRegeneration()
     {
         if (m_appliedStatuses[EStatusType.Regeneration] > 0)
@@ -159,6 +180,22 @@ public class PlayerStatus : MonoBehaviour
         {
             m_appliedStatuses.Remove(EStatusType.Regeneration);
             Debug.Log($"[PLAYER] Status <{EStatusType.Regeneration}> removed>");
+        }
+    }
+
+    private void ApplyArcaneProtection()
+    {
+        if (m_appliedStatuses[EStatusType.ArcaneProtection] > 0)
+        {
+            Debug.Log($"[PLAYER] Applying <{EStatusType.ArcaneProtection}> status ({m_appliedStatuses[EStatusType.ArcaneProtection]} turns left)");
+            
+            m_player.RestoreHealth(1);
+            m_appliedStatuses[EStatusType.ArcaneProtection]--;
+        }
+        else
+        {
+            m_appliedStatuses.Remove(EStatusType.ArcaneProtection);
+            Debug.Log($"[PLAYER] Status <{EStatusType.ArcaneProtection}> removed>");
         }
     }
 

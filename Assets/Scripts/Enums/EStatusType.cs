@@ -7,7 +7,8 @@
         Silence,
         Invisibility,
         Regeneration,
-        Protection
+        Protection,
+        ArcaneProtection
         
     }
 }

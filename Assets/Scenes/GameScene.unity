@@ -941,11 +941,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_stats.MaxArmor
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_fullManaAtStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_stats.MaxHealth
@@ -953,7 +953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_fullArmorAtStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
@@ -997,12 +997,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3366543820717749067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b7ab0b35d789b4382f67280b82e555, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a6159e507242c2459e8d7430498632c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: 52dbea147e365e24daa6c269bf2683bc, type: 2}
+  m_magicData: {fileID: 11400000, guid: be2dedc3c0739ab44a0ce3a1da7c31f4, type: 2}
   m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
   m_infiniteUses: 0
+  m_minNumberOfTurns: 1
+  m_maxNumberOfTurns: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

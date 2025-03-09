@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text m_coinsText;
 
     [Header("Debug")]
-    [SerializeField] private bool m_fullManaAtStart;
     [SerializeField] private bool m_fullArmorAtStart;
+    [SerializeField] private bool m_fullManaAtStart;
 
     public PlayerMovement Movement => m_movement;
     private PlayerMovement m_movement;
@@ -83,6 +83,12 @@ public class Player : MonoBehaviour
     /// <param name="damage">The amount of damage to apply</param>
     public void Hit(int damage)
     {
+        // Make player invincible while having Arcane Protection status enabled
+        if (m_status.HasStatusApplied(EStatusType.ArcaneProtection))
+        {
+            return;
+        }
+        
         // Reduce all damage in half if it has Protection enabled
         if (Status.HasStatusApplied(EStatusType.Protection))
         {
@@ -141,6 +147,19 @@ public class Player : MonoBehaviour
         m_armorText.text = m_stats.m_currentArmor.ToString();
     }
 
+    /// <summary>
+    /// Increase current mana
+    /// </summary>
+    /// <param name="mana">Mana value</param>
+    public void UpdateMana(int mana)
+    {
+        m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, 0, m_stats.MaxMana);
+        m_manaText.text = m_stats.m_currentMana.ToString();
+    }
+
+    /// <summary>
+    /// Swap health stat for armor and viceversa
+    /// </summary>
     public void SwapStats()
     {
         int health = CurrentHealth;
@@ -152,17 +171,7 @@ public class Player : MonoBehaviour
         m_healthText.text = m_stats.m_currentHealth.ToString();
         m_armorText.text = m_stats.m_currentArmor.ToString();
     }
-
-    /// <summary>
-    /// Increase current mana
-    /// </summary>
-    /// <param name="mana">Mana value</param>
-    public void UpdateMana(int mana)
-    {
-        m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, 0, m_stats.MaxMana);
-        m_manaText.text = m_stats.m_currentMana.ToString();
-    }
-
+    
     /// <summary>
     /// Add coins
     /// </summary>
