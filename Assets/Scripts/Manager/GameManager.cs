@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
 
-    
-    
     public UnityEvent OnTurnCommited;
 
     private void Awake()

@@ -941,15 +941,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_stats.MaxArmor
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_fullManaAtStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_stats.MaxHealth
-      value: 100
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullArmorAtStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
@@ -961,7 +965,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8696173517092335568}
+      addedObject: {fileID: 8696173517092335573}
   m_SourcePrefab: {fileID: 100100000, guid: 921acd986f674da41a578ca4114f5348, type: 3}
 --- !u!1 &3366543820717749067 stripped
 GameObject:
@@ -984,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531de205c4742d98350d65b961dd448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8696173517092335568
+--- !u!114 &8696173517092335573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -993,10 +997,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3366543820717749067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e78828be8e927438fdaaf1a21502e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b7ab0b35d789b4382f67280b82e555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicData: {fileID: 11400000, guid: ed20ba81f8c7fa14d9806130dec8a558, type: 2}
+  m_magicData: {fileID: 11400000, guid: 52dbea147e365e24daa6c269bf2683bc, type: 2}
   m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
   m_infiniteUses: 0
 --- !u!1660057539 &9223372036854775807

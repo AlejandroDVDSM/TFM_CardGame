@@ -11,6 +11,6 @@ public class Jump : MagicAttack
         GameManager.Instance.CommitTurn();
         
         m_player.UpdateMana(m_magicData.ManaCost * -1);
-        hasUsedMagic = true;   
+        hasUsedMagic = true;
     }
 }

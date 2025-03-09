@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
         internal int m_coins;
     }
     
+    public int CurrentHealth => m_stats.m_currentHealth;
+    public int CurrentArmor => m_stats.m_currentArmor;
     public int CurrentMana => m_stats.m_currentMana;
     
     [SerializeField] private Stats m_stats;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool m_fullManaAtStart;
+    [SerializeField] private bool m_fullArmorAtStart;
 
     public PlayerMovement Movement => m_movement;
     private PlayerMovement m_movement;
@@ -59,6 +62,12 @@ public class Player : MonoBehaviour
         if (m_fullManaAtStart)
         {
             m_stats.m_currentMana = m_stats.MaxMana;
+        }
+
+        // Debug: start game with full armor
+        if (m_fullArmorAtStart)
+        {
+            m_stats.m_currentArmor = m_stats.MaxArmor;
         }
         
         m_healthText.text = m_stats.m_currentHealth.ToString();
@@ -84,7 +93,12 @@ public class Player : MonoBehaviour
         if (m_stats.m_currentArmor > 0 && !m_status.HasStatusApplied(EStatusType.Poison))
         {
             // ... get the damage that couldn't be absorbed by the armor and apply it to the health
-            int damageNotAbsorbedByArmor = Mathf.Abs(m_stats.m_currentArmor - damage);
+            int damageNotAbsorbedByArmor = 0;
+            if (m_stats.m_currentArmor - damage < 0)
+            {
+                damageNotAbsorbedByArmor = Mathf.Abs(m_stats.m_currentArmor - damage);
+            }
+            
             m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor - damage, 0, m_stats.m_currentArmor);
             m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damageNotAbsorbedByArmor, 0, m_stats.m_currentHealth);
         }
@@ -124,6 +138,18 @@ public class Player : MonoBehaviour
     public void RestoreArmor(int armor)
     {
         m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor + armor, m_stats.m_currentArmor, m_stats.MaxArmor);
+        m_armorText.text = m_stats.m_currentArmor.ToString();
+    }
+
+    public void SwapStats()
+    {
+        int health = CurrentHealth;
+        int armor = CurrentArmor;
+        
+        m_stats.m_currentHealth = Mathf.Clamp(armor, armor, m_stats.MaxHealth);
+        m_stats.m_currentArmor = Mathf.Clamp(health, health, m_stats.MaxArmor);
+        
+        m_healthText.text = m_stats.m_currentHealth.ToString();
         m_armorText.text = m_stats.m_currentArmor.ToString();
     }
 
