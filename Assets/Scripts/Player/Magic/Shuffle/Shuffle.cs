@@ -19,6 +19,7 @@ public class Shuffle : MagicAttack
         GameManager.Instance.MiddleRow.PopulateRow();
         GameManager.Instance.BottomRow.PopulateRow();
         
+        m_player.UpdateMana(m_magicData.ManaCost * -1);
         hasUsedMagic = true;
     }
 }

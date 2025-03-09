@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using CardGame;
 using CardGame.Enums;
 using UnityEngine;
 using UnityEngine.Events;
@@ -85,6 +87,12 @@ public class GameManager : MonoBehaviour
         List<Card> topRowCards = topRow.GetCards();
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();
+
+        // Check if the bottom cards are CupCard. If it is, we can not commit the turn 
+        if (bottomRowCards[0].GetType() == typeof(CupCard))
+        {
+            return;
+        }
         
         // Send the cards that were in the bottom row back to the pool
         m_cardPool.DestroyCards(bottomRowCards);
