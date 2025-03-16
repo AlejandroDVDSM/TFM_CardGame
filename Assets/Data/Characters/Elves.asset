@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f24b68139269dc4a9fcc5245a1a2281, type: 3}
+  m_Name: Elves
+  m_EditorClassIdentifier: 
+  Name: Elves
+  Sprite: {fileID: -7914586359189542566, guid: d152168bbf40d074f96ccc1337623046, type: 3}
+  HealthPoints: 10
+  Armor: 10
+  Mana: 5
+  MagicData: {fileID: 11400000, guid: a4f64c236e65de64aa6ad46c419a5571, type: 2}

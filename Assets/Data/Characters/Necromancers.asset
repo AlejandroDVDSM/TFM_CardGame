@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f24b68139269dc4a9fcc5245a1a2281, type: 3}
-  m_Name: Human
+  m_Name: Necromancers
   m_EditorClassIdentifier: 
-  Name: Human
-  Sprite: {fileID: 8248543377919322394, guid: d152168bbf40d074f96ccc1337623046, type: 3}
+  Name: Necromancers
+  Sprite: {fileID: 1808964706522467271, guid: d152168bbf40d074f96ccc1337623046, type: 3}
   HealthPoints: 10
   Armor: 10
   Mana: 5
+  MagicData: {fileID: 11400000, guid: cca5406f63fbf5a4d95efe71ba69af1f, type: 2}
