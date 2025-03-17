@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Shuffle
   ManaCost: 5
+  Description: 'Discard all current cards and '

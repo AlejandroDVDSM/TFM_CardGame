@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -26,5 +27,11 @@ public class MenuController : MonoBehaviour
     {
         m_landingPage.gameObject.SetActive(false);
         m_characterSelector.gameObject.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        
+        SceneManager.LoadScene("Game");
     }
 }

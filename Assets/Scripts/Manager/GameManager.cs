@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardGame;
-using CardGame.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,10 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public CardPool CardPool => m_cardPool;
-    
     public Player Player => m_player;
 
+    public CardPool CardPool => m_cardPool;
     public CardRow TopRow => topRow;
     public CardRow MiddleRow => middleRow;
     public CardRow BottomRow => bottomRow;
@@ -29,6 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
 
+    [Header("Player Prefabs")] 
+    [SerializeField] private Player[] m_playerPrefabs;
+    [Space(15)]
+    
     public UnityEvent OnTurnCommited;
 
     private void Awake()
@@ -40,7 +42,27 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
+        LoadPlayer();
         InitGame();
+    }
+
+    private void LoadPlayer()
+    {
+        if (!PlayerPrefs.HasKey("Character"))
+        {
+            Debug.LogError("The player could not be loaded as the key <Character> does not exist in the PlayerPrefs");
+            return;
+        }
+
+        Player characterPrefab = m_playerPrefabs.FirstOrDefault(p => p.CharacterName == PlayerPrefs.GetString("Character"));
+
+        if (!characterPrefab)
+        {
+            Debug.LogError($"Could not find any player prefab with the name {PlayerPrefs.GetString("Character")}");
+            return;
+        }
+        m_player = Instantiate(characterPrefab, FindAnyObjectByType<Canvas>().transform);
     }
 
     /// <summary>

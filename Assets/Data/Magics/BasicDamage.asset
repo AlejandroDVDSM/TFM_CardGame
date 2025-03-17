@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Basic Damage
   ManaCost: 2
+  Description: Apply damage to the next enemy, a lane or all

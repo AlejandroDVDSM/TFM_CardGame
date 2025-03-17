@@ -9,7 +9,6 @@ public class PlayerStatus : MonoBehaviour
     
     Dictionary<EStatusType, int> m_appliedStatuses = new();
 
-
     private void Start()
     {
         m_player = GetComponent<Player>();

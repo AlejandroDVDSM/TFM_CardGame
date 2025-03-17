@@ -44,4 +44,9 @@ public class CharacterSelector : MonoBehaviour
         m_characterMagicName.text = m_charactersData[m_currentCharacterIndex].MagicData.Name;
         m_characterMagicCost.text = m_charactersData[m_currentCharacterIndex].MagicData.ManaCost.ToString();
     }
+
+    public void SelectCharacter()
+    {
+        PlayerPrefs.SetString("Character", m_charactersData[m_currentCharacterIndex].Name);
+    }
 }
