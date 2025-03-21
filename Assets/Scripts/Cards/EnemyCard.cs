@@ -1,13 +1,18 @@
 ﻿using CardGame.Enums;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CardGame
 {
     public class EnemyCard : Card
     {
+        private ParticleSystem m_particleSystem;
+        
         protected override void Start()
         {
             base.Start();
+            m_particleSystem = FindAnyObjectByType<ParticleSystem>();
             GameManager.Instance.OnTurnCommited.AddListener(AutoAttack);
         }
 
@@ -20,18 +25,49 @@ namespace CardGame
                 return;
             }
             
-            // Hit player
-            GameManager.Instance.Player.Hit(m_value);
+            // Animation where the card charges forward against the player
+            Sequence attackSequence = DOTween.Sequence();
+            attackSequence
+                .Append(transform.DOScale(Vector3.one * 1.2f, .6f).SetEase(Ease.OutQuint))
+                .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, .4f).SetEase(Ease.InOutBack));
+                
+            // Animation where the card returns to the original position
+            Sequence knockbackSequence = DOTween.Sequence();
+            knockbackSequence
+                .Insert(0, transform.DOScale(Vector3.one, .4f).SetEase(Ease.InQuint))
+                .Insert(0, transform.DOLocalMoveY(0, 0.4f).SetEase(Ease.InBack))
+                .Append(transform.DOShakePosition(1.2f, 20f));
             
-            // Replace this enemy card for a coin card
-            ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
-            coinCard.UpdateValue(Value);
+            Sequence destroySequence = DOTween.Sequence();
+            destroySequence
+                .Append(m_canvasGroup.DOFade(0, 1.0f).SetEase(Ease.InBack));
             
-            // TODO: add tween before replacing to card. The effect has to be like an attack
-            
-            GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane, transform.GetSiblingIndex());
-            GameManager.Instance.CardPool.DestroyCard(this);
-            // StartCoroutine(Test());
+            attackSequence.Play();
+            attackSequence.OnComplete(() =>
+            {
+                // Hit player
+                GameManager.Instance.Player.Hit(m_value);
+                knockbackSequence.Play();
+            });
+
+            knockbackSequence.OnComplete(() =>
+            {
+                destroySequence.Play();
+            });
+
+            destroySequence.OnComplete(() =>
+            {
+                m_particleSystem.transform.position = transform.position;
+                var sh = m_particleSystem.shape;
+                sh.texture = (Texture2D)image.mainTexture;
+                m_particleSystem.Play();
+                
+                // Replace this enemy card for a coin card
+                ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
+                coinCard.UpdateValue(Value);
+                GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane, transform.GetSiblingIndex());
+                GameManager.Instance.CardPool.DestroyCard(this);
+            });
         }
 
         public void Hit(int damage)
@@ -54,18 +90,5 @@ namespace CardGame
                 PerformAction();
             }
         }
-        
-        // private IEnumerator Test()
-        // {
-        //     // Replace this enemy card for a coin card
-        //     ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
-        //     coinCard.UpdateValue(Value);
-        //     
-        //     // TODO: add tween before replacing to card. The effect has to be like an attack
-        //     yield return new WaitForSeconds(1);
-        //     
-        //     GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane);
-        //     GameManager.Instance.CardPool.DestroyCard(this);
-        // }
     }
 }

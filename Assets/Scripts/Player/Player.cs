@@ -1,6 +1,7 @@
 ﻿using System;
 using CardGame.Enums;
 using CardGame.Player;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,9 +81,6 @@ public class Player : MonoBehaviour
         m_stats.MaxMana = m_characterData.Mana;
         m_stats.m_currentHealth = m_stats.MaxHealth;
         
-        // gameObject.AddComponent<m_characterData.MagicData.MagicAttack.GetType()>();
-        // gameObject.AddComponent<MagicAttack>();
-        
         // Debug: start game with full armor
         if (m_fullArmorAtStart)
         {
@@ -140,6 +138,9 @@ public class Player : MonoBehaviour
         { // ... apply damage directly to player's health
             m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damage, 0, m_stats.m_currentHealth);   
         }
+
+        // transform.DOPunchScale(new Vector3(.1f, .1f, .1f), 1, 10, 1f);
+        transform.DOShakePosition(1f, 10f);
         
         // Check if the damage was enough to kill the player
         if (m_stats.m_currentHealth == 0)

@@ -104,6 +104,7 @@ public class CardPool : MonoBehaviour
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
         card.Disable();
+        card.GetComponent<CanvasGroup>().alpha = 1;
         card.IsInPool = true;
     }
     

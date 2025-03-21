@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardGame;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow middleRow;
     [SerializeField] private CardRow bottomRow;
 
-    [Header("Player Prefabs")] 
+    [Header("Player Prefabs")]
     [SerializeField] private Player[] m_playerPrefabs;
     [Space(15)]
     
@@ -42,7 +43,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         LoadPlayer();
         InitGame();
     }

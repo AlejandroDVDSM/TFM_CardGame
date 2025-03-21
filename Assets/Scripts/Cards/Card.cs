@@ -14,7 +14,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField] private TMP_Text valueTxt;
     [SerializeField] private Image background;
     [SerializeField] private Image shadow;
-    [SerializeField] private Image image;
+    [SerializeField] protected Image image;
     
     public bool IsInPool { get; set; }
     public ECardLane Lane => m_lane;
@@ -27,11 +27,14 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     protected BaseCardData m_data;
     protected int m_value;
     
+    protected CanvasGroup m_canvasGroup;
+    
     private Transmute m_Transmute;
 
     protected virtual void Start()
     {
         GameManager.Instance.Player.TryGetComponent<Transmute>(out m_Transmute);
+        m_canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public abstract void PerformAction();
