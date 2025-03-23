@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text m_armorText;
     [SerializeField] private TMP_Text m_manaText;
     [SerializeField] private TMP_Text m_coinsText;
+    [SerializeField] private Image m_characterImage;
 
     [SerializeField] private TMP_Text m_characterNameText;
 
@@ -84,23 +85,23 @@ public class Player : MonoBehaviour
         // Debug: start game with full armor
         if (m_fullArmorAtStart)
         {
-            m_stats.m_currentArmor = m_stats.MaxArmor;
+            m_stats.m_currentArmor = MaxArmor;
         }
         
         // Debug: start game with full mana
         if (m_fullManaAtStart)
         {
-            m_stats.m_currentMana = m_stats.MaxMana;
+            m_stats.m_currentMana = MaxMana;
         }
 
         // Update UI
-        m_healthText.text = m_stats.m_currentHealth.ToString();
-        m_armorText.text = m_stats.m_currentArmor.ToString();
-        m_manaText.text = m_stats.m_currentMana.ToString();
+        m_healthText.text = CurrentHealth.ToString();
+        m_armorText.text = CurrentArmor.ToString();
+        m_manaText.text = CurrentMana.ToString();
         m_coinsText.text = m_stats.m_coins.ToString();
         
         m_characterNameText.text = m_characterData.Name;
-        GetComponent<Image>().sprite = m_characterData.Sprite;
+        m_characterImage.sprite = m_characterData.Sprite;
     }
 
     /// <summary>
@@ -122,38 +123,41 @@ public class Player : MonoBehaviour
         }
         
         // If the player has armor and is not poisoned...
-        if (m_stats.m_currentArmor > 0 && !m_status.HasStatusApplied(EStatusType.Poison))
+        if (CurrentArmor > 0 && !m_status.HasStatusApplied(EStatusType.Poison))
         {
             // ... get the damage that couldn't be absorbed by the armor and apply it to the health
             int damageNotAbsorbedByArmor = 0;
-            if (m_stats.m_currentArmor - damage < 0)
+            if (CurrentArmor - damage < 0)
             {
-                damageNotAbsorbedByArmor = Mathf.Abs(m_stats.m_currentArmor - damage);
+                damageNotAbsorbedByArmor = Mathf.Abs(CurrentArmor - damage);
             }
             
-            m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor - damage, 0, m_stats.m_currentArmor);
-            m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damageNotAbsorbedByArmor, 0, m_stats.m_currentHealth);
+            m_stats.m_currentArmor = Mathf.Clamp(CurrentArmor - damage, 0, CurrentArmor);
+            m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth - damageNotAbsorbedByArmor, 0, CurrentHealth);
         }
         else
         { // ... apply damage directly to player's health
-            m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth - damage, 0, m_stats.m_currentHealth);   
+            m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth - damage, 0, CurrentHealth);   
         }
 
-        // transform.DOPunchScale(new Vector3(.1f, .1f, .1f), 1, 10, 1f);
+        // Feedback that player got hit
         transform.DOShakePosition(1f, 10f);
         
         // Check if the damage was enough to kill the player
-        if (m_stats.m_currentHealth == 0)
+        if (CurrentHealth == 0)
         {
             // TODO: end game
             // TODO: add tween
             // TODO: sound
             Debug.Log("DEAD");
+        } else if (CurrentHealth < MaxHealth / 2)
+        {
+            m_characterImage.DOColor(Color.red, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
         
         // Update texts
-        m_healthText.text = m_stats.m_currentHealth.ToString();
-        m_armorText.text = m_stats.m_currentArmor.ToString();
+        m_healthText.text = CurrentHealth.ToString();
+        m_armorText.text = CurrentArmor.ToString();
     }
 
     /// <summary>
@@ -162,8 +166,14 @@ public class Player : MonoBehaviour
     /// <param name="health">Heal value</param>
     public void RestoreHealth(int health)
     {
-        m_stats.m_currentHealth = Mathf.Clamp(m_stats.m_currentHealth + health, m_stats.m_currentHealth, m_stats.MaxHealth);
-        m_healthText.text = m_stats.m_currentHealth.ToString();
+        m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth + health, CurrentHealth, MaxHealth);
+        m_healthText.text = CurrentHealth.ToString();
+
+        if (CurrentHealth >= MaxHealth / 2)
+        {
+            m_characterImage.DOKill();
+            m_characterImage.DOColor(Color.white, 0.2f).SetEase(Ease.InSine);
+        }
     }
 
     /// <summary>
@@ -172,8 +182,8 @@ public class Player : MonoBehaviour
     /// <param name="armor">Armor value</param>
     public void RestoreArmor(int armor)
     {
-        m_stats.m_currentArmor = Mathf.Clamp(m_stats.m_currentArmor + armor, m_stats.m_currentArmor, m_stats.MaxArmor);
-        m_armorText.text = m_stats.m_currentArmor.ToString();
+        m_stats.m_currentArmor = Mathf.Clamp(CurrentArmor + armor, CurrentArmor, MaxArmor);
+        m_armorText.text = CurrentArmor.ToString();
     }
 
     /// <summary>
@@ -182,8 +192,8 @@ public class Player : MonoBehaviour
     /// <param name="mana">Mana value</param>
     public void UpdateMana(int mana)
     {
-        m_stats.m_currentMana = Mathf.Clamp(m_stats.m_currentMana + mana, 0, m_stats.MaxMana);
-        m_manaText.text = m_stats.m_currentMana.ToString();
+        m_stats.m_currentMana = Mathf.Clamp(CurrentMana + mana, 0, MaxMana);
+        m_manaText.text = CurrentMana.ToString();
     }
 
     /// <summary>
@@ -194,11 +204,11 @@ public class Player : MonoBehaviour
         int health = CurrentHealth;
         int armor = CurrentArmor;
         
-        m_stats.m_currentHealth = Mathf.Clamp(armor, armor, m_stats.MaxHealth);
-        m_stats.m_currentArmor = Mathf.Clamp(health, health, m_stats.MaxArmor);
+        m_stats.m_currentHealth = Mathf.Clamp(armor, armor, MaxHealth);
+        m_stats.m_currentArmor = Mathf.Clamp(health, health, MaxArmor);
         
-        m_healthText.text = m_stats.m_currentHealth.ToString();
-        m_armorText.text = m_stats.m_currentArmor.ToString();
+        m_healthText.text = CurrentHealth.ToString();
+        m_armorText.text = CurrentArmor.ToString();
     }
     
     /// <summary>

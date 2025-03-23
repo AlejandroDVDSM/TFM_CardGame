@@ -1,4 +1,5 @@
 ﻿using CardGame.Enums;
+using DG.Tweening;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -30,8 +31,11 @@ namespace CardGame
                     break;
             }
             
-            GameManager.Instance.CommitTurn();
-            m_isPerformingAction = false;
+            EnableDisappearAnimation(() =>
+            {
+                m_isPerformingAction = false;
+                GameManager.Instance.CommitTurn();
+            });
         }
     }
 }

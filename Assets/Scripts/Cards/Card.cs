@@ -1,9 +1,7 @@
-using System;
 using CardGame.Enums;
 using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -43,15 +41,16 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
         m_imageStartingLocalPosition = image.transform.localPosition;
         
-        HandleImageAnimation();
-        GameManager.Instance.OnTurnCommited.AddListener(HandleImageAnimation);
+        EnableFloatingAnimation();
+        GameManager.Instance.OnTurnCommited.AddListener(EnableFloatingAnimation);
     }
 
-    
+    #region Animations
+
     /// <summary>
     /// Animate image if the player can select this card
     /// </summary>
-    private void HandleImageAnimation()
+    private void EnableFloatingAnimation()
     {
         if (m_currentRow != ERow.Bottom)
         {
@@ -77,6 +76,19 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             image.transform.DOLocalMoveY(image.transform.localPosition.y + 8f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
     }
+
+    protected void EnableDisappearAnimation(TweenCallback callback)
+    {
+        Sequence disappearSequence = DOTween.Sequence();
+        disappearSequence
+            .Append(image.transform.DOScale(Vector3.one * 1.4f, 0.3f).SetEase(Ease.OutQuad))
+            .Append(image.transform.DOScale(Vector3.zero, 0.15f).SetEase(Ease.InQuad))
+            .OnComplete(callback);
+        
+        disappearSequence.Play();
+    }
+
+    #endregion
 
     public abstract void PerformAction();
 
@@ -125,6 +137,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         // Kill movement tween and go back to original position
         image.transform.DOKill();
         image.transform.localPosition = m_imageStartingLocalPosition;
+        image.transform.localScale = Vector3.one;
         
         // Restore image alpha back to 1
         Color imageColor = image.color;
@@ -133,7 +146,9 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         
         IsInPool = true;
     }
-    
+
+    #region EventSystemHandler
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (m_Transmute !=null && m_Transmute.IsTransmuting)
@@ -163,11 +178,22 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // TODO: add juicy effect on hover
+        if (m_currentRow != ERow.Bottom)
+        {
+            return;
+        }
+
+        transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutSine);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // TODO: add juicy effect when it stops being hovered
+        if (m_currentRow != ERow.Bottom)
+        {
+            return;
+        }
+        
+        transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InSine);
     }
+    #endregion
 }

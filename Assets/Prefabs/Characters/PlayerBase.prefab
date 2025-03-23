@@ -1098,6 +1098,7 @@ MonoBehaviour:
   m_armorText: {fileID: 3428010248502687681}
   m_manaText: {fileID: 1851828810813968380}
   m_coinsText: {fileID: 3203122558716255063}
+  m_characterImage: {fileID: 220688394169376834}
   m_characterNameText: {fileID: 5720810780793639620}
   m_fullArmorAtStart: 0
   m_fullManaAtStart: 0

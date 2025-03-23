@@ -41,7 +41,7 @@ namespace CardGame
             // Animation where the card charges forward against the player
             m_chargeSequence = DOTween.Sequence();
             m_chargeSequence
-                .Append(transform.DOScale(Vector3.one * 1.2f, 0.4f).SetEase(Ease.OutQuint))
+                .Append(transform.DOScale(Vector3.one * 1.3f, 0.4f).SetEase(Ease.OutQuint))
                 .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, 0.3f).SetEase(Ease.InOutBack))
                 .OnComplete(() =>
                 {
