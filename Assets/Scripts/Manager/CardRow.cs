@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CardGame.Enums;
+using DG.Tweening;
 using UnityEngine;
 
 public class CardRow : MonoBehaviour
@@ -8,43 +9,27 @@ public class CardRow : MonoBehaviour
     [SerializeField] private ERow row;
     
     [Min(0)]
-    [SerializeField] private float offsetX = 160;
+    [SerializeField] private float offsetX;
 
-    public void PopulateRow()
+    public void PopulateRow(List<Card> cards = null)
     {
-        Vector3 pos = Vector3.zero;
-        List<Card> cards = GameManager.Instance.CardPool.ExtractRangeFromPool();
-        
-        for(int i = 0; i < cards.Count; i++)
+        if (cards == null)
         {
-            cards[i].transform.SetParent(transform);
-            pos.x = offsetX * i;
-            cards[i].transform.localPosition = pos;
-            cards[i].transform.localScale = Vector3.one;
-            cards[i].SetLaneAndRow(i, row);
-        }   
-    }
-    
-    public void PopulateRow(List<Card> cards)
-    {
-        Vector3 pos = Vector3.zero;
+            cards = GameManager.Instance.CardPool.ExtractRangeFromPool();
+        }
         
-        for(int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
-            cards[i].transform.SetParent(transform);
-            pos.x = offsetX * i;
-            cards[i].transform.localPosition = pos;
-            cards[i].transform.localScale = Vector3.one;
-            cards[i].SetLaneAndRow(i, row);
+            PlaceSingleCard(cards[i], i);
         }
     }
-
+    
     public List<Card> GetCards()
     {
         return GetComponentsInChildren<Card>().ToList();
     }
 
-    public void PlaceSingleCard(Card card, ECardLane lane, int siblingIndex = -1)
+    public void PlaceSingleCard(Card card, int lane, int siblingIndex = -1)
     {
         Vector3 pos = Vector3.zero;
         card.transform.SetParent(transform);
@@ -54,10 +39,9 @@ public class CardRow : MonoBehaviour
             card.gameObject.transform.SetSiblingIndex(siblingIndex);
         }
         
-        pos.x = offsetX * (int)lane;
-        card.transform.localPosition = pos;
+        pos.x = offsetX * lane;
         card.transform.localScale = Vector3.one;
-        card.SetLaneAndRow((int)lane, row);
-        card.IsInPool = false;
+        card.transform.DOLocalMove(pos, 0.2f).SetEase(Ease.OutSine);
+        card.SetLaneAndRow(lane, row);
     }
 }

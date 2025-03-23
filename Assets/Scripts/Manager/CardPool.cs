@@ -92,7 +92,9 @@ public class CardPool : MonoBehaviour
     public void DestroyCards(List<Card> cards)
     {
         foreach (Card card in cards)
+        {
             DestroyCard(card);
+        }
     }
     
     /// <summary>
@@ -103,7 +105,7 @@ public class CardPool : MonoBehaviour
     {
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
-        card.Disable();
+        card.SetLaneAndRow(-1, ERow.Out);
         card.GetComponent<CanvasGroup>().alpha = 1;
         card.IsInPool = true;
     }
@@ -218,13 +220,13 @@ public class CardPool : MonoBehaviour
 
         // TODO: is this the best way to do it? Doubt it
         if (card?.GetType() == typeof(EnemyCard))
-            card.Set(enemiesCollection.GetRandomData());
+            card.SetData(enemiesCollection.GetRandomData());
         else if (card?.GetType() == typeof(ItemCard))
-            card.Set(itemsCollection.GetRandomData());
+            card.SetData(itemsCollection.GetRandomData());
         else if (card?.GetType() == typeof(StatusCard))
-            card.Set(statusesCollection.GetRandomData());
+            card.SetData(statusesCollection.GetRandomData());
         else if (card?.GetType() == typeof(CupCard))
-            card.Set(cupCardData);
+            card.SetData(cupCardData);
         
         if (card)
             card.IsInPool = false;
@@ -244,7 +246,8 @@ public class CardPool : MonoBehaviour
             m_cardsPool.Add(itemCard);
         }
         
-        itemCard.Set(itemsCollection.GetItemDataByType(itemType));
+        itemCard.SetData(itemsCollection.GetItemDataByType(itemType));
+        itemCard.IsInPool = false;
         return itemCard;
     }
 }

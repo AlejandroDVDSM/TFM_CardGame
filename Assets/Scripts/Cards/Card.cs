@@ -1,7 +1,9 @@
 using System;
 using CardGame.Enums;
+using DG.Tweening;
 using ScriptableObjects;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -39,9 +41,8 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public abstract void PerformAction();
 
-    public void Set(BaseCardData cardData)
+    public void SetData(BaseCardData cardData)
     {
-        // Debug.Log($"Card: {cardData}");
         m_data = cardData;
         m_value = Random.Range(cardData.MinValue, cardData.MaxValue + 1);
         UpdateUI();
@@ -72,17 +73,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         m_lane = (ECardLane)laneIndex;
         m_currentRow = row;
     }
-
-    public void SetRow(ERow row)
-    {
-        m_currentRow = row;
-    }
-
-    public void Disable()
-    {
-        m_lane = ECardLane.Out;
-        m_currentRow = ERow.Out;
-    }
+    
     
     public void OnPointerClick(PointerEventData eventData)
     {

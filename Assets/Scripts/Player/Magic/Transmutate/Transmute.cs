@@ -72,7 +72,7 @@ public class Transmute : MagicAttack
         }
         
         // Place the ItemCard in the same place where the picked card is and destroy it
-        row.PlaceSingleCard(itemCard, m_pickedCardToTransmute.Lane, itemCard.transform.GetSiblingIndex());
+        row.PlaceSingleCard(itemCard, (int)m_pickedCardToTransmute.Lane, itemCard.transform.GetSiblingIndex());
         GameManager.Instance.CardPool.DestroyCard(m_pickedCardToTransmute);
         m_IsTransmuting = false;
         

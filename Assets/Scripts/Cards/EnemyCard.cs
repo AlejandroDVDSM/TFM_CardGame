@@ -8,12 +8,38 @@ namespace CardGame
     public class EnemyCard : Card
     {
         private ParticleSystem m_particleSystem;
+
+        private Sequence m_attackSequence;
+        private Sequence m_knockbackSequence;
+        private Sequence m_destroySequence;
         
         protected override void Start()
         {
             base.Start();
             m_particleSystem = FindAnyObjectByType<ParticleSystem>();
+            CreateAttackTweens();
             GameManager.Instance.OnTurnCommited.AddListener(AutoAttack);
+        }
+
+        private void CreateAttackTweens()
+        {   
+            // Animation where the card charges forward against the player
+            m_attackSequence = DOTween.Sequence();
+            m_attackSequence
+                .Append(transform.DOScale(Vector3.one * 1.2f, 0.4f).SetEase(Ease.OutQuint))
+                .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, 0.3f).SetEase(Ease.InOutBack));
+            
+                
+            // Animation where the card returns to the original position
+            m_knockbackSequence = DOTween.Sequence();
+            m_knockbackSequence
+                .Insert(0, transform.DOScale(Vector3.one, 0.25f).SetEase(Ease.InQuint))
+                .Insert(0, transform.DOLocalMoveY(0, 0.25f).SetEase(Ease.InBack))
+                .Append(transform.DOShakePosition(0.6f, 25f));
+            
+            m_destroySequence = DOTween.Sequence();
+            m_destroySequence
+                .Append(m_canvasGroup.DOFade(0, 0.4f).SetEase(Ease.InBack));
         }
 
         public override void PerformAction()
@@ -24,38 +50,25 @@ namespace CardGame
                 GameManager.Instance.CommitTurn();
                 return;
             }
+
+            // We have to recreate the tweens each time due to the autokill settings
+            CreateAttackTweens();
             
-            // Animation where the card charges forward against the player
-            Sequence attackSequence = DOTween.Sequence();
-            attackSequence
-                .Append(transform.DOScale(Vector3.one * 1.2f, .6f).SetEase(Ease.OutQuint))
-                .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, .4f).SetEase(Ease.InOutBack));
-                
-            // Animation where the card returns to the original position
-            Sequence knockbackSequence = DOTween.Sequence();
-            knockbackSequence
-                .Insert(0, transform.DOScale(Vector3.one, .4f).SetEase(Ease.InQuint))
-                .Insert(0, transform.DOLocalMoveY(0, 0.4f).SetEase(Ease.InBack))
-                .Append(transform.DOShakePosition(1.2f, 20f));
+            m_attackSequence.Play();
             
-            Sequence destroySequence = DOTween.Sequence();
-            destroySequence
-                .Append(m_canvasGroup.DOFade(0, 1.0f).SetEase(Ease.InBack));
-            
-            attackSequence.Play();
-            attackSequence.OnComplete(() =>
+            m_attackSequence.OnComplete(() =>
             {
                 // Hit player
                 GameManager.Instance.Player.Hit(m_value);
-                knockbackSequence.Play();
+                m_knockbackSequence.Play();
             });
 
-            knockbackSequence.OnComplete(() =>
+            m_knockbackSequence.OnComplete(() =>
             {
-                destroySequence.Play();
+                 m_destroySequence.Play();
             });
 
-            destroySequence.OnComplete(() =>
+            m_destroySequence.OnComplete(() =>
             {
                 m_particleSystem.transform.position = transform.position;
                 var sh = m_particleSystem.shape;
@@ -65,7 +78,7 @@ namespace CardGame
                 // Replace this enemy card for a coin card
                 ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
                 coinCard.UpdateValue(Value);
-                GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, Lane, transform.GetSiblingIndex());
+                GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, (int)Lane, transform.GetSiblingIndex());
                 GameManager.Instance.CardPool.DestroyCard(this);
             });
         }

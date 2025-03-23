@@ -8,9 +8,7 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
     public Player Player => m_player;
-
     public CardPool CardPool => m_cardPool;
     public CardRow TopRow => topRow;
     public CardRow MiddleRow => middleRow;
@@ -19,8 +17,6 @@ public class GameManager : MonoBehaviour
     [Header("Game settings")]
     [Min(1)]
     [SerializeField] private int m_turns;
-    
-    [SerializeField] private Player m_player;
     [SerializeField] private CardPool m_cardPool;
     
     [Header("Rows")]
@@ -34,6 +30,8 @@ public class GameManager : MonoBehaviour
     
     public UnityEvent OnTurnCommited;
 
+    private Player m_player;
+    
     private void Awake()
     {
         // Singleton
