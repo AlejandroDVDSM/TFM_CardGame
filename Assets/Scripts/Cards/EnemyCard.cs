@@ -10,6 +10,7 @@ namespace CardGame
         private ParticleSystem m_particleSystem;
 
         private Sequence m_attackSequence;
+        private Sequence m_chargeSequence;
         private Sequence m_knockbackSequence;
         private Sequence m_destroySequence;
         
@@ -17,17 +18,36 @@ namespace CardGame
         {
             base.Start();
             m_particleSystem = FindAnyObjectByType<ParticleSystem>();
-            CreateAttackTweens();
             GameManager.Instance.OnTurnCommited.AddListener(AutoAttack);
         }
 
-        private void CreateAttackTweens()
+        public override void PerformAction()
+        {
+            m_isPerformingAction = true;
+            
+            // The enemy will avoid the player if it is invisible
+            if (GameManager.Instance.Player.Status.HasStatusApplied(EStatusType.Invisibility))
+            {
+                GameManager.Instance.CommitTurn();
+                m_isPerformingAction = false;
+                return;
+            }
+
+            Attack();
+        }
+        
+        private void Attack()
         {   
             // Animation where the card charges forward against the player
-            m_attackSequence = DOTween.Sequence();
-            m_attackSequence
+            m_chargeSequence = DOTween.Sequence();
+            m_chargeSequence
                 .Append(transform.DOScale(Vector3.one * 1.2f, 0.4f).SetEase(Ease.OutQuint))
-                .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, 0.3f).SetEase(Ease.InOutBack));
+                .Append(transform.DOMoveY(GameManager.Instance.Player.transform.position.y, 0.3f).SetEase(Ease.InOutBack))
+                .OnComplete(() =>
+                {
+                    // Hit player
+                    GameManager.Instance.Player.Hit(m_value);
+                });
             
                 
             // Animation where the card returns to the original position
@@ -37,50 +57,33 @@ namespace CardGame
                 .Insert(0, transform.DOLocalMoveY(0, 0.25f).SetEase(Ease.InBack))
                 .Append(transform.DOShakePosition(0.6f, 25f));
             
+            // Animation where the card is destroyed and replaced by a coin
             m_destroySequence = DOTween.Sequence();
             m_destroySequence
-                .Append(m_canvasGroup.DOFade(0, 0.4f).SetEase(Ease.InBack));
-        }
-
-        public override void PerformAction()
-        {
-            // The enemy will avoid the player if it is invisible
-            if (GameManager.Instance.Player.Status.HasStatusApplied(EStatusType.Invisibility))
-            {
-                GameManager.Instance.CommitTurn();
-                return;
-            }
-
-            // We have to recreate the tweens each time due to the autokill settings
-            CreateAttackTweens();
+                .Append(m_canvasGroup.DOFade(0, 0.4f).SetEase(Ease.InBack))
+                .OnComplete(() =>
+                {
+                    m_particleSystem.transform.position = transform.position;
+                    var sh = m_particleSystem.shape;
+                    sh.texture = (Texture2D)image.mainTexture;
+                    m_particleSystem.Play();
+                
+                    // Replace this enemy card for a coin card
+                    ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
+                    coinCard.UpdateValue(Value);
+                    GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, (int)Lane, transform.GetSiblingIndex());
+                    GameManager.Instance.CardPool.DestroyCard(this);
+                });
+            
+            // Full animation
+            m_attackSequence = DOTween.Sequence();
+            m_attackSequence
+                .Append(m_chargeSequence)
+                .Append(m_knockbackSequence)
+                .Append(m_destroySequence)
+                .OnComplete(() => m_isPerformingAction = false);
             
             m_attackSequence.Play();
-            
-            m_attackSequence.OnComplete(() =>
-            {
-                // Hit player
-                GameManager.Instance.Player.Hit(m_value);
-                m_knockbackSequence.Play();
-            });
-
-            m_knockbackSequence.OnComplete(() =>
-            {
-                 m_destroySequence.Play();
-            });
-
-            m_destroySequence.OnComplete(() =>
-            {
-                m_particleSystem.transform.position = transform.position;
-                var sh = m_particleSystem.shape;
-                sh.texture = (Texture2D)image.mainTexture;
-                m_particleSystem.Play();
-                
-                // Replace this enemy card for a coin card
-                ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
-                coinCard.UpdateValue(Value);
-                GetComponentInParent<CardRow>().PlaceSingleCard(coinCard, (int)Lane, transform.GetSiblingIndex());
-                GameManager.Instance.CardPool.DestroyCard(this);
-            });
         }
 
         public void Hit(int damage)

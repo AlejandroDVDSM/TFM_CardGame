@@ -22,12 +22,14 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     public ECardLane Lane => m_lane;
     public ERow CurrentRow => m_currentRow;
     public int Value => m_value;
+    public bool IsPerformingAction => m_isPerformingAction;
     
     private ECardLane m_lane = ECardLane.Out;
     protected ERow m_currentRow;
     
     protected BaseCardData m_data;
     protected int m_value;
+    protected bool m_isPerformingAction;
     
     protected CanvasGroup m_canvasGroup;
     
@@ -72,8 +74,18 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     {
         m_lane = (ECardLane)laneIndex;
         m_currentRow = row;
+
+        // Sine movement at bottom
+        if (m_currentRow == ERow.Bottom)
+        {
+            image.transform.DOLocalMoveX(image.transform.localPosition.x + 10f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            image.transform.DOLocalMoveY(image.transform.localPosition.y + 8f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        }
+        else
+        {
+            image.transform.DOKill();
+        }
     }
-    
     
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -82,11 +94,22 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             m_Transmute.PickCard(this);
             return;
         }
+
+        // Abort if one of the bottom cards is already performing an action 
+        foreach (Card card in GameManager.Instance.BottomRow.GetCards())
+        {
+            if (card.IsPerformingAction)
+            {
+                return;
+            }
+        }
         
         // Do nothing if the selected card is not at the bottom
         // TODO: add tween when the selected card is not at the bottom
         if (m_currentRow != ERow.Bottom)
+        {
             return;
+        }
         
         GameManager.Instance.PlayTurn(this);
     }

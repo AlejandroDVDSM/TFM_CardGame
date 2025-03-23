@@ -8,6 +8,7 @@ namespace CardGame
     {
         public override void PerformAction()
         {
+            m_isPerformingAction = true;
             ItemCardData itemCardData = m_data as ItemCardData;
             
             switch (itemCardData?.Type)
@@ -30,6 +31,7 @@ namespace CardGame
             }
             
             GameManager.Instance.CommitTurn();
+            m_isPerformingAction = false;
         }
     }
 }

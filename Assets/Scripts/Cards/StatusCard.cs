@@ -7,14 +7,21 @@ namespace CardGame
     {
         public override void PerformAction()
         {
-            StatusCardData itemCardData = m_data as StatusCardData;
+            m_isPerformingAction = true;
             
+            StatusCardData itemCardData = m_data as StatusCardData;
+
             if (itemCardData)
+            {
                 GameManager.Instance.Player.Status.ApplyNewStatus(itemCardData.Status, Value);
+            }
             else
+            {
                 Debug.LogError($"This card is not of type {typeof(StatusCard)}");
+            }
             
             GameManager.Instance.CommitTurn();
+            m_isPerformingAction = false;
         }
     }
 }

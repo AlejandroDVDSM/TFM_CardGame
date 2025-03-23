@@ -39,9 +39,10 @@ public class CardRow : MonoBehaviour
             card.gameObject.transform.SetSiblingIndex(siblingIndex);
         }
         
+        card.SetLaneAndRow(lane, row);
+        
         pos.x = offsetX * lane;
         card.transform.localScale = Vector3.one;
         card.transform.DOLocalMove(pos, 0.2f).SetEase(Ease.OutSine);
-        card.SetLaneAndRow(lane, row);
     }
 }
