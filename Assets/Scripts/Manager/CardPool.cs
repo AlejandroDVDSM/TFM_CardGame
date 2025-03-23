@@ -69,7 +69,7 @@ public class CardPool : MonoBehaviour
     }
     
     #endregion
-
+    
     public List<Card> GetCardsInRow(ERow row)
     {
         return GetCardsOutsidePool().Where(c => c.CurrentRow == row).ToList();
@@ -103,11 +103,7 @@ public class CardPool : MonoBehaviour
     /// <param name="card">Card that will go back to the pool</param>
     public void DestroyCard(Card card)
     {
-        card.transform.SetParent(transform);
-        card.transform.localPosition = Vector3.zero;
-        card.SetLaneAndRow(-1, ERow.Out);
-        card.GetComponent<CanvasGroup>().alpha = 1;
-        card.IsInPool = true;
+        card.DestroyCard(); 
     }
     
     /// <summary>

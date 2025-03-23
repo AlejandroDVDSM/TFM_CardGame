@@ -34,11 +34,48 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     protected CanvasGroup m_canvasGroup;
     
     private Transmute m_Transmute;
+    private Vector3 m_imageStartingLocalPosition;
 
     protected virtual void Start()
     {
         GameManager.Instance.Player.TryGetComponent<Transmute>(out m_Transmute);
         m_canvasGroup = GetComponent<CanvasGroup>();
+
+        m_imageStartingLocalPosition = image.transform.localPosition;
+        
+        HandleImageAnimation();
+        GameManager.Instance.OnTurnCommited.AddListener(HandleImageAnimation);
+    }
+
+    
+    /// <summary>
+    /// Animate image if the player can select this card
+    /// </summary>
+    private void HandleImageAnimation()
+    {
+        if (m_currentRow != ERow.Bottom)
+        {
+            return;
+        }
+        
+        // If the player can't move to this card...
+        if (!GameManager.Instance.Player.Movement.CanMoveTo(m_lane))
+        {
+            // ...reduce image alpha
+            Color disabledColor = image.color;
+            disabledColor.a = 0.5f;
+            image.color = disabledColor;
+            
+            // ...slow down sine movement
+            image.transform.DOLocalMoveX(image.transform.localPosition.x + 10f, 4f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            image.transform.DOLocalMoveY(image.transform.localPosition.y + 8f, 3.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        }
+        else
+        {
+            // ...apply sine movement
+            image.transform.DOLocalMoveX(image.transform.localPosition.x + 10f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            image.transform.DOLocalMoveY(image.transform.localPosition.y + 8f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        }
     }
 
     public abstract void PerformAction();
@@ -74,17 +111,27 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     {
         m_lane = (ECardLane)laneIndex;
         m_currentRow = row;
+    }
+    
+    public void DestroyCard()
+    {
+        transform.SetParent(GameManager.Instance.CardPool.transform);
+        transform.localPosition = Vector3.zero;
+        
+        SetLaneAndRow(-1, ERow.Out);
+        
+        m_canvasGroup.alpha = 1;
 
-        // Sine movement at bottom
-        if (m_currentRow == ERow.Bottom)
-        {
-            image.transform.DOLocalMoveX(image.transform.localPosition.x + 10f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-            image.transform.DOLocalMoveY(image.transform.localPosition.y + 8f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-        }
-        else
-        {
-            image.transform.DOKill();
-        }
+        // Kill movement tween and go back to original position
+        image.transform.DOKill();
+        image.transform.localPosition = m_imageStartingLocalPosition;
+        
+        // Restore image alpha back to 1
+        Color imageColor = image.color;
+        imageColor.a = 1;
+        image.color = imageColor;
+        
+        IsInPool = true;
     }
     
     public void OnPointerClick(PointerEventData eventData)
@@ -105,9 +152,9 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         }
         
         // Do nothing if the selected card is not at the bottom
-        // TODO: add tween when the selected card is not at the bottom
-        if (m_currentRow != ERow.Bottom)
+        if (m_currentRow != ERow.Bottom || !GameManager.Instance.Player.Movement.CanMoveTo(m_lane))
         {
+            transform.DOShakePosition(0.4f, 10f);
             return;
         }
         

@@ -20,7 +20,6 @@ namespace CardGame.Player
         {
             // Checks if the player is currently in one side and is trying to select a card from the other side
             // If it is, he can't move there
-            // TODO: add tween to give player the feedback that it can't move to the other side
             if (!CanMoveTo(cardLane))
                 return;
             
