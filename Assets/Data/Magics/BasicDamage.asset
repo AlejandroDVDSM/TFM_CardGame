@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: Basic Damage
   ManaCost: 2
   Description: Apply damage to the next enemy, a lane or all
+  Icon: {fileID: -3039320712659194744, guid: 9459037f6e04fa64c8ede246e385907e, type: 3}

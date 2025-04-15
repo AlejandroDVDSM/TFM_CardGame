@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Jump
   ManaCost: 3
+  Description: Skip a turn
+  Icon: {fileID: 7460046300004610927, guid: aa9c766bbd987384199b3c20c639d0b4, type: 3}

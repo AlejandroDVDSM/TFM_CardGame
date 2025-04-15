@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Swap Stat
   ManaCost: 4
+  Description: Exchange your life value for armour and viceversa
+  Icon: {fileID: 7345683057011990984, guid: 5a85960a811b6554c8d90121334f6a01, type: 3}

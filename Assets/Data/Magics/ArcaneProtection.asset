@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Arcane Protection
   ManaCost: 8
+  Description: Restore health each turn and block all damage
+  Icon: {fileID: -8141969486205588590, guid: e57d325b699dc8e4a9cb7d41c2f08ed5, type: 3}

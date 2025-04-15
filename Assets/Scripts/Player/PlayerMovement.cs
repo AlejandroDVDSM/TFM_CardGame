@@ -7,7 +7,6 @@ namespace CardGame.Player
     {
         [Header("Position")]
         [SerializeField] private float m_lateralMovement;
-        [SerializeField] private float m_posY;
 
         public ECardLane CurrentLane => m_currentLane;
         private ECardLane m_currentLane = ECardLane.Middle;
@@ -28,15 +27,15 @@ namespace CardGame.Player
             switch (cardLane)
             {
                 case ECardLane.Left:
-                    newPos = new Vector3(-m_lateralMovement, m_posY, 0);
+                    newPos = new Vector3(-m_lateralMovement, 0, 0);
                     break;
                 
                 case ECardLane.Middle:
-                    newPos = new Vector3(0, m_posY, 0);
+                    newPos = new Vector3(0, 0, 0);
                     break;
                 
                 case ECardLane.Right:
-                    newPos = new Vector3(m_lateralMovement, m_posY, 0);
+                    newPos = new Vector3(m_lateralMovement, 0, 0);
                     break;
             }
     

@@ -23,7 +23,7 @@ namespace CardGame
                     break;
                 
                 case EItemType.Coin:
-                    GameManager.Instance.Player.AddCoins(m_value);
+                    GameManager.Instance.Player.UpdateCoins(m_value);
                     break;
                 
                 case EItemType.Armor:

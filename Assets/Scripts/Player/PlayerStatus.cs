@@ -219,6 +219,9 @@ public class PlayerStatus : MonoBehaviour
         // }
     }
 
+    /// <summary>
+    /// Restore health each turn and block all damage
+    /// </summary>
     private void ApplyArcaneProtection()
     {
         if (m_appliedStatuses[EStatusType.ArcaneProtection] > 0)

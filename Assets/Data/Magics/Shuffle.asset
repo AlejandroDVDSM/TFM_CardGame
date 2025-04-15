@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Shuffle
   ManaCost: 5
-  Description: 'Discard all current cards and '
+  Description: Discards all current cards and generates new ones
+  Icon: {fileID: -1416966217745745518, guid: d26df8c0728ee4f478f0c0872a6a61e3, type: 3}

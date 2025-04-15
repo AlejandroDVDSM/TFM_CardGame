@@ -25,13 +25,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardRow bottomRow;
 
     [Header("Player Prefabs")]
+    [SerializeField] private Transform m_playerSpawn;
     [SerializeField] private Player[] m_playerPrefabs;
     [Space(15)]
     
     public UnityEvent OnTurnCommited;
 
     private Player m_player;
-    
+
     private void Awake()
     {
         // Singleton
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"Could not find any player prefab with the name {PlayerPrefs.GetString("Character")}");
             return;
         }
-        m_player = Instantiate(characterPrefab, FindAnyObjectByType<Canvas>().transform);
+        m_player = Instantiate(characterPrefab, m_playerSpawn);
     }
 
     /// <summary>

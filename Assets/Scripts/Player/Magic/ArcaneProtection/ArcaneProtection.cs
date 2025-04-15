@@ -28,6 +28,6 @@ public class ArcaneProtection : MagicAttack
         m_player.Status.ApplyNewStatus(m_statusData, Random.Range(m_minNumberOfTurns, m_maxNumberOfTurns + 1));
         
         m_player.UpdateMana(m_magicData.ManaCost * -1);
-        hasUsedMagic = true;   
+        hasUsedMagic = true;
     }
 }

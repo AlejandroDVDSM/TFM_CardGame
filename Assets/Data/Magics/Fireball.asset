@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fireball
   ManaCost: 4
+  Description: Inflicts damage to all visible enemies
+  Icon: {fileID: -6607481912129624618, guid: 15da59e6faf892b4c848493d28c78be1, type: 3}

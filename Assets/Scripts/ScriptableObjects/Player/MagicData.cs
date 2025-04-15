@@ -8,4 +8,6 @@ public class MagicData : ScriptableObject
     public int ManaCost;
     
     public string Description;
+
+    public Sprite Icon;
 }

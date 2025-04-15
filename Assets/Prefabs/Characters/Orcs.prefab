@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 56816292652665325, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -403
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 56816292652665325, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d428282246c20a64383014cd45658e94, type: 2}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
-      value: PlayerBase Variant
+      value: Orcs
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

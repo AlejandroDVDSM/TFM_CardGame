@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public int CurrentHealth => m_stats.m_currentHealth;
     public int CurrentArmor => m_stats.m_currentArmor;
     public int CurrentMana => m_stats.m_currentMana;
+    public int Coins => m_stats.m_coins;
+    
     public string CharacterName => m_characterData.Name;
     
     [SerializeField] private CharacterData m_characterData;
@@ -215,7 +217,7 @@ public class Player : MonoBehaviour
     /// Add coins
     /// </summary>
     /// <param name="coins">The amount to add</param>
-    public void AddCoins(int coins)
+    public void UpdateCoins(int coins)
     {
         m_stats.m_coins += coins;
         m_coinsText.text = m_stats.m_coins.ToString();

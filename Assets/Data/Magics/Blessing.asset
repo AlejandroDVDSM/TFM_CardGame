@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Blessing
   ManaCost: 6
+  Description: Get a positive status
+  Icon: {fileID: -5925642069798460707, guid: 24888a3f01a670245bf68c6baab8685f, type: 3}

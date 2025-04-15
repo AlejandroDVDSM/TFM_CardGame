@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Transmutate
   ManaCost: 8
+  Description: Change any card for an item card
+  Icon: {fileID: 3173489861109135860, guid: d30c50bf8931a894d9c35065dedaf0f5, type: 3}

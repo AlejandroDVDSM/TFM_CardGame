@@ -18,6 +18,13 @@ public class TransmuteView : MagicView
     protected override void Start()
     {
         m_transmute = m_magicAttack as Transmute;
+
+        if (!m_transmute)
+        {
+            Debug.LogError("[TransmuteView] MagicAttack is not Transmute");
+            return;
+        }
+        
         m_CastBtn.onClick.AddListener(m_transmute.EnableTransmutingMode);
         m_transmuteSelectionPanel.SetActive(false);
         m_transmuteModeText.gameObject.SetActive(false);
