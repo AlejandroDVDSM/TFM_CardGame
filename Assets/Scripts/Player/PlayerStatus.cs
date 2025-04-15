@@ -1,13 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CardGame.Enums;
+using ScriptableObjects;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    [SerializeField] private Transform m_statusIconsContainer;
+    [SerializeField] private StatusIcon m_statusIconPrefab;
+    
     private Player m_player;
     
-    Dictionary<EStatusType, int> m_appliedStatuses = new();
+    private Dictionary<EStatusType, int> m_appliedStatuses = new();
+    private List<StatusIcon> m_statusIconsPlaced = new();
 
     private void Start()
     {
@@ -18,20 +23,35 @@ public class PlayerStatus : MonoBehaviour
     /// <summary>
     /// Apply a new status to the player. If the status is already applied, it will overwrite the number of turns
     /// </summary>
-    /// <param name="status">The new status to apply</param>
+    /// <param name="statusData">The new status to apply</param>
     /// <param name="turns">The number of turns the player will have this status</param>
-    public void ApplyNewStatus(EStatusType status, int turns)
+    public void ApplyNewStatus(StatusCardData statusData, int turns)
     {
-        Debug.Log($"[PLAYER] Applying new status: <{status}>");
+        Debug.Log($"[PLAYER] Applying new status: <{statusData.Status}>");
         
-        if (m_appliedStatuses.ContainsKey(status))
-        {
-            m_appliedStatuses[status] = turns;
+        // Check if the status is already applied...
+        if (m_appliedStatuses.ContainsKey(statusData.Status))
+        { 
+            // ...overwrite it
+            m_appliedStatuses[statusData.Status] = turns;
+            UpdateStatusInfo(statusData.Status, turns);
         }
         else
         {
-            m_appliedStatuses.Add(status, turns);
+            // ... add it
+            m_appliedStatuses.Add(statusData.Status, turns);
+            AddStatusInfo(statusData, turns);
         }
+    }
+    
+    /// <summary>
+    /// Check if the given status is active for the player
+    /// </summary>
+    /// <param name="status">The status to check</param>
+    /// <returns>True if the player has the given status applied. False if not</returns>
+    public bool HasStatusApplied(EStatusType status)
+    {
+        return m_appliedStatuses.ContainsKey(status);
     }
     
     /// <summary>
@@ -59,7 +79,24 @@ public class PlayerStatus : MonoBehaviour
         
         if (m_appliedStatuses.ContainsKey(EStatusType.ArcaneProtection))
             ApplyArcaneProtection();
+
+        UpdateStatusesInfo();
+        // TryRemoveStatuses();
     }
+
+    // private void TryRemoveStatuses()
+    // {
+    //     foreach (var appliedStatus in m_appliedStatuses)
+    //     {
+    //         if (appliedStatus.Value <= 0)
+    //         {
+    //             RemoveStatusInfo(appliedStatus.Key);
+    //             
+    //             Debug.Log($"[PLAYER] Status <{appliedStatus.Key}> removed>");
+    //             m_appliedStatuses.Remove(appliedStatus.Key);
+    //         }
+    //     }
+    // }
 
     /// <summary>
     /// Reduce player's health by 1
@@ -73,11 +110,11 @@ public class PlayerStatus : MonoBehaviour
             m_player.Hit(1);
             m_appliedStatuses[EStatusType.Poison]--;
         }
-        else
-        {
-            m_appliedStatuses.Remove(EStatusType.Poison);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Poison}> removed>");
-        }
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.Poison);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.Poison}> removed>");
+        // }
     }
 
     /// <summary>
@@ -107,8 +144,8 @@ public class PlayerStatus : MonoBehaviour
                 card.HideValue(false);
             }
 
-            m_appliedStatuses.Remove(EStatusType.Blind);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Blind}> removed>");
+            // m_appliedStatuses.Remove(EStatusType.Blind);
+            // Debug.Log($"[PLAYER] Status <{EStatusType.Blind}> removed>");
         }
     }
     
@@ -122,11 +159,11 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Silence}> status ({m_appliedStatuses[EStatusType.Silence]} turns left)");
             m_appliedStatuses[EStatusType.Silence]--;
         }
-        else
-        {
-            m_appliedStatuses.Remove(EStatusType.Silence);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Silence}> removed>");
-        }
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.Silence);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.Silence}> removed>");
+        // }
     }
 
     /// <summary>
@@ -139,11 +176,11 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Invisibility}> status ({m_appliedStatuses[EStatusType.Invisibility]} turns left)");
             m_appliedStatuses[EStatusType.Invisibility]--;
         }
-        else
-        {
-            m_appliedStatuses.Remove(EStatusType.Invisibility);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Invisibility}> removed>");
-        }
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.Invisibility);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.Invisibility}> removed>");
+        // }
     }
 
     /// <summary>
@@ -156,11 +193,11 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Protection}> status ({m_appliedStatuses[EStatusType.Protection]} turns left)");
             m_appliedStatuses[EStatusType.Protection]--;
         }
-        else
-        {
-            m_appliedStatuses.Remove(EStatusType.Protection);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Protection}> removed>");
-        }
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.Protection);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.Protection}> removed>");
+        // }
     }
 
     /// <summary>
@@ -175,11 +212,11 @@ public class PlayerStatus : MonoBehaviour
             m_player.RestoreHealth(1);
             m_appliedStatuses[EStatusType.Regeneration]--;
         }
-        else
-        {
-            m_appliedStatuses.Remove(EStatusType.Regeneration);
-            Debug.Log($"[PLAYER] Status <{EStatusType.Regeneration}> removed>");
-        }
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.Regeneration);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.Regeneration}> removed>");
+        // }
     }
 
     private void ApplyArcaneProtection()
@@ -191,20 +228,60 @@ public class PlayerStatus : MonoBehaviour
             m_player.RestoreHealth(1);
             m_appliedStatuses[EStatusType.ArcaneProtection]--;
         }
-        else
+        // else
+        // {
+        //     m_appliedStatuses.Remove(EStatusType.ArcaneProtection);
+        //     Debug.Log($"[PLAYER] Status <{EStatusType.ArcaneProtection}> removed>");
+        // }
+    }
+
+    private void AddStatusInfo(StatusCardData statusData, int turns)
+    {
+        StatusIcon newStatusIcon = Instantiate(m_statusIconPrefab, m_statusIconsContainer);
+        newStatusIcon.SetStatusIcon(statusData, turns);
+        
+        m_statusIconsPlaced.Add(newStatusIcon);
+    }
+    
+    private void UpdateStatusInfo(EStatusType statusType, int turns)
+    {
+        StatusIcon statusIcon = m_statusIconsPlaced.FirstOrDefault(s => s.StatusType == statusType);
+
+        if (!statusIcon)
         {
-            m_appliedStatuses.Remove(EStatusType.ArcaneProtection);
-            Debug.Log($"[PLAYER] Status <{EStatusType.ArcaneProtection}> removed>");
+            return;
+        }
+        
+        statusIcon.UpdateTurns(turns);
+    }
+
+    private void UpdateStatusesInfo()
+    {
+        foreach (var appliedStatus in m_appliedStatuses)
+        {
+            if (appliedStatus.Value > 0)
+            {
+                UpdateStatusInfo(appliedStatus.Key, appliedStatus.Value);
+            } else 
+            {
+                RemoveStatusInfo(appliedStatus.Key);
+                
+                Debug.Log($"[PLAYER] Status <{appliedStatus.Key}> removed>");
+                m_appliedStatuses.Remove(appliedStatus.Key);
+            }
         }
     }
 
-    /// <summary>
-    /// Check if the given status is active for the player
-    /// </summary>
-    /// <param name="status">The status to check</param>
-    /// <returns>True if the player has the given status applied. False if not</returns>
-    public bool HasStatusApplied(EStatusType status)
+    private void RemoveStatusInfo(EStatusType statusType)
     {
-        return m_appliedStatuses.ContainsKey(status);
+        StatusIcon statusIcon = m_statusIconsPlaced.FirstOrDefault(s => s.StatusType == statusType);
+        m_statusIconsPlaced.Remove(statusIcon);
+
+        if (!statusIcon)
+        {
+            return;
+        }
+        
+        Destroy(statusIcon.gameObject);
     }
 }

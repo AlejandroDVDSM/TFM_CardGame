@@ -29,11 +29,11 @@ public class BlessingView : MagicView
         {
             cardSelection = Instantiate(m_cardSelectionPrefab, m_blessingsSelectionPanel.transform);
             cardSelection.SetData(blessing);
-            cardSelection.GetComponentInChildren<Button>().onClick.AddListener(() => PickBlessing(((StatusCardData)blessing).Status /*, cardSelection.Value*/));
+            cardSelection.GetComponentInChildren<Button>().onClick.AddListener(() => PickBlessing(((StatusCardData)blessing)/*.Status*/ /*, cardSelection.Value*/));
         }
     }
 
-    private void PickBlessing(EStatusType status)
+    private void PickBlessing(/*EStatusType status*/StatusCardData status)
     {
         // TODO: tween when picking blessing
         m_blessing.ApplyBlessing(status);

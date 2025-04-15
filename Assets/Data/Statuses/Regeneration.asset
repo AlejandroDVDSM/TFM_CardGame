@@ -19,3 +19,4 @@ MonoBehaviour:
   MaxValue: 4
   IgnoreData: 0
   Status: 4
+  Icon: {fileID: 7138865361695076239, guid: 1da5f29019a5bf34e91ca939fd6c66a4, type: 3}

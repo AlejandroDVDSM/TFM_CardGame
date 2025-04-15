@@ -13,7 +13,7 @@ namespace CardGame
 
             if (itemCardData)
             {
-                GameManager.Instance.Player.Status.ApplyNewStatus(itemCardData.Status, Value);
+                GameManager.Instance.Player.Status.ApplyNewStatus(itemCardData, Value);
             }
             else
             {

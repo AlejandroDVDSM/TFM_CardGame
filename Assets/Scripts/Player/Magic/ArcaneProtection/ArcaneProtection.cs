@@ -1,4 +1,5 @@
 using CardGame.Enums;
+using ScriptableObjects;
 using UnityEngine;
 
 public class ArcaneProtection : MagicAttack
@@ -6,6 +7,8 @@ public class ArcaneProtection : MagicAttack
     [Header("Arcane Protection Settings")]
     [SerializeField] private int m_minNumberOfTurns;
     [SerializeField] private int m_maxNumberOfTurns;
+    
+    [SerializeField] private StatusCardData m_statusData;
     
     public override void Cast()
     {
@@ -22,7 +25,7 @@ public class ArcaneProtection : MagicAttack
             return;
         }
         
-        m_player.Status.ApplyNewStatus(EStatusType.ArcaneProtection, Random.Range(m_minNumberOfTurns, m_maxNumberOfTurns + 1));
+        m_player.Status.ApplyNewStatus(m_statusData, Random.Range(m_minNumberOfTurns, m_maxNumberOfTurns + 1));
         
         m_player.UpdateMana(m_magicData.ManaCost * -1);
         hasUsedMagic = true;   

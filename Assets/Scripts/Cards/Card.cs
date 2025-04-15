@@ -81,7 +81,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     {
         Sequence disappearSequence = DOTween.Sequence();
         disappearSequence
-            .Append(image.transform.DOScale(Vector3.one * 1.4f, 0.3f).SetEase(Ease.OutQuad))
+            .Append(image.transform.DOScale(Vector3.one * 1.4f, 0.25f).SetEase(Ease.OutQuad))
             .Append(image.transform.DOScale(Vector3.zero, 0.15f).SetEase(Ease.InQuad))
             .OnComplete(callback);
         

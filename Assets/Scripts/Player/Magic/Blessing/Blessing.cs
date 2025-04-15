@@ -1,10 +1,12 @@
 using CardGame.Enums;
+using ScriptableObjects;
 using UnityEngine;
 
 public class Blessing : MagicAttack
 {
     private BlessingView m_blessingView;
-    private EStatusType m_pickedBlessing;
+    // private EStatusType m_pickedBlessing;
+    private StatusCardData m_pickedBlessing;
     
     protected override void Start()
     {
@@ -33,7 +35,7 @@ public class Blessing : MagicAttack
         hasUsedMagic = true;
     }
 
-    public void ApplyBlessing(EStatusType blessing)
+    public void ApplyBlessing(/*EStatusType blessing*/StatusCardData blessing)
     {
         m_pickedBlessing = blessing;
         Cast();

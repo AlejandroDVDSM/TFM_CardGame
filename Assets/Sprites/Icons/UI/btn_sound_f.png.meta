@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 27f98750630e2794898813f7804277cc
+guid: 9b2eb781bad2f024f9098bfa9c202eff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4258536346754752987
-    second: Armor_00_0
+      213: -6105861654267164881
+    second: btn_sound_f_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armor_00_0
+      name: btn_sound_f_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 6
-        width: 946
-        height: 1018
+        x: 0
+        y: 0
+        width: 116
+        height: 132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 52ed79c51c3a6e4c0800000000000000
-      internalID: -4258536346754752987
+      spriteID: f270ab9fc2f934ba0800000000000000
+      internalID: -6105861654267164881
       vertices: []
       indices: 
       edges: []

@@ -9,6 +9,5 @@
         Regeneration,
         Protection,
         ArcaneProtection
-        
     }
 }

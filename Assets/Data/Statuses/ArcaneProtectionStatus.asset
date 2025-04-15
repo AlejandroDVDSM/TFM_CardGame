@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176586c1b3f34a4e84aa3586ba9c28f1, type: 3}
+  m_Name: ArcaneProtectionStatus
+  m_EditorClassIdentifier: 
+  Name: Arcane Protection
+  Sprite: {fileID: 7791958387990293293, guid: 0fed0813d2f850a48b85bce748d00c2f, type: 3}
+  BackgroundColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
+  MinValue: 2
+  MaxValue: 5
+  IgnoreData: 1
+  Status: 6
+  Icon: {fileID: -8141969486205588590, guid: e57d325b699dc8e4a9cb7d41c2f08ed5, type: 3}

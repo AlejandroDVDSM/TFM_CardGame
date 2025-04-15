@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 75c4b9a976387a24899ece6d54c9df5f, type: 2}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
-      value: PlayerBase (1) Variant
+      value: Wooden Elves
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -126,3 +126,4 @@ MonoBehaviour:
   m_infiniteUses: 0
   m_minNumberOfTurns: 2
   m_maxNumberOfTurns: 5
+  m_statusData: {fileID: 11400000, guid: aaa6d4fc2d059bc44933a9b4d9e1254c, type: 2}

@@ -5,6 +5,7 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "NewBaseCard", menuName = "Card / Base Card Data")]
     public class BaseCardData : ScriptableObject
     {
+        [Header("Base Card Data")]
         public string Name;
         
         public Sprite Sprite;
