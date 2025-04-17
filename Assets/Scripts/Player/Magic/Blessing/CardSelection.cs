@@ -14,9 +14,11 @@ public class CardSelection : MonoBehaviour
     [SerializeField] private TMP_Text m_itemPrice;
     
     public int Value => m_Value;
+    public BaseCardData CardData => m_cardData;
     
     private int m_Value;
     private BaseCardData m_cardData;
+    
 
     public void SetData(BaseCardData cardData)
     {

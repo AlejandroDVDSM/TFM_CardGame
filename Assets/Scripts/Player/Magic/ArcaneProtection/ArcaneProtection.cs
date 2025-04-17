@@ -14,7 +14,6 @@ public class ArcaneProtection : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
             return;
         }
 

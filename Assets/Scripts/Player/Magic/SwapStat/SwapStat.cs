@@ -6,11 +6,10 @@ public class SwapStat : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
             return;
         }
 
-        // If the player doesn't have armor it doesn't make sense to swap the stats because
+        // If the player doesn't have armor, it doesn't make sense to swap the stats because
         // it will end up getting 0 hp in the exchange
         if (m_player.CurrentArmor == 0)
         {

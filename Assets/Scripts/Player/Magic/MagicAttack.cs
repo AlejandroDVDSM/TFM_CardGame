@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class MagicAttack : MonoBehaviour
 {
+    [Header("Magick Attack Base")]
     [Header("Data")]
     [SerializeField] protected MagicData m_magicData;
     public MagicData MagicData => m_magicData;
@@ -34,7 +35,7 @@ public abstract class MagicAttack : MonoBehaviour
 
     public abstract void Cast();
     
-    protected bool CanCast()
+    public bool CanCast()
     {
         // If the player has already used the magic in this turn...
         if (hasUsedMagic && !m_infiniteUses)

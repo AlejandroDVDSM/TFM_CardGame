@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Enemy
   Sprite: {fileID: 6584690746588489567, guid: 0ce3223ea46cf3440841b2e8c89a2205, type: 3}
-  BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  BackgroundColor: {r: 0.76862746, g: 0.11372549, b: 0.11372549, a: 1}
   MinValue: 2
   MaxValue: 5
   IgnoreData: 0

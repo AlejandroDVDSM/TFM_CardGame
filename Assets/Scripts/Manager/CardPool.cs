@@ -214,7 +214,6 @@ public class CardPool : MonoBehaviour
 
         }
 
-        // TODO: is this the best way to do it? Doubt it
         if (card?.GetType() == typeof(EnemyCard))
             card.SetData(enemiesCollection.GetRandomData());
         else if (card?.GetType() == typeof(ItemCard))

@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 869096115905304932}
   - component: {fileID: 3701900998117421083}
   - component: {fileID: 5998776166234268185}
+  - component: {fileID: 5388880430027241889}
   m_Layer: 5
   m_Name: CastMagicBtn
   m_TagString: Untagged
@@ -207,6 +208,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5388880430027241889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489965984267104301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c03c009c2b366429f018405ec59878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1499569109691824336
 GameObject:
   m_ObjectHideFlags: 0

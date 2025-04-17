@@ -1,12 +1,9 @@
-using UnityEngine;
-
 public class Shuffle : MagicAttack
 {
     public override void Cast()
     {
         if (!CanCast())
         {
-            // TODO: add tween
             return;
         }
         

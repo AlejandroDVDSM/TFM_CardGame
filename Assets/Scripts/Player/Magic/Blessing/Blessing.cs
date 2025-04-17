@@ -1,4 +1,5 @@
 using CardGame.Enums;
+using DG.Tweening;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -18,7 +19,6 @@ public class Blessing : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
             return;
         }
 
@@ -28,6 +28,7 @@ public class Blessing : MagicAttack
             return;
         }
         
+        m_blessingView.CloseBlessingPanel();
         GameManager.Instance.Player.Status.ApplyNewStatus(m_pickedBlessing, 2);
         
         m_player.UpdateMana(m_magicData.ManaCost * -1);

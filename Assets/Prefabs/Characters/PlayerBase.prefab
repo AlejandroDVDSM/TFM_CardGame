@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_characterImage: {fileID: 220688394169376834}
   m_characterNameText: {fileID: 5720810780793639620}
   m_fullArmorAtStart: 0
-  m_fullManaAtStart: 0
+  m_fullManaAtStart: 1
 --- !u!114 &7529986820823214024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,7 +1178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_lateralMovement: 216
-  m_posY: -400
 --- !u!114 &2470544990151691638
 MonoBehaviour:
   m_ObjectHideFlags: 0

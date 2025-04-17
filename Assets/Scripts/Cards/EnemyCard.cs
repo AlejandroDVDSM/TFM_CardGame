@@ -38,7 +38,7 @@ namespace CardGame
         
         private void Attack()
         {   
-            // Animation where the card charges forward against the player
+            // Create animation where the card charges forward against the player
             m_chargeSequence = DOTween.Sequence();
             m_chargeSequence
                 .Append(transform.DOScale(Vector3.one * 1.3f, 0.4f).SetEase(Ease.OutQuint))
@@ -50,14 +50,14 @@ namespace CardGame
                 });
             
                 
-            // Animation where the card returns to the original position
+            // Create animation where the card returns to the original position
             m_knockbackSequence = DOTween.Sequence();
             m_knockbackSequence
                 .Insert(0, transform.DOScale(Vector3.one, 0.25f).SetEase(Ease.InQuint))
                 .Insert(0, transform.DOLocalMoveY(0, 0.25f).SetEase(Ease.InBack))
                 .Append(transform.DOShakePosition(0.6f, 25f));
             
-            // Animation where the card is destroyed and replaced by a coin
+            // Create animation where the card is destroyed and replaced by a coin
             m_destroySequence = DOTween.Sequence();
             m_destroySequence
                 .Append(m_canvasGroup.DOFade(0, 0.4f).SetEase(Ease.InBack))
@@ -75,7 +75,7 @@ namespace CardGame
                     GameManager.Instance.CardPool.DestroyCard(this);
                 });
             
-            // Full animation
+            // Play full animation
             m_attackSequence = DOTween.Sequence();
             m_attackSequence
                 .Append(m_chargeSequence)
@@ -89,6 +89,7 @@ namespace CardGame
         public void Hit(int damage)
         {
             UpdateValue(Mathf.Clamp(m_value - damage, 0, m_value));
+            transform.DOShakePosition(0.75f, 10f);
         }
 
         /// <summary>
