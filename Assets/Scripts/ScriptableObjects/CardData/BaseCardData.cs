@@ -15,6 +15,9 @@ namespace ScriptableObjects
         public int MinValue;
         
         public int MaxValue;
+
+        [Range(0, 100)]        
+        public float Weight;
         
         public bool IgnoreData;
 

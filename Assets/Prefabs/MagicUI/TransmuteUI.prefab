@@ -642,7 +642,6 @@ GameObject:
   - component: {fileID: 7541411116032827615}
   - component: {fileID: 8228568756893171976}
   - component: {fileID: 3493107592955890517}
-  - component: {fileID: 485409201390098783}
   m_Layer: 5
   m_Name: TransmuteUI
   m_TagString: Untagged
@@ -729,15 +728,3 @@ MonoBehaviour:
   m_transmuteModeText: {fileID: 7577555615914464346}
   m_itemsCollection: {fileID: 11400000, guid: fd49c578229d2084083edda1eba8ad14, type: 2}
   m_cardSelectionPrefab: {fileID: 8549513932427506508, guid: 29a43aca88b898c46a7bbaac7b40d257, type: 3}
---- !u!114 &485409201390098783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6961201363290884559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c03c009c2b366429f018405ec59878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

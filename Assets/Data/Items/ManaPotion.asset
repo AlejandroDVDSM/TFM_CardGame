@@ -17,6 +17,7 @@ MonoBehaviour:
   BackgroundColor: {r: 0, g: 0.69803923, b: 1, a: 1}
   MinValue: 1
   MaxValue: 2
+  Weight: 35
   IgnoreData: 0
   Type: 1
   Price: 2

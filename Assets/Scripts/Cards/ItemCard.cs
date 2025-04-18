@@ -1,7 +1,5 @@
 ﻿using CardGame.Enums;
-using DG.Tweening;
 using ScriptableObjects;
-using UnityEngine;
 
 namespace CardGame
 {
@@ -29,6 +27,11 @@ namespace CardGame
                 case EItemType.Armor:
                     GameManager.Instance.Player.RestoreArmor(m_value);
                     break;
+                
+                case EItemType.Chest:
+                    FindAnyObjectByType<Shop>().OpenShop(true);
+                    break;
+                    
             }
             
             EnableDisappearAnimation(() =>

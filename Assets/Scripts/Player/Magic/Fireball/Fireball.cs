@@ -33,7 +33,7 @@ public class Fireball : MagicAttack
         // Instantiate fireball fx
         if (!m_fireballFxPlaced)
         {
-            m_fireballFxPlaced = Instantiate(m_fireballFxPrefab, m_player.transform);
+            m_fireballFxPlaced = Instantiate(m_fireballFxPrefab, FindAnyObjectByType<Canvas>().transform);
             
             // Harcoded value
             m_fireballFxPlaced.transform.localPosition = new Vector3(0, -1200, 0);

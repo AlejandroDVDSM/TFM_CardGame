@@ -17,6 +17,7 @@ MonoBehaviour:
   BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   MinValue: 1
   MaxValue: 4
+  Weight: 55
   IgnoreData: 0
   Status: 5
   Icon: {fileID: -3324902807109394615, guid: 213ab722b1adc4d48b4840665016f6d4, type: 3}

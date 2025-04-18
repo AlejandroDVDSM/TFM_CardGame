@@ -16,5 +16,5 @@ MonoBehaviour:
   Sprite: {fileID: 2807314771408455767, guid: d152168bbf40d074f96ccc1337623046, type: 3}
   HealthPoints: 10
   Armor: 10
-  Mana: 5
+  Mana: 999
   MagicData: {fileID: 11400000, guid: 6ceaba55e3272454ebc06ca3e791a2eb, type: 2}

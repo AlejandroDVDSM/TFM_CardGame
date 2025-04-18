@@ -14,6 +14,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private Image m_shopPopup;
     [SerializeField] private GameObject m_shopContent;
 
+    private CardSelection[] m_shopItems;
+    private bool freeShop;
+
     private void Start()
     {
         // The shop must be closed at the start of the game
@@ -21,15 +24,27 @@ public class Shop : MonoBehaviour
 
         CreateShopItems();
     }
-        
+    
     /// <summary>
     /// Open the shop
     /// </summary>
-    public void OpenShop()
+    /// <param name="free">Indicates if the objects are free or not</param>
+    public void OpenShop(bool free = false)
     {
+        freeShop = free;
+        SetPriceTagActive(!free);
+        
         m_shopPopup.gameObject.SetActive(true);
         m_shopPopup.DOFade(0.95f, 0.1f)
             .SetEase(Ease.OutSine);
+    }
+
+    private void SetPriceTagActive(bool free)
+    {
+        foreach (CardSelection shopItem in m_shopItems)
+        {
+            shopItem.SetPriceTagActive(free);
+        }
     }
 
     /// <summary>
@@ -46,6 +61,8 @@ public class Shop : MonoBehaviour
         m_shopPopup.DOFade(0f, 0.2f)
             .SetEase(Ease.InSine)
             .OnComplete(() => m_shopPopup.gameObject.SetActive(false));
+
+        freeShop = false;
     }
     
     /// <summary>
@@ -53,11 +70,15 @@ public class Shop : MonoBehaviour
     /// </summary>
     private void CreateShopItems()
     {
-        foreach (BaseCardData shopItemData in m_shopCollection.Cards)
+        m_shopItems = new CardSelection[m_shopCollection.Cards.Count];
+        
+        for (int i = 0; i < m_shopCollection.Cards.Count; i++)
         {
             CardSelection shopItem = Instantiate(m_cardSelectionPrefab, m_shopContent.transform);
-            shopItem.SetData(shopItemData);
+            shopItem.SetData(m_shopCollection.Cards[i]);
             shopItem.GetComponentInChildren<Button>().onClick.AddListener(() => BuyItem(shopItem, shopItem.Value));
+            
+            m_shopItems[i] = shopItem;
         }
     }
 
@@ -77,7 +98,7 @@ public class Shop : MonoBehaviour
         }
         
         // Check if the player has enough coins to buy the item...
-        if (GameManager.Instance.Player.Coins < shopItemData.Price)
+        if (GameManager.Instance.Player.Coins < shopItemData.Price && !freeShop)
         {
             Debug.Log($"[SHOP] Player doesn't have enough money to buy '{shopItemData.Name}'. " +
                       $"Price: {shopItemData.Price} <-> Player's coins: {GameManager.Instance.Player.Coins}");

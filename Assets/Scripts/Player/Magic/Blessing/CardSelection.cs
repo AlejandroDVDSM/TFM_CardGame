@@ -11,7 +11,8 @@ public class CardSelection : MonoBehaviour
     [SerializeField] private Image m_cardImage;
     
     [Header("Shop Card Selection")]
-    [SerializeField] private TMP_Text m_itemPrice;
+    [SerializeField] private Image m_itemPriceTag;
+    [SerializeField] private TMP_Text m_itemPriceText;
     
     public int Value => m_Value;
     public BaseCardData CardData => m_cardData;
@@ -32,9 +33,18 @@ public class CardSelection : MonoBehaviour
         m_cardImage.sprite = m_cardData.Sprite;
 
         // Set the price text if the card selection is used in the shop
-        if (m_itemPrice)
+        if (m_itemPriceText)
         {
-            m_itemPrice.text = ((ItemCardData)cardData).Price.ToString();
+            m_itemPriceText.text = ((ItemCardData)cardData).Price.ToString();
         }
+    }
+
+    /// <summary>
+    /// Show or hide the price tag
+    /// </summary>
+    /// <param name="active">Indicates if the tag must be visible or not</param>
+    public void SetPriceTagActive(bool active)
+    {
+        m_itemPriceTag.gameObject.SetActive(active);
     }
 }

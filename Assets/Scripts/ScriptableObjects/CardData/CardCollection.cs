@@ -13,11 +13,36 @@ namespace ScriptableObjects
         /// <summary>
         /// Get a random card
         /// </summary>
-        /// <returns>A random card</returns>
+        /// <returns>The data of a random card</returns>
         public BaseCardData GetRandomData()
         {
             List<BaseCardData> cardsData = Cards.Where(d => !d.IgnoreData).ToList();
-            return cardsData[Random.Range(0, cardsData.Count)];
+            
+            float total = 0f;
+            for (int i = 0; i < cardsData.Count; i++)
+            {
+                total += cardsData[i].Weight;
+            }
+            
+            float rand = Random.value;
+            float cumulativeProbability = 0f;
+
+            int count = cardsData.Count - 1;
+            for (int i = 0; i < count; i++)
+            {
+                cumulativeProbability += cardsData[i].Weight / total;
+                
+                if (cumulativeProbability >= rand)
+                {
+                    return cardsData[i];
+                }
+            }
+            
+            return cardsData[count];
+
+            // Old way of getting a random card without taking into account the weight
+            // List<BaseCardData> cardsData = Cards.Where(d => !d.IgnoreData).ToList();
+            // return cardsData[Random.Range(0, cardsData.Count)];
         }
         
         /// <summary>

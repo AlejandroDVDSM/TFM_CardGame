@@ -5,6 +5,7 @@
         Health,
         Mana,
         Coin,
-        Armor
+        Armor,
+        Chest
     }
 }

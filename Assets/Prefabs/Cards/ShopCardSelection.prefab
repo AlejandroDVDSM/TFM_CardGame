@@ -384,6 +384,14 @@ PrefabInstance:
       propertyPath: m_itemPrice
       value: 
       objectReference: {fileID: 6497469314492856899}
+    - target: {fileID: 8549513932427506508, guid: 29a43aca88b898c46a7bbaac7b40d257, type: 3}
+      propertyPath: m_itemPriceTag
+      value: 
+      objectReference: {fileID: 4711553565685414169}
+    - target: {fileID: 8549513932427506508, guid: 29a43aca88b898c46a7bbaac7b40d257, type: 3}
+      propertyPath: m_itemPriceText
+      value: 
+      objectReference: {fileID: 6497469314492856899}
     - target: {fileID: 8649951096663020207, guid: 29a43aca88b898c46a7bbaac7b40d257, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
