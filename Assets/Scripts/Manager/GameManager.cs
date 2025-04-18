@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour
         middleRow.PopulateRow();
         
         bottomRow.PopulateRow();
+        
+        AudioManager.Instance.Play("GameMusic");
     }
 
     /// <summary>
