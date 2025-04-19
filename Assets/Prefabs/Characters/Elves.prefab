@@ -92,6 +92,18 @@ PrefabInstance:
       propertyPath: m_characterData
       value: 
       objectReference: {fileID: 11400000, guid: 322b7b492df39134b9d4f6e67b254bc2, type: 2}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullManaAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullArmorAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullCoinsAtStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
       value: Elves
@@ -123,6 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_magicData: {fileID: 11400000, guid: a4f64c236e65de64aa6ad46c419a5571, type: 2}
   m_magicUIPrefab: {fileID: 5874587223010296731, guid: ac94fa1ec8f49b34dbfb708656b74d56, type: 3}
-  m_infiniteUses: 1
+  m_infiniteUses: 0
   m_damage: 3
   m_fireballFxPrefab: {fileID: 4324673132279814493, guid: f310e5dcd5b8f0d42b05dc4aa1a18d3d, type: 3}

@@ -29,7 +29,7 @@ public class BasicDamage : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
+            AudioManager.Instance.Play("Denied");
             return;
         }
 
@@ -47,6 +47,8 @@ public class BasicDamage : MagicAttack
                 CastToAll();
                 break;
         }
+        
+        AudioManager.Instance.Play("BasicDamageCast");
     }
 
     /// <summary>

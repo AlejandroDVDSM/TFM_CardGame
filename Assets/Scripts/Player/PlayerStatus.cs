@@ -81,22 +81,7 @@ public class PlayerStatus : MonoBehaviour
             ApplyArcaneProtection();
 
         UpdateStatusesInfo();
-        // TryRemoveStatuses();
     }
-
-    // private void TryRemoveStatuses()
-    // {
-    //     foreach (var appliedStatus in m_appliedStatuses)
-    //     {
-    //         if (appliedStatus.Value <= 0)
-    //         {
-    //             RemoveStatusInfo(appliedStatus.Key);
-    //             
-    //             Debug.Log($"[PLAYER] Status <{appliedStatus.Key}> removed>");
-    //             m_appliedStatuses.Remove(appliedStatus.Key);
-    //         }
-    //     }
-    // }
 
     /// <summary>
     /// Reduce player's health by 1
@@ -109,6 +94,7 @@ public class PlayerStatus : MonoBehaviour
             
             m_player.Hit(1);
             m_appliedStatuses[EStatusType.Poison]--;
+            AudioManager.Instance.Play("Poison");
         }
         // else
         // {
@@ -159,11 +145,6 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Silence}> status ({m_appliedStatuses[EStatusType.Silence]} turns left)");
             m_appliedStatuses[EStatusType.Silence]--;
         }
-        // else
-        // {
-        //     m_appliedStatuses.Remove(EStatusType.Silence);
-        //     Debug.Log($"[PLAYER] Status <{EStatusType.Silence}> removed>");
-        // }
     }
 
     /// <summary>
@@ -176,11 +157,6 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Invisibility}> status ({m_appliedStatuses[EStatusType.Invisibility]} turns left)");
             m_appliedStatuses[EStatusType.Invisibility]--;
         }
-        // else
-        // {
-        //     m_appliedStatuses.Remove(EStatusType.Invisibility);
-        //     Debug.Log($"[PLAYER] Status <{EStatusType.Invisibility}> removed>");
-        // }
     }
 
     /// <summary>
@@ -193,11 +169,6 @@ public class PlayerStatus : MonoBehaviour
             Debug.Log($"[PLAYER] Applying <{EStatusType.Protection}> status ({m_appliedStatuses[EStatusType.Protection]} turns left)");
             m_appliedStatuses[EStatusType.Protection]--;
         }
-        // else
-        // {
-        //     m_appliedStatuses.Remove(EStatusType.Protection);
-        //     Debug.Log($"[PLAYER] Status <{EStatusType.Protection}> removed>");
-        // }
     }
 
     /// <summary>
@@ -211,12 +182,9 @@ public class PlayerStatus : MonoBehaviour
             
             m_player.RestoreHealth(1);
             m_appliedStatuses[EStatusType.Regeneration]--;
+            
+            AudioManager.Instance.Play("Regeneration");
         }
-        // else
-        // {
-        //     m_appliedStatuses.Remove(EStatusType.Regeneration);
-        //     Debug.Log($"[PLAYER] Status <{EStatusType.Regeneration}> removed>");
-        // }
     }
 
     /// <summary>
@@ -231,11 +199,6 @@ public class PlayerStatus : MonoBehaviour
             m_player.RestoreHealth(1);
             m_appliedStatuses[EStatusType.ArcaneProtection]--;
         }
-        // else
-        // {
-        //     m_appliedStatuses.Remove(EStatusType.ArcaneProtection);
-        //     Debug.Log($"[PLAYER] Status <{EStatusType.ArcaneProtection}> removed>");
-        // }
     }
 
     private void AddStatusInfo(StatusCardData statusData, int turns)

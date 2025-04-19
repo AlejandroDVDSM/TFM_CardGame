@@ -103,6 +103,7 @@ public class Shop : MonoBehaviour
             Debug.Log($"[SHOP] Player doesn't have enough money to buy '{shopItemData.Name}'. " +
                       $"Price: {shopItemData.Price} <-> Player's coins: {GameManager.Instance.Player.Coins}");
             shopItem.transform.DOShakePosition(0.5f, 7.5f);
+            AudioManager.Instance.Play("Denied");
             return;
         }
         
@@ -122,6 +123,15 @@ public class Shop : MonoBehaviour
         }
         
         GameManager.Instance.Player.UpdateCoins(shopItemData.Price * -1);
+
+        if (freeShop)
+        {
+            AudioManager.Instance.Play("BuyFree");
+        }
+        else
+        {
+            AudioManager.Instance.Play("Buy");
+        }
         
         CloseShop();
     }

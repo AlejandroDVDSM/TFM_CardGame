@@ -14,6 +14,7 @@ public class ArcaneProtection : MagicAttack
     {
         if (!CanCast())
         {
+            AudioManager.Instance.Play("Denied");
             return;
         }
 
@@ -21,6 +22,7 @@ public class ArcaneProtection : MagicAttack
         if (m_player.Status.HasStatusApplied(EStatusType.ArcaneProtection))
         {
             Debug.Log($"The player can't use <{nameof(MagicAttack)}> as it is already invincible");
+            AudioManager.Instance.Play("Denied");
             return;
         }
         

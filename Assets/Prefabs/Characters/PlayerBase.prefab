@@ -1164,7 +1164,8 @@ MonoBehaviour:
   m_characterImage: {fileID: 220688394169376834}
   m_characterNameText: {fileID: 5720810780793639620}
   m_fullArmorAtStart: 0
-  m_fullManaAtStart: 1
+  m_fullManaAtStart: 0
+  m_fullCoinsAtStart: 0
 --- !u!114 &7529986820823214024
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class Fireball : MagicAttack
     {
         if (!CanCast())
         {
+            AudioManager.Instance.Play("Denied");
             return;
         }
 
@@ -27,9 +28,12 @@ public class Fireball : MagicAttack
         if (enemies.Count == 0)
         {
             Debug.Log($"There is no enemy outside the pool to cast <{nameof(Fireball)}>");
+            AudioManager.Instance.Play("Denied");
             return;
         }
 
+        AudioManager.Instance.Play("FireballCast");
+        
         // Instantiate fireball fx
         if (!m_fireballFxPlaced)
         {
@@ -40,7 +44,7 @@ public class Fireball : MagicAttack
         }
 
         // Move the fireball from the bottom of the screen to the top
-        m_fireballFxPlaced.transform.DOLocalMoveY(1600, 1.2f)
+        m_fireballFxPlaced.transform.DOLocalMoveY(1600, 1.5f)
             .SetEase(Ease.OutSine)
             .OnComplete(() =>
             {
@@ -50,6 +54,7 @@ public class Fireball : MagicAttack
                 // Hit all enemies
                 enemies.ForEach(e => e.Hit(m_damage));
             });
+        
         
         m_player.UpdateMana(m_magicData.ManaCost * -1);
         hasUsedMagic = true;

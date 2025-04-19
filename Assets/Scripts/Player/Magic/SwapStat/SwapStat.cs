@@ -6,6 +6,7 @@ public class SwapStat : MagicAttack
     {
         if (!CanCast())
         {
+            AudioManager.Instance.Play("Denied");
             return;
         }
 
@@ -14,6 +15,7 @@ public class SwapStat : MagicAttack
         if (m_player.CurrentArmor == 0)
         {
             Debug.Log($"The player can't use <{nameof(MagicAttack)}> as its armor is 0");
+            AudioManager.Instance.Play("Denied");
             return;
         }
         

@@ -46,7 +46,7 @@ public class Transmute : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
+            AudioManager.Instance.Play("Denied");
             return;
         }
         

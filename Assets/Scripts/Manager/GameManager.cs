@@ -4,6 +4,7 @@ using CardGame;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();
 
-        // Check if the bottom cards are CupCard. If it is, we can not commit the turn 
+        // Check if the bottom cards are CupCard. If it is, we cannot commit the turn 
         if (bottomRowCards[0].GetType() == typeof(CupCard))
         {
             return;
@@ -130,17 +131,24 @@ public class GameManager : MonoBehaviour
             m_turns--;
         }
         
-        // The cards that were in the top row will go to the middle row now
+        // The cards in the top row will go to the middle row now
         middleRow.PopulateRow(topRowCards);
         
-        // The cards that were in the middle row will go to the bottom row now
+        // The cards in the middle row will go to the bottom row now
         bottomRow.PopulateRow(middleRowCards);
 
         OnTurnCommited?.Invoke();
     }
 
-    public void EndGame()
+    public void EndGame(bool win)
     {
-        Debug.Log("YOU WIN");
+        // TODO: Show a special screen if the player won (?)
+        if (win)
+        {
+            AudioManager.Instance.Play("Win");
+            Debug.Log("YOU WIN");
+        }
+        
+        SceneManager.LoadScene("MainMenu");
     }
 }

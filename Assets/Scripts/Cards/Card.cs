@@ -169,6 +169,7 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         // Do nothing if the selected card is not at the bottom
         if (m_currentRow != ERow.Bottom || !GameManager.Instance.Player.Movement.CanMoveTo(m_lane))
         {
+            AudioManager.Instance.Play("Denied");
             transform.DOShakePosition(0.4f, 10f);
             return;
         }

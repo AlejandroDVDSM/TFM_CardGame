@@ -30,6 +30,7 @@ namespace CardGame
                 
                 case EItemType.Chest:
                     FindAnyObjectByType<Shop>().OpenShop(true);
+                    AudioManager.Instance.Play("PickupChest");
                     break;
                     
             }

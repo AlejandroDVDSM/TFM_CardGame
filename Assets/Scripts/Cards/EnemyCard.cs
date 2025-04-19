@@ -68,6 +68,8 @@ namespace CardGame
                     sh.texture = (Texture2D)image.mainTexture;
                     m_particleSystem.Play();
                 
+                    AudioManager.Instance.Play("EnemyDead");
+                    
                     // Replace this enemy card for a coin card
                     ItemCard coinCard = GameManager.Instance.CardPool.ExtractItemCardOfType(EItemType.Coin);
                     coinCard.UpdateValue(Value);
@@ -84,6 +86,7 @@ namespace CardGame
                 .OnComplete(() => m_isPerformingAction = false);
             
             m_attackSequence.Play();
+            AudioManager.Instance.Play("EnemyAttack");
         }
 
         public void Hit(int damage)

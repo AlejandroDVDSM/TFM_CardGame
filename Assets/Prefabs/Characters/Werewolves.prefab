@@ -92,6 +92,18 @@ PrefabInstance:
       propertyPath: m_characterData
       value: 
       objectReference: {fileID: 11400000, guid: 2caa4f62d7c526240a366dcadaa93927, type: 2}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullManaAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullArmorAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242303142865761133, guid: 921acd986f674da41a578ca4114f5348, type: 3}
+      propertyPath: m_fullCoinsAtStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6544616752376179754, guid: 921acd986f674da41a578ca4114f5348, type: 3}
       propertyPath: m_Name
       value: Werewolves

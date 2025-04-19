@@ -6057,10 +6057,129 @@ MonoBehaviour:
   m_sounds:
   - Name: GameMusic
     Clip: {fileID: 8300000, guid: e25af7c14804ffd43a707e5db2db4888, type: 3}
-    Volume: 1
+    Volume: 0.15
     Pitch: 1
     Loop: 1
     PlayOnAwake: 1
+    Source: {fileID: 0}
+  - Name: EnemyAttack
+    Clip: {fileID: 8300000, guid: e992213b7cb92184e9fe8f76d97e538c, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: EnemyDead
+    Clip: {fileID: 8300000, guid: 9f54540ab7315c847a2a0f60f890fd94, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PlayerHit
+    Clip: {fileID: 8300000, guid: 99c4691df1a54124089df7139daaaa80, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PickupHealth
+    Clip: {fileID: 8300000, guid: 9c55355a29c9bb942aab24f3874ace47, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PickupMana
+    Clip: {fileID: 8300000, guid: ef4d9cc580741354f87a41f7129b324e, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PickupArmor
+    Clip: {fileID: 8300000, guid: c84626e47b77064418d85e2abeac1675, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PickupCoin
+    Clip: {fileID: 8300000, guid: 4420e1e2dd228b343a8db178055f6e40, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: PickupChest
+    Clip: {fileID: 8300000, guid: 9ce4d07e0f10b9241b3d49272c612fac, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: Poison
+    Clip: {fileID: 8300000, guid: 1a33c7ba4afe80a41ba80ad63022b641, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: Regeneration
+    Clip: {fileID: 8300000, guid: 7e3d8542514904c49aa4f608f9b98fb9, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: FireballCast
+    Clip: {fileID: 8300000, guid: 47f71591a39734544ad43f7a53693d4d, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: BasicDamageCast
+    Clip: {fileID: 8300000, guid: 8e10ab16d986e824695fa48d1d82f12e, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: ArcaneProtectionBlock
+    Clip: {fileID: 8300000, guid: 79587301e923e1841bedff7d1ea5ccf0, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: Buy
+    Clip: {fileID: 8300000, guid: 17371d196dd244a49b09a4cc9ccf1de4, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: BuyFree
+    Clip: {fileID: 8300000, guid: edbeeba0fdc82ad448e0ef116dae38a4, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: Denied
+    Clip: {fileID: 8300000, guid: d2eedb2a2715f2e41a97a56bc46b4008, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
+    Source: {fileID: 0}
+  - Name: Win
+    Clip: {fileID: 8300000, guid: dae5edecf3d26934bab056ace6828d23, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnAwake: 0
     Source: {fileID: 0}
 --- !u!1 &1350023429
 GameObject:

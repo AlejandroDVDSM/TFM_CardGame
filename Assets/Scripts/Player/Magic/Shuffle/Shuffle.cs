@@ -4,6 +4,7 @@ public class Shuffle : MagicAttack
     {
         if (!CanCast())
         {
+            AudioManager.Instance.Play("Denied");
             return;
         }
         

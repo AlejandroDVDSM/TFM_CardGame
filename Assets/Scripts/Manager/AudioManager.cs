@@ -25,19 +25,6 @@ public class AudioManager : MonoBehaviour
         foreach (Sound sound in m_sounds.Where(s => s.PlayOnAwake))
         {
             Play(sound.Name);
-            
-            // s.Source = gameObject.AddComponent<AudioSource>();
-            // s.Source.clip = s.Clip;
-            //
-            // s.Source.volume = s.Volume;
-            // s.Source.pitch = s.Pitch;
-            // s.Source.loop = s.Loop;
-
-            
-            // if (sound.PlayOnAwake)
-            // {
-            //     Play(sound.Name);
-            // }
         }
     }
 

@@ -4,7 +4,7 @@ public class Jump : MagicAttack
     {
         if (!CanCast())
         {
-            // TODO: add tween
+            AudioManager.Instance.Play("Denied");
             return;
         }
         

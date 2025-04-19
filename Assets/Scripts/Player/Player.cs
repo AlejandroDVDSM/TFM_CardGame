@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool m_fullArmorAtStart;
     [SerializeField] private bool m_fullManaAtStart;
+    [SerializeField] private bool m_fullCoinsAtStart;
 
     public PlayerMovement Movement => m_movement;
     private PlayerMovement m_movement;
@@ -84,16 +85,22 @@ public class Player : MonoBehaviour
         m_stats.MaxMana = m_characterData.Mana;
         m_stats.m_currentHealth = m_stats.MaxHealth;
         
-        // Debug: start game with full armor
+        // Debug: start the game with full armor
         if (m_fullArmorAtStart)
         {
             m_stats.m_currentArmor = MaxArmor;
         }
         
-        // Debug: start game with full mana
+        // Debug: start the game with full mana
         if (m_fullManaAtStart)
         {
             m_stats.m_currentMana = MaxMana;
+        }
+
+        // Debug: start the game with full coins
+        if (m_fullCoinsAtStart)
+        {
+            m_stats.m_coins = 999;
         }
 
         // Update UI
@@ -112,9 +119,10 @@ public class Player : MonoBehaviour
     /// <param name="damage">The amount of damage to apply</param>
     public void Hit(int damage)
     {
-        // Make player invincible while having Arcane Protection status enabled
+        // Make the player invincible while having Arcane Protection status enabled
         if (m_status.HasStatusApplied(EStatusType.ArcaneProtection))
         {
+            AudioManager.Instance.Play("ArcaneProtectionBlock");
             return;
         }
         
@@ -138,20 +146,20 @@ public class Player : MonoBehaviour
             m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth - damageNotAbsorbedByArmor, 0, CurrentHealth);
         }
         else
-        { // ... apply damage directly to player's health
+        { // ... apply damage directly to the player's health
             m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth - damage, 0, CurrentHealth);   
         }
 
         // Feedback that player got hit
+        AudioManager.Instance.Play("PlayerHit");
         transform.DOShakePosition(1f, 10f);
         
         // Check if the damage was enough to kill the player
         if (CurrentHealth == 0)
         {
-            // TODO: end game
-            // TODO: add tween
             // TODO: sound
             Debug.Log("DEAD");
+            GameManager.Instance.EndGame(false);
         } else if (CurrentHealth < MaxHealth / 2)
         {
             m_characterImage.DOColor(Color.red, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
@@ -170,7 +178,8 @@ public class Player : MonoBehaviour
     {
         m_stats.m_currentHealth = Mathf.Clamp(CurrentHealth + health, CurrentHealth, MaxHealth);
         m_healthText.text = CurrentHealth.ToString();
-
+        AudioManager.Instance.Play("PickupHealth");
+        
         if (CurrentHealth >= MaxHealth / 2)
         {
             m_characterImage.DOKill();
@@ -186,6 +195,7 @@ public class Player : MonoBehaviour
     {
         m_stats.m_currentArmor = Mathf.Clamp(CurrentArmor + armor, CurrentArmor, MaxArmor);
         m_armorText.text = CurrentArmor.ToString();
+        AudioManager.Instance.Play("PickupArmor");
     }
 
     /// <summary>
@@ -196,6 +206,7 @@ public class Player : MonoBehaviour
     {
         m_stats.m_currentMana = Mathf.Clamp(CurrentMana + mana, 0, MaxMana);
         m_manaText.text = CurrentMana.ToString();
+        AudioManager.Instance.Play("PickupMana");
     }
 
     /// <summary>
@@ -221,5 +232,6 @@ public class Player : MonoBehaviour
     {
         m_stats.m_coins += coins;
         m_coinsText.text = m_stats.m_coins.ToString();
+        AudioManager.Instance.Play("PickupCoin");
     }
 }
