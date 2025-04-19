@@ -1,23 +1,23 @@
 [[headers]]
-  for = ";/Build/*.data.gz"
+  for = "/Build/*.data.gz"
   [headers.values]
-    Content-Encoding = ";gz"
-    Content-Type = ";application/octet-stream"
-
+    Content-Encoding = "gz"
+    Content-Type = "application/octet-stream"
+	
 [[headers]]
-  for = ";/Build/*.wasm.gz"
+  for = "/Build/*.wasm.gz"
   [headers.values]
-    Content-Encoding = ";gz"
-    Content-Type = ";application/wasm"
+    Content-Encoding = "gz"
+    Content-Type = "application/wasm"
 
-[[headers]]
-  for = ";/Build/*.js"
+[[headers]]                                                                      
+  for = "/Build/*.js"                                                             
   [headers.values]
-    Content-Encoding = ";js"
-    Content-Type = ";application/javascript"
-
-[[headers]]
-  for = ";/Build/*.js.gz"
+    Content-Encoding = "js"
+    Content-Type = "application/javascript"
+	
+[[headers]]                                                                      
+  for = "/Build/*.js.gz"                                                             
   [headers.values]
-    Content-Encoding = ";gz"
-    Content-Type = ";application/javascript"
+    Content-Encoding = "gz"
+    Content-Type = "application/javascript"
