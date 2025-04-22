@@ -37,6 +37,12 @@ public abstract class MagicAttack : MonoBehaviour
     
     public bool CanCast()
     {
+        if (TutorialManager.Instance.IsRunning)
+        {
+            Debug.Log($"The player can't use <{nameof(MagicAttack)}> as it is in the tutorial");   
+            return false;
+        }
+        
         // If the player has already used the magic in this turn...
         if (hasUsedMagic && !m_infiniteUses)
         {

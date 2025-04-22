@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         LoadPlayer();
         InitGame();
+        
     }
 
     private void LoadPlayer()
@@ -70,13 +71,21 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void InitGame()
     {
-        topRow.PopulateRow();
-        
-        middleRow.PopulateRow();
-        
-        bottomRow.PopulateRow();
-        
         AudioManager.Instance.Play("GameMusic");
+        
+        if (PlayerPrefs.GetInt("TutorialCompleted") == 1)
+        {
+            topRow.PopulateRow();
+        
+            middleRow.PopulateRow();
+        
+            bottomRow.PopulateRow();
+        }
+        else
+        {
+            m_turns = TutorialManager.Instance.TutorialTurns;
+            TutorialManager.Instance.StartTutorial();    
+        }
     }
 
     /// <summary>
@@ -106,6 +115,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CommitTurn()
     {
+        // if (TutorialManager.Instance.IsRunning)
+        // {
+        //     TutorialManager.Instance.CommitTutorialTurn();
+        //     OnTurnCommited?.Invoke();
+        //     return;
+        // }
+        
         List<Card> topRowCards = topRow.GetCards();
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();
@@ -123,7 +139,7 @@ public class GameManager : MonoBehaviour
         if (m_turns > 0)
         {
             // New cards from the pool will go the top row
-            topRow.PopulateRow(m_cardPool.ExtractRangeFromPool());
+            topRow.PopulateRow();
             m_turns--;
         } else if (m_turns == 0)
         { // Generates cups cards

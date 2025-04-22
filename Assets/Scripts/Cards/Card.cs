@@ -15,11 +15,13 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField] private Image background;
     [SerializeField] private Image shadow;
     [SerializeField] protected Image image;
+    [SerializeField] private Image valueImage;
     
     public bool IsInPool { get; set; }
     public ECardLane Lane => m_lane;
     public ERow CurrentRow => m_currentRow;
     public int Value => m_value;
+    public Image ValueImage => valueImage;
     public bool IsPerformingAction => m_isPerformingAction;
     
     private ECardLane m_lane = ECardLane.Out;
@@ -151,6 +153,12 @@ public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (TutorialManager.Instance.IsRunning && TutorialManager.Instance.CurrentHighlightedCard != this)
+        {
+            Debug.Log("[CARD] Can't pick this card as the tutorial is not highlighting it");
+            return;
+        }
+        
         if (m_Transmute !=null && m_Transmute.IsTransmuting)
         {
             m_Transmute.PickCard(this);

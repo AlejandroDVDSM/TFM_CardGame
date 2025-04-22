@@ -9,6 +9,8 @@ public abstract class MagicView : MonoBehaviour
     [SerializeField] protected Button m_CastBtn;
     [SerializeField] protected TMP_Text m_magicNameTxt;
     [SerializeField] protected TMP_Text m_manaCostTxt;
+    
+    public Button CastBtn => m_CastBtn;
 
     protected MagicAttack m_magicAttack;
 

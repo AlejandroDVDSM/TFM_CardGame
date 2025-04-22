@@ -1,8 +1,3 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class SimpleMagicView : MagicView
+﻿public class SimpleMagicView : MagicView
 {
 }

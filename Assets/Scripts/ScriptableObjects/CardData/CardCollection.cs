@@ -55,6 +55,17 @@ namespace ScriptableObjects
             List<ItemCardData> itemCardsData = Cards.OfType<ItemCardData>().ToList();
             return itemCardsData.FirstOrDefault(d => d.Type == itemType);
         }
+
+        /// <summary>
+        /// Get a StatusCardData given its type
+        /// </summary>
+        /// <param name="statusType">Type of the status card to find</param>
+        /// <returns>The data of the card matching the desired type</returns>
+        public StatusCardData GetStatusDataByType(EStatusType statusType)
+        {
+            List<StatusCardData> statusCardsData = Cards.OfType<StatusCardData>().ToList();
+            return statusCardsData.FirstOrDefault(d => d.Status == statusType);
+        }
         
         /// <summary>
         /// Get the data of a card given an index

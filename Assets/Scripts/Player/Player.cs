@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
     
     public string CharacterName => m_characterData.Name;
     
+    public PlayerMovement Movement => m_movement;
+    public PlayerStatus Status => m_status;
+    
+    public RectTransform ArmorHolder => m_armorHolder;
+    
     [SerializeField] private CharacterData m_characterData;
     
     [Space(10)]
@@ -48,6 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text m_armorText;
     [SerializeField] private TMP_Text m_manaText;
     [SerializeField] private TMP_Text m_coinsText;
+    [SerializeField] private RectTransform m_armorHolder;
     [SerializeField] private Image m_characterImage;
 
     [SerializeField] private TMP_Text m_characterNameText;
@@ -57,13 +63,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool m_fullManaAtStart;
     [SerializeField] private bool m_fullCoinsAtStart;
 
-    public PlayerMovement Movement => m_movement;
     private PlayerMovement m_movement;
-    
-    public PlayerStatus Status => m_status;
-
     private PlayerStatus m_status;
-    
     private Stats m_stats;
 
     private void Awake()

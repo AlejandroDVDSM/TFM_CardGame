@@ -235,7 +235,7 @@ public class CardPool : MonoBehaviour
 
         if (!itemCard)
         { 
-            // If there is no ItemCard in the pool create one and add it
+            // If there is no ItemCard in the pool, create one and add it
             itemCard = Instantiate(itemCardPrefab, transform);
             itemCard.IsInPool = true;
             m_cardsPool.Add(itemCard);
@@ -244,5 +244,47 @@ public class CardPool : MonoBehaviour
         itemCard.SetData(itemsCollection.GetItemDataByType(itemType));
         itemCard.IsInPool = false;
         return itemCard;
+    }
+    
+    /// <summary>
+    /// Get a status card
+    /// </summary>
+    /// <param name="statusType">Status to get</param>
+    /// <returns>A status card matching the desired type</returns>
+    public StatusCard ExtractStatusCardOfType(EStatusType statusType)
+    {
+        StatusCard statusCard = m_cardsPool.OfType<StatusCard>().FirstOrDefault(c => c.IsInPool);
+
+        if (!statusCard)
+        {
+            // If there is no StatusCard in the pool, create one and add it
+            statusCard = Instantiate(statusCardPrefab, transform);
+            statusCard.IsInPool = true;
+            m_cardsPool.Add(statusCard);
+        }
+        
+        statusCard.SetData(statusesCollection.GetStatusDataByType(statusType));
+        statusCard.IsInPool = false;
+        return statusCard;
+    }
+
+    /// <summary>
+    /// Get an enemy card
+    /// </summary>
+    /// <returns>An enemy card</returns>
+    public EnemyCard ExtractEnemyCard()
+    {
+        EnemyCard enemyCard = m_cardsPool.OfType<EnemyCard>().FirstOrDefault(c => c.IsInPool);
+
+        if (!enemyCard)
+        {
+            enemyCard = Instantiate(enemyCardPrefab, transform);
+            enemyCard.IsInPool = true;
+            m_cardsPool.Add(enemyCard);
+        }
+        
+        enemyCard.SetData(enemiesCollection.GetRandomData());
+        enemyCard.IsInPool = false;
+        return enemyCard;
     }
 }

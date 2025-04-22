@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 982598277559364776}
   m_Layer: 5
   m_Name: CastMagicBtn
-  m_TagString: Untagged
+  m_TagString: MagicBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -657,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c03c009c2b366429f018405ec59878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_loop: 0
 --- !u!1 &7105354293134276448
 GameObject:
   m_ObjectHideFlags: 0
