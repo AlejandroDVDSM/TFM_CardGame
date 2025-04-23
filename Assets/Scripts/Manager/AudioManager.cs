@@ -50,6 +50,16 @@ public class AudioManager : MonoBehaviour
         sound.Source.Play();
     }
 
+    public void MuteAudio(bool mute)
+    {
+        AudioListener.volume = mute ? 0 : 1;
+    }
+
+    public bool IsAudioMuted()
+    {
+        return AudioListener.volume == 0;
+    }
+
     private void CreateAudioSource(Sound sound)
     {
         sound.Source = gameObject.AddComponent<AudioSource>();

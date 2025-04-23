@@ -31,6 +31,12 @@ public class Shop : MonoBehaviour
     /// <param name="free">Indicates if the objects are free or not</param>
     public void OpenShop(bool free = false)
     {
+        if (TutorialManager.Instance.IsRunning)
+        {
+            Debug.Log("[SHOP] Can't open shop while the tutorial is running");
+            return;
+        }
+        
         freeShop = free;
         SetPriceTagActive(!free);
         

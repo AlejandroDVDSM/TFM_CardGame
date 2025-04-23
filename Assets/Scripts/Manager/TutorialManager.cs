@@ -35,7 +35,6 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private RectTransform m_referencePosition;
     
     [Header("Dialogue")]
-    // [SerializeField] private Image m_dialogueContainer;
     [SerializeField] private TMP_Text m_dialogueTxt;
     [SerializeField] private Button m_continueButton;
     
@@ -81,10 +80,6 @@ public class TutorialManager : MonoBehaviour
         {
             ShowNextDialog();
         }
-        // else
-        // {
-        //     m_dialogueContainer.gameObject.SetActive(false);
-        // }
     }
     
     public void DoStep1()
