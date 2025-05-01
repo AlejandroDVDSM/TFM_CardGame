@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ed2dbe82d854ec58435efb5833d8bb4, type: 3}
-  m_Name: EvolvedBug
+  m_Name: Fishman
   m_EditorClassIdentifier: 
-  Name: Evolved Bug
-  Sprite: {fileID: 6584690746588489567, guid: 0ce3223ea46cf3440841b2e8c89a2205, type: 3}
+  Name: Fishman
+  Sprite: {fileID: 8328207794145681918, guid: 0ce3223ea46cf3440841b2e8c89a2205, type: 3}
   BackgroundColor: {r: 0.76862746, g: 0.11372549, b: 0.11372549, a: 1}
-  MinValue: 2
-  MaxValue: 5
-  Weight: 20
+  MinValue: 3
+  MaxValue: 3
+  Weight: 55
   IgnoreData: 0
