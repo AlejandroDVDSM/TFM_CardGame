@@ -50,16 +50,28 @@ public class AudioManager : MonoBehaviour
         sound.Source.Play();
     }
 
+    /// <summary>
+    /// Set volume to 0 or 1 according to a bool
+    /// </summary>
+    /// <param name="mute">Dictates if the volume should be silenced or not</param>
     public void MuteAudio(bool mute)
     {
         AudioListener.volume = mute ? 0 : 1;
     }
 
+    /// <summary>
+    /// Check if the volume is 0
+    /// </summary>
+    /// <returns>True if the audio is muted. Otherwise, return false</returns>
     public bool IsAudioMuted()
     {
         return AudioListener.volume == 0;
     }
 
+    /// <summary>
+    /// Add an AudioSource component to the AudioManager game object with the specified sound
+    /// </summary>
+    /// <param name="sound">The sound that should be linked to the new audio source</param>
     private void CreateAudioSource(Sound sound)
     {
         sound.Source = gameObject.AddComponent<AudioSource>();

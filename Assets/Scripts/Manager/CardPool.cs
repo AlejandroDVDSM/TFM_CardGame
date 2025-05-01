@@ -75,11 +75,19 @@ public class CardPool : MonoBehaviour
         return GetCardsOutsidePool().Where(c => c.CurrentRow == row).ToList();
     }
     
+    /// <summary>
+    /// Get all the EnemyCard that are outside the pool 
+    /// </summary>
+    /// <returns></returns>
     public List<EnemyCard> GetEnemiesOutsidePool()
     {
         return m_cardsPool.OfType<EnemyCard>().Where(card => !card.IsInPool).ToList();
     }
 
+    /// <summary>
+    /// Get all the cards that are outside the pool without filtering by any type
+    /// </summary>
+    /// <returns></returns>
     public List<Card> GetCardsOutsidePool()
     {
         return m_cardsPool.Where(c => !c.IsInPool).ToList();
@@ -211,7 +219,6 @@ public class CardPool : MonoBehaviour
                 }
 
                 break;
-
         }
 
         if (card?.GetType() == typeof(EnemyCard))
@@ -229,6 +236,11 @@ public class CardPool : MonoBehaviour
         return card;
     }
 
+    /// <summary>
+    /// Get a item card
+    /// </summary>
+    /// <param name="itemType"></param>
+    /// <returns></returns>
     public ItemCard ExtractItemCardOfType(EItemType itemType)
     {
         ItemCard itemCard = m_cardsPool.OfType<ItemCard>().FirstOrDefault(c => c.IsInPool);

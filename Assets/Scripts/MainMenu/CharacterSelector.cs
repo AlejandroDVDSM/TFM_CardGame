@@ -29,18 +29,27 @@ public class CharacterSelector : MonoBehaviour
         UpdateCharacterData();
     }
     
+    /// <summary>
+    /// Display the previous character in the list
+    /// </summary>
     public void PrevCharacter()
     {
         m_currentCharacterIndex = m_currentCharacterIndex - 1 < 0 ? m_charactersData.Length - 1 : m_currentCharacterIndex - 1;
         UpdateCharacterData();
     }
     
+    /// <summary>
+    /// Display the next character in the list
+    /// </summary>
     public void NextCharacter()
     {
         m_currentCharacterIndex = m_currentCharacterIndex + 1 > m_charactersData.Length - 1 ? 0 : m_currentCharacterIndex + 1;
         UpdateCharacterData();
     }
 
+    /// <summary>
+    /// Update the character data according to the current character index
+    /// </summary>
     private void UpdateCharacterData()
     {
         m_characterImg.sprite = m_charactersData[m_currentCharacterIndex].Sprite;
@@ -58,6 +67,9 @@ public class CharacterSelector : MonoBehaviour
         m_characterMagicCost.text = m_charactersData[m_currentCharacterIndex].MagicData.ManaCost.ToString();
     }
 
+    /// <summary>
+    /// Set the character that the player will use during a game
+    /// </summary>
     public void SelectCharacter()
     {
         PlayerPrefs.SetString("Character", m_charactersData[m_currentCharacterIndex].Name);

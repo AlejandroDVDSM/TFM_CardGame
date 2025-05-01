@@ -32,7 +32,6 @@ namespace CardGame
                     FindAnyObjectByType<Shop>().OpenShop(true);
                     AudioManager.Instance.Play("PickupChest");
                     break;
-                    
             }
             
             EnableDisappearAnimation(() =>

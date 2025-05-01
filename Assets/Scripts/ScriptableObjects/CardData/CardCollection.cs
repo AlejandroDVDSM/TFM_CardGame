@@ -39,10 +39,6 @@ namespace ScriptableObjects
             }
             
             return cardsData[count];
-
-            // Old way of getting a random card without taking into account the weight
-            // List<BaseCardData> cardsData = Cards.Where(d => !d.IgnoreData).ToList();
-            // return cardsData[Random.Range(0, cardsData.Count)];
         }
         
         /// <summary>

@@ -59,6 +59,9 @@ public class TutorialManager : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Start the tutorial by displaying the first line of the dialogue
+    /// </summary>
     public void StartTutorial()
     {
         GameManager.Instance.OnTurnCommited.AddListener(OnTutorialTurnCommited);
@@ -69,6 +72,9 @@ public class TutorialManager : MonoBehaviour
         NextStep();
     }
 
+    /// <summary>
+    /// Perform the next step in the tutorial
+    /// </summary>
     public void NextStep()
     {
         m_currentHighlightedCard = null;

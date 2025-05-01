@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardGame;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -103,11 +102,6 @@ public class GameManager : MonoBehaviour
         
         // Apply card effect
         card.PerformAction();
-
-        // We do not commit the turn when the card is an enemy as it has to turn into a coin first.
-        // Then, the player must choose between selecting that coin or one of the other two cards in the row
-        // if (card is not EnemyCard)
-        //     CommitTurn();
     }
 
     /// <summary>
@@ -115,13 +109,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CommitTurn()
     {
-        // if (TutorialManager.Instance.IsRunning)
-        // {
-        //     TutorialManager.Instance.CommitTutorialTurn();
-        //     OnTurnCommited?.Invoke();
-        //     return;
-        // }
-        
         List<Card> topRowCards = topRow.GetCards();
         List<Card> middleRowCards = middleRow.GetCards();
         List<Card> bottomRowCards = bottomRow.GetCards();

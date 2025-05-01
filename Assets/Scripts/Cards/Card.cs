@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public abstract class Card: MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("UI")]
-    [SerializeField] private TMP_Text nameTxt;    
+    [SerializeField] private TMP_Text nameTxt;
     [SerializeField] private TMP_Text valueTxt;
     [SerializeField] private Image background;
     [SerializeField] private Image shadow;

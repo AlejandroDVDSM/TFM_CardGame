@@ -11,10 +11,10 @@ public class MenuController : MonoBehaviour
     
     private void Start()
     {
+        // !--- DEBUG ---!
         if (m_characterSelectorAtStart)
         {
-            m_landingPage.gameObject.SetActive(false);
-            m_characterSelector.gameObject.SetActive(true);
+            ShowCharacterSelector();
         }
         else
         {
@@ -23,12 +23,18 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide the landing page and show the character selection panel
+    /// </summary>
     public void ShowCharacterSelector()
     {
         m_landingPage.gameObject.SetActive(false);
         m_characterSelector.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Load the game scene
+    /// </summary>
     public void StartGame()
     {
         SceneManager.LoadScene("Game");

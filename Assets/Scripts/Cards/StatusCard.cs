@@ -20,10 +20,6 @@ namespace CardGame
                 Debug.LogError($"This card is not of type {typeof(StatusCard)}");
             }
             
-            // GameManager.Instance.CommitTurn();
-            // m_isPerformingAction = false;
-            
-            
             EnableDisappearAnimation(() =>
             {
                 m_isPerformingAction = false;

@@ -36,6 +36,9 @@ namespace CardGame
             Attack();
         }
         
+        /// <summary>
+        /// Play an animation to attack and inflict damage to the player
+        /// </summary>
         private void Attack()
         {   
             // Create animation where the card charges forward against the player
@@ -89,6 +92,10 @@ namespace CardGame
             AudioManager.Instance.Play("EnemyAttack");
         }
 
+        /// <summary>
+        /// Reduce card's value
+        /// </summary>
+        /// <param name="damage"></param>
         public void Hit(int damage)
         {
             UpdateValue(Mathf.Clamp(m_value - damage, 0, m_value));
