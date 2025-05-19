@@ -726,5 +726,5 @@ MonoBehaviour:
   m_manaCostTxt: {fileID: 414573109791633263}
   m_transmuteSelectionPanel: {fileID: 247433323572595579}
   m_transmuteModeText: {fileID: 7577555615914464346}
-  m_itemsCollection: {fileID: 11400000, guid: fd49c578229d2084083edda1eba8ad14, type: 2}
+  m_itemsCollection: {fileID: 11400000, guid: 4ff6436213bd17f44a57b4a905275ec8, type: 2}
   m_cardSelectionPrefab: {fileID: 8549513932427506508, guid: 29a43aca88b898c46a7bbaac7b40d257, type: 3}

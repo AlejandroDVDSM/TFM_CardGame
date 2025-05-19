@@ -40,7 +40,7 @@ namespace ScriptableObjects
             
             return cardsData[count];
         }
-        
+
         /// <summary>
         /// Get an ItemCardData given its type
         /// </summary>

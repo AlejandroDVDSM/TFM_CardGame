@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Elves
   Sprite: {fileID: -7914586359189542566, guid: d152168bbf40d074f96ccc1337623046, type: 3}
-  HealthPoints: 10
+  HealthPoints: 7
   Armor: 10
   Mana: 10
   MagicData: {fileID: 11400000, guid: a4f64c236e65de64aa6ad46c419a5571, type: 2}

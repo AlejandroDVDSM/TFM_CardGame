@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Orcs
   Sprite: {fileID: 115972425246325791, guid: d152168bbf40d074f96ccc1337623046, type: 3}
-  HealthPoints: 10
-  Armor: 10
-  Mana: 10
+  HealthPoints: 8
+  Armor: 15
+  Mana: 3
   MagicData: {fileID: 11400000, guid: ed20ba81f8c7fa14d9806130dec8a558, type: 2}

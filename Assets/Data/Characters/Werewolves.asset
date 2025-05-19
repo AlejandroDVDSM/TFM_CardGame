@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Werewolves
   Sprite: {fileID: 7649489486189614792, guid: d152168bbf40d074f96ccc1337623046, type: 3}
-  HealthPoints: 10
-  Armor: 10
-  Mana: 10
+  HealthPoints: 16
+  Armor: 4
+  Mana: 6
   MagicData: {fileID: 11400000, guid: f9eb18bdf003ff34f813a6b1a5f89a81, type: 2}

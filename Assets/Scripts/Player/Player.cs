@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Swap health stat for armor and viceversa
+    /// Swap health stat for armor and vice versa
     /// </summary>
     public void SwapStats()
     {

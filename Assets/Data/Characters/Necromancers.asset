@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Necromancers
   Sprite: {fileID: 1808964706522467271, guid: d152168bbf40d074f96ccc1337623046, type: 3}
   HealthPoints: 10
-  Armor: 10
-  Mana: 10
+  Armor: 1
+  Mana: 16
   MagicData: {fileID: 11400000, guid: cca5406f63fbf5a4d95efe71ba69af1f, type: 2}

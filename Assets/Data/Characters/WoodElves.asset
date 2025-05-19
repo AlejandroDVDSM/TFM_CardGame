@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wood elves
   Sprite: {fileID: 57365866442116020, guid: d152168bbf40d074f96ccc1337623046, type: 3}
-  HealthPoints: 10
+  HealthPoints: 7
   Armor: 10
-  Mana: 10
+  Mana: 12
   MagicData: {fileID: 11400000, guid: be2dedc3c0739ab44a0ce3a1da7c31f4, type: 2}

@@ -39,7 +39,6 @@ public class Fireball : MagicAttack
         {
             m_fireballFxPlaced = Instantiate(m_fireballFxPrefab, FindAnyObjectByType<Canvas>().transform);
             
-            // Harcoded value
             m_fireballFxPlaced.transform.localPosition = new Vector3(0, -1200, 0);
         }
 
@@ -48,7 +47,6 @@ public class Fireball : MagicAttack
             .SetEase(Ease.OutSine)
             .OnComplete(() =>
             {
-                // Harcoded value
                 m_fireballFxPlaced.transform.localPosition = new Vector3(0, -1200, 0);
                 
                 // Hit all enemies

@@ -35,6 +35,10 @@ public abstract class MagicAttack : MonoBehaviour
 
     public abstract void Cast();
     
+    /// <summary>
+    /// Check through multiple conditions if the magic can be cast
+    /// </summary>
+    /// <returns>True if the magic can be cast. Otherwise, return false</returns>
     public bool CanCast()
     {
         if (TutorialManager.Instance.IsRunning)
